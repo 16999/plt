@@ -1,4 +1,4 @@
-#include "client/functions.h"
+//#include "client/functions.h"
 
 /*
 #include <SFML/Graphics.hpp>
@@ -10,6 +10,6 @@
 
 int main(int argc,char* argv[])
 {
-  refresh();
+  //refresh();
   return 0;
 }
