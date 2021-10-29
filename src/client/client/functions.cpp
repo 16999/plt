@@ -24,7 +24,7 @@ sf::Event event;
 client::Map map;
 client::Player playerA;
 client::Player playerB;
-
+ 
 
 void functions::refresh(void)
 {
