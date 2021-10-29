@@ -1,15 +1,10 @@
-//#include "client/functions.h"
+#include <render/StateLayer.h>
 
-/*
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <client/Map.h>
-#include <client/Player.h>
-#include <client/State.h>
-*/
+
+render::StateLayer s;
 
 int main(int argc,char* argv[])
 {
   //refresh();
-  return 0;
+  s.Welcome();
 }
