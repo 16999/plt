@@ -21,12 +21,12 @@ int globalMap[] = {
 sf::RenderWindow scene(sf::VideoMode(client::WINDOW_WIDTH, client::WINDOW_HEIGHT), "Tanks Battle !");
 sf::Event event;
 
-client::Map map(globalMap);
-client::Player playerA(client::NAVY_TANK,50,432);
-client::Player playerB(client::GREY_TANK,670,432);
+client::Map map;
+client::Player playerA;
+client::Player playerB;
 
 
-void refresh(void)
+void functions::refresh(void)
 {
   scene.setFramerateLimit(60);
   scene.setVerticalSyncEnabled(true);
@@ -38,10 +38,13 @@ void refresh(void)
     }
     scene.clear(sf::Color(32,64,255));
 
+    map.setMap(globalMap);
+    playerA.setPlayer(0,50,432);
+    playerB.setPlayer(1,670,432);
+
     map.drawMap(scene);
     playerA.drawPlayer(scene);
     playerB.drawPlayer(scene);
-    //player.goForward();
 
     scene.display();
   }

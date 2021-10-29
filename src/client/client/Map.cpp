@@ -1,9 +1,10 @@
-#include "Bloc.h"
 #include "functions.h"
+#include <SFML/Graphics.hpp>
 
 namespace client {
 
-  Map::Map (int* m)
+
+  void Map::setMap (int* m)
   {
     int i;
     for(i=0;i<MAP_SIZE;i++)
