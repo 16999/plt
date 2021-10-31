@@ -5,15 +5,17 @@ using namespace render;
 using namespace state;
 
 
-Scene::Scene()
+Scene::Scene(int width, int height, std::string title)
 {
-
+  this->width = width;
+  this->height = height;
+  this->title = title;
 }
 
-void Scene::init(void)
+void Scene::init()
 {
-  std::cout << "---- Welcome to TANKS GAME ! ----" << endl;
-  window.create(sf::VideoMode(960, 540), "Tanks game");
+  std::cout << "-- Welcome to TANKS GAME ! --" << endl;
+  window.create(sf::VideoMode(this->width,this->height), this->title);
 }
 
 void Scene::refresh(void)
