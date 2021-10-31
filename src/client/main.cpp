@@ -1,10 +1,14 @@
-#include <render/StateLayer.h>
+#include <render/Scene.h>
 
 
-render::StateLayer s;
+render::Scene s;
 
 int main(int argc,char* argv[])
 {
   //refresh();
-  s.Welcome();
+  s.init();
+  while(1)
+  {
+    s.refresh();
+  }
 }

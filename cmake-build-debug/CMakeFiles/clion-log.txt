@@ -1,0 +1,36 @@
+C:\Windows\system32\wsl.exe --distribution Ubuntu --exec /bin/sh -c "export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /mnt/c/Users/10265/CLionProjects/plt/cmake-build-debug && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/usr/bin/make -DCMAKE_C_COMPILER=/usr/bin/cc '-DCMAKE_CXX_COMPILER=/usr/bin/g++' -G 'CodeBlocks - Unix Makefiles' /mnt/c/Users/10265/CLionProjects/plt"
+-- The C compiler identification is GNU 9.3.0
+-- The CXX compiler identification is GNU 9.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/g++
+-- Check for working CXX compiler: /usr/bin/g++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Build type: Debug
+-- Code coverage: ON
+-- Found Python: /usr/bin/python3.8 (found version "3.8.10") found components: Interpreter 
+-- Appending code coverage compiler flags: -g --coverage -fprofile-arcs -ftest-coverage
+-- Found LibXml2: /usr/lib/x86_64-linux-gnu/libxml2.so (found version "2.9.10") 
+-- Found SFML 2.5.1 in /usr/lib/x86_64-linux-gnu/cmake/SFML
+-- Could NOT find Dia (missing: DIA_EXECUTABLE) 
+-- Could NOT find Ps2Pdf (missing: PS2PDF_EXECUTABLE) 
+CMake Warning at rapport/CMakeLists.txt:51 (message):
+  Dia or ps2pdf not found! Rapport generation not available!
+
+
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found suitable version "1.71.0", minimum required is "1.50") found components: unit_test_framework 
+-- Boost libraries: Boost::unit_test_framework
+-- Boost include directory: /usr/include
+-- Configuring done
+CMake Error at src/client/CMakeLists.txt:13 (add_library):
+  No SOURCES given to target: client_static
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

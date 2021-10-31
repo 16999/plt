@@ -1,7 +1,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-//#include "../../src/shared/state/Exemple.h"
+
 /*
 using namespace ::state;
 
@@ -28,3 +28,4 @@ BOOST_AUTO_TEST_CASE(TestExemple)
 }*/
 
 /* vim: set sw=2 sts=2 et : */
+
