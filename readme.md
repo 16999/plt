@@ -48,11 +48,9 @@ sudo apt-get install libboost-test-dev
 
 ## Work environment
 
-To make our project , we work on linux environment and to compile our project, we have to do this steps :
-git clone https://github.com/16999/plt.
-cd plt/
-mkdir build
-cd build/
+To make our project , we work on linux environment and to compile our project, we have to do this steps :   
+git clone https://github.com/16999/plt.  
+cd plt/  
 make Execution du client :
 bin/client
 
