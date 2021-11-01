@@ -25,11 +25,9 @@ git clone https://github.com/16999/plt.
 cd plt/  
 mkdir build  
 cd build/  
-cmake ..  
-make -j  
-and do this execute the client:  
+make
 Execution du client :  
-cd /home/pc/github/plt/bin && ./client  
+bin/client
 
 ## Build Environment
 We code the game in C++ with these library:  
