@@ -70,8 +70,8 @@ Listez les versions ici
 _exemple :_
 **Dernière version stable :** 5.0
 **Dernière version :** 5.1
-Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
-_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
+Liste des versions : [Clic here to see the new version](https://github.com/16999/plt/tags)
+_(phttps://github.com/16999/plt/tags)_
 
 ## Authors
 
