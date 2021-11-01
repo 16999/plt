@@ -78,13 +78,13 @@ _(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
 (https://github.com/16999/plt)
 * **Shuman Lin**(https://github.com/ShumanLIN)
 * **Eddy Lobjois** (https://github.com/16999)
-* **Ouattara Siaka** _alias_ [davson1](https://github.com/Davson1)
+* **Ouattara Siaka** _alias_ [davson1](https://github.com/Davson1)  
 https://github.com/16999/plt/ShumanLIN  
-https://github.com/16999/plt/16999
-https://github.com/16999/plt/Davson1
+https://github.com/16999/plt/16999  
+https://github.com/16999/plt/Davson1  
 ## License
 
-Rhis project is on license ``exemple: WTFTPL`` - see the filer[LICENSE.md](LICENSE.md) for more informations
+Rhis project is on license ``exemple: WTFTPL`` - see the file [LICENSE.md](LICENSE.md) for more informations
   
 ........................................
 
