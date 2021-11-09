@@ -14,7 +14,7 @@ Scene::Scene(int width, int height, std::string title)
 
 void Scene::init()
 {
-  std::cout << "-- Welcome to TANKS GAME ! --" << endl;
+  std::cout << "-- Welcome to " << this->title << endl;
   window.create(sf::VideoMode(this->width,this->height), this->title);
 }
 

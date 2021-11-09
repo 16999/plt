@@ -1,7 +1,7 @@
 #include <render/Scene.h>
 
 
-render::Scene s(960,540,"-- Tanks Game --");
+render::Scene s(960,540,"TANKS GAME");
 
 int main(int argc,char* argv[])
 {
