@@ -82,6 +82,8 @@ https://github.com/16999/plt/16999
 https://github.com/16999/plt/Davson1  
 ## License
 
-This project is on license ``exemple: WTFTPL`` - see the file [LICENSE.md](LICENSE.md) for more informations
+Rhis project is on license ``exemple: WTFTPL`` - see the file [LICENSE.md](LICENSE.md) for more informations
   
+........................................
 
+29 octobre 21h40 : j'ai remis l'ancien fichier /src/client/CMakeLists.txt car le nouveau provoquait des erreurs à la compilation.
