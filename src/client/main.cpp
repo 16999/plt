@@ -24,5 +24,6 @@ int main(int argc,char* argv[])
       scene.draw(window);
       window.display();
   }
+  
 
 }
