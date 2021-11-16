@@ -1,7 +1,6 @@
 #include "Engine.h"
 using namespace engine;
 
-
 Engine::Engine()
 {
 
@@ -12,7 +11,7 @@ Engine::~Engine()
 
 }
 
-const state::State& Engine::getCurrentState() const
+state::State& Engine::getCurrentState()
 {
   return this->currentState;
 }

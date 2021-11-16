@@ -1,10 +1,12 @@
 #include <render/Scene.h>
 #include <../shared/engine/Engine.h>
 
-sf::RenderWindow window;
-state::State thisState;
-render::Scene scene(thisState,window);
 engine::Engine ngine;
+sf::RenderWindow window;
+render::Scene scene(ngine.getCurrentState(),window);
+//state::State thisState;
+//render::Scene scene(thisState,window);
+
 
 int main(int argc,char* argv[])
 {

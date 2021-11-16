@@ -11,11 +11,12 @@ using namespace std;
 int Command::getLastCommand() const
 {
 
+  std::cout << "\nTEST ENGINE" << endl;
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-    std::cout << "Key pressed = left" << endl;
+    std::cout << "\nKey pressed = left" << endl;
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-    std::cout << "Key pressed = right" << endl;
+    std::cout << "\nKey pressed = right" << endl;
   }
 
 
