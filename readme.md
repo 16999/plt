@@ -1,7 +1,7 @@
 
   
 
-# Transversal Sotfware Project(PLT)
+# Transversal Software Project(PLT)
 _This is the final Project of our journey and schooling in ENSEA Graduate School.The principle is to make in application every courses we did in specialization IT and Systems and in to do that , we have to build a game and we choose to build a 2D based on a Tank game._
 
 
