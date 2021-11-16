@@ -52,7 +52,7 @@ To make our project , we work on linux environment and to compile our project, w
 git clone https://github.com/16999/plt.  
 cd plt/  
 make Execution du client :
-bin/client
+bin/client render
 
 ## Build With
 
