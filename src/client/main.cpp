@@ -19,6 +19,7 @@ int main(int argc,char* argv[])
               window.close();
       }
 
+
       // draw the map
       window.clear(sf::Color(128,160,255));
       scene.draw(window);
