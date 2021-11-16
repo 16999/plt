@@ -1,9 +1,10 @@
 #include <render/Scene.h>
-
+#include <../shared/engine/Engine.h>
 
 sf::RenderWindow window;
 state::State thisState;
 render::Scene scene(thisState,window);
+engine::Engine ngine;
 
 int main(int argc,char* argv[])
 {
@@ -24,6 +25,6 @@ int main(int argc,char* argv[])
       scene.draw(window);
       window.display();
   }
-  
+
 
 }
