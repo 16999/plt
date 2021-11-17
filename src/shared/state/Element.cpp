@@ -1,6 +1,7 @@
 #include "Element.h"
 using namespace state;
 
+
 float Element::getX() const
 {
   return this->x;

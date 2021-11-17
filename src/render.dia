@@ -577,7 +577,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#etat#</dia:string>
+            <dia:string>#currentState#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#state::State&amp;#</dia:string>
