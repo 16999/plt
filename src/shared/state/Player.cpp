@@ -86,7 +86,7 @@ void Player::setData(int ID, int tankType)
   this->playerStatus = 999;
   this->tank.setX(IDvectorX[this->ID]);
   this->tank.setY(IDvectorY[this->ID]);
-  this->tank.setAngle(0.5);
+  this->tank.setRotation(0.5);
 }
 
 void Player::move(int elemType, float dx, float dy)
