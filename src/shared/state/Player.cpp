@@ -27,9 +27,9 @@ std::string Player::getTextData() const
   "\nTank : X = " + to_string((int)this->tank.getX()) +
   "; Y = " + to_string((int)this->tank.getY()) +
   "; Phi = " + to_string((int)this->tank.getAngle()) +
-  "\nWeapon : X = " + to_string((int)this->weapon.getX()) +
-  "; Y = " + to_string((int)this->weapon.getY()) +
-  "; Phi = " + to_string((int)this->weapon.getAngle());
+  "\nWeapon : X = " + to_string((int)this->bullet.getX()) +
+  "; Y = " + to_string((int)this->bullet.getY()) +
+  "; Phi = " + to_string((int)this->bullet.getAngle());
   return data;
 }
 
@@ -63,9 +63,9 @@ const Tank& Player::getTank() const
   return this->tank;
 }
 
-const Weapon& Player::getWeapon() const
+const Bullet& Player::getBullet() const
 {
-  return this->weapon;
+  return this->bullet;
 }
 
 int Player::getTankType() const
@@ -77,8 +77,8 @@ void Player::setData(int ID, int tankType)
 {
   int lifeVector[] = {60,80,100};
   int damageVector[] = {25,20,15};
-  int IDvectorX[] = {70,430};
-  int IDvectorY[] = {363,364};
+  int IDvectorX[] = {70,530};
+  int IDvectorY[] = {433,433};
   this->ID = ID;
   this->tankType = tankType;
   this->life = lifeVector[ID];
@@ -86,6 +86,7 @@ void Player::setData(int ID, int tankType)
   this->playerStatus = 999;
   this->tank.setX(IDvectorX[this->ID]);
   this->tank.setY(IDvectorY[this->ID]);
+  this->tank.setAngle(0.5);
 }
 
 void Player::move(int elemType, float dx, float dy)
@@ -93,7 +94,7 @@ void Player::move(int elemType, float dx, float dy)
   switch(elemType)
   {
     case TANK: this->tank.move(dx,dy); break;
-    case WEAPON: this->weapon.move(dx,dy); break;
+    case BULLET: this->bullet.move(dx,dy); break;
     default: break;
   }
 

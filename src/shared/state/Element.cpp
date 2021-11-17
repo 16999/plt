@@ -31,7 +31,7 @@ void Element::setAngle(float angle)
   this->angle = angle;
 }
 
-void Element::move(float dx, float dy)
+void Element::move(float dx, float dy) 
 {
   this->x += dx;
   this->y += dy;

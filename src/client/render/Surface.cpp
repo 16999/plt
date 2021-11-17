@@ -69,10 +69,12 @@ void Surface::loadText(std::string data, int ID, sf::Color color)
   this->text[ID].setPosition(WINDOW_WIDTH-PANEL_WIDTH+8,(ID*WINDOW_HEIGHT/2)+8);
 }
 
-void Surface::loadTank(int ID,float x, float y)
+void Surface::loadTank(int ID,state::Element element)
 {
   this->tankSprite[ID].setTexture(this->tankTexture[ID]);
-  this->tankSprite[ID].setPosition(x,y);
+  this->tankSprite[ID].setPosition(element.getX(),element.getY());
+  this->tankSprite[ID].setOrigin((float)(this->tankTexture[ID].getSize().x)/2,(float)(this->tankTexture[ID].getSize().y));
+  this->tankSprite[ID].rotate(element.getAngle());
 }
 
 void Surface::draw(sf::RenderTarget& target, sf::RenderStates states) const
