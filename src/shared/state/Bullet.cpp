@@ -1,22 +1,23 @@
 //#include "weapon.h"
+#include <math.h>
+#include <cmath>
+//using namespace element;
 
-
-int Weapon() {
+float Element::Bullet() {
     float Vinit = 10;
     float RADinit = M_PI/4;
     float t;
-    float dx, dy;
-    Position positionInit;
-    Position positionFin;
+    Element::positionInit;
+    Element::positionFin;
     for(t=0;t<2;t+=0.1)
     {
     positionFin = CalculPosition (Vinit, RADinit, t, positionInit);
     std::cout << "La position finale à " << t << "s soit ("<< positionFin.x << "," << positionFin.y << ")" << std::endl;
     }
-    return 0;
+    return positionFin;
 }
 
-Position CalculPosition (float Vinit, float RADinit, float t, Position positionInit)
+Element::positionFin CalculPosition (float Vinit, float RADinit, float t, Position positionInit)
 {
     //vitesse en m.s-1, position en m, angle en radians et temps en secondes
     //opération efectuée dans le plan 2D xy
