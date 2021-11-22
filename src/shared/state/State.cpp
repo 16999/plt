@@ -7,13 +7,14 @@ using namespace state;
 using namespace std;
 
 
+
 State::State ()
 {
   std::cout << "Welcome to TANKS GAME" << endl;
+  this->map.init("../res/map.hex");
   this->player.resize(2);
   this->player[0].setData(0,GREY_TANK);
   this->player[1].setData(1,GREEN_TANK);
-  this->map.init("../res/map.hex");
 }
 
 State::~State ()
@@ -29,6 +30,31 @@ const Map& State::getMap() const
 const std::vector<Player>& State::getPlayer() const
 {
   return this->player;
+}
+
+int State::getPlayerID() const
+{
+  return this->playerID;
+}
+
+int State::getTurnID() const
+{
+  return this->turnID;
+}
+
+void State::move (int ID, ElemType elemType, float dx, float dy)
+{
+  this->player[ID].move(elemType,dx,dy);
+}
+
+void State::turn (int ID, ElemType elemType, float dPhi)
+{
+  this->player[ID].turn(elemType,dPhi);
+}
+
+void State::nextTurnID ()
+{
+  this->turnID = 1 - this->turnID;
 }
 
 void State::endGame ()

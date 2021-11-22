@@ -4,14 +4,19 @@ using namespace std;
 using namespace render;
 using namespace state;
 
+#define WINDOW_WIDTH 1080
+#define WINDOW_HEIGHT 540
 
-Scene::Scene(state::State& state, sf::RenderWindow& window) : window(window), etat(state)
+Scene::Scene(state::State& state, sf::RenderWindow& window) : window(window), currentState(state)
 {
   this->window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),"TANKS GAME");
-  this->surface.initTileset("../res/tileset.png");
-  this->surface.initFont("../res/arial.ttf");
-  this->surface.initTank(0,"../res/tank0.png");
-  this->surface.initTank(1,"../res/tank2.png");
+  this->window.setFramerateLimit(60);
+  this->mapSurface.initTileset("../res/tileset.png");
+  this->playerSurface.resize(2);
+  this->playerSurface[0].initText("../res/arial.ttf");
+  this->playerSurface[1].initText("../res/arial.ttf");
+  this->playerSurface[0].initPlayer(this->currentState.getPlayer()[0],{"../res/tank0.png","../res/turret0.png","../res/bullet0.png"});
+  this->playerSurface[1].initPlayer(this->currentState.getPlayer()[1],{"../res/tank1.png","../res/turret0.png","../res/bullet0.png"});
 }
 
 Scene::~Scene ()
@@ -21,11 +26,24 @@ Scene::~Scene ()
 
 void Scene::draw(sf::RenderWindow& window)
 {
-  this->surface.loadMap(this->etat.getMap().getVector());
-  this->surface.loadText(this->etat.getPlayer()[0].getTextData(),0,sf::Color(64,64,64));
-  this->surface.loadText(this->etat.getPlayer()[1].getTextData(),1,sf::Color(64,0,0));
-  this->surface.loadTank(0,this->etat.getPlayer()[0].getTank().getX(),this->etat.getPlayer()[0].getTank().getY());
-  this->surface.loadTank(1,this->etat.getPlayer()[1].getTank().getX(),this->etat.getPlayer()[1].getTank().getY());
+  this->window.clear(sf::Color(0,0,64));
+  this->mapSurface.loadTileset(this->currentState.getMap().getVector());
+  window.draw(this->mapSurface);
+  this->playerSurface[0].loadText(this->currentState.getPlayer()[0]);
+  this->playerSurface[1].loadText(this->currentState.getPlayer()[1]);
+  this->playerSurface[0].loadPlayer(this->currentState.getPlayer()[0]);
+  this->playerSurface[1].loadPlayer(this->currentState.getPlayer()[1]);
+  this->playerSurface[0].draw(window);
+  this->playerSurface[1].draw(window);
+  this->window.display();
+}
 
-  window.draw(this->surface);
+state::State& Scene::getCurrentState() const
+{
+  return this->currentState;
+}
+
+void Scene::setCurrentState(const state::State&& currentState)
+{
+  this->currentState = currentState;
 }

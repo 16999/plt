@@ -1,10 +1,21 @@
 #include "Element.h"
 using namespace state;
 
+Element::Element()
+{
+
+}
+
+Element::~Element()
+{
+
+}
+
 float Element::getX() const
 {
   return this->x;
 }
+
 float Element::getY() const
 {
   return this->y;
@@ -38,5 +49,5 @@ void Element::move(float dx, float dy)
 
 void Element::turn(float dPhi)
 {
-  this->angle = dPhi;
+  this->angle += dPhi;
 }
