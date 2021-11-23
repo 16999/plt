@@ -7,7 +7,7 @@ using namespace state;
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 540
 
-Scene::Scene(state::State& state, sf::RenderWindow& window) : window(window), currentState(state)
+Scene::Scene(sf::RenderWindow& window) : window(window)
 {
   this->window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),"TANKS GAME");
   this->window.setFramerateLimit(60);
@@ -15,8 +15,8 @@ Scene::Scene(state::State& state, sf::RenderWindow& window) : window(window), cu
   this->playerSurface.resize(2);
   this->playerSurface[0].initText("../res/arial.ttf");
   this->playerSurface[1].initText("../res/arial.ttf");
-  this->playerSurface[0].initPlayer(this->currentState.getPlayer()[0],{"../res/tank0.png","../res/turret0.png","../res/bullet0.png"});
-  this->playerSurface[1].initPlayer(this->currentState.getPlayer()[1],{"../res/tank1.png","../res/turret0.png","../res/bullet0.png"});
+  this->playerSurface[0].initPlayer({"../res/tank0.png","../res/turret0.png","../res/bullet0.png"});
+  this->playerSurface[1].initPlayer({"../res/tank1.png","../res/turret0.png","../res/bullet0.png"});
 }
 
 Scene::~Scene ()
@@ -38,12 +38,12 @@ void Scene::draw(sf::RenderWindow& window)
   this->window.display();
 }
 
-state::State& Scene::getCurrentState() const
+const state::State& Scene::getCurrentState() const
 {
   return this->currentState;
 }
 
-void Scene::setCurrentState(const state::State&& currentState)
+void Scene::setCurrentState(const state::State& currentState)
 {
   this->currentState = currentState;
 }

@@ -6,8 +6,10 @@ using namespace std;
 
 engine::Engine ngine;
 sf::RenderWindow window;
-render::Scene scene(ngine.getCurrentState(),window);
+render::Scene scene(window);
+state::State currentState;
 sf::Event event;
+bool val;
 
 
 void display(void)
@@ -15,9 +17,18 @@ void display(void)
   while (window.isOpen())
   {
       while (window.pollEvent(event))
-        if(event.type == sf::Event::Closed)
-          window.close();
-      ngine.update();
+      {
+        switch(event.type)
+        {
+          case sf::Event::Closed : window.close();  break;
+          case sf::Event::KeyPressed :
+            ngine.setAction(ngine.convert(event));
+            ngine.apply(currentState,ngine.getAction());
+            scene.setCurrentState(currentState);
+          break;
+          default : break;
+        }
+      }
       scene.draw(window);
   }
 }

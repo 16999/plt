@@ -13,8 +13,13 @@ Command::~Command()
 
 }
 
+/*
 Action Command::getAction() const
 {
+
+
+
+
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
     return MOVE_LEFT;}
   else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
@@ -27,4 +32,4 @@ Action Command::getAction() const
     return FIRE;}
   else{
     return NOTHING;}
-}
+}*/

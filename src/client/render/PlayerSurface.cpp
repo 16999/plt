@@ -27,7 +27,7 @@ void PlayerSurface::initText(std::string path)
   this->text.setFont(this->font);
 }
 
-void PlayerSurface::initPlayer(state::Player player, std::vector<std::string> path)
+void PlayerSurface::initPlayer(std::vector<std::string> path)
 {
   this->playerTexture[0].loadFromFile(path[0]);
   this->playerTexture[1].loadFromFile(path[1]);
