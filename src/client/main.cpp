@@ -16,6 +16,7 @@ void display(void)
 {
   while (window.isOpen())
   {
+      int numUpdate = 0;
       while (window.pollEvent(event))
       {
         switch(event.type)
@@ -23,12 +24,13 @@ void display(void)
           case sf::Event::Closed : window.close();  break;
           case sf::Event::KeyPressed :
             ngine.setAction(ngine.convert(event));
-            ngine.apply(currentState,ngine.getAction());
-            scene.setCurrentState(currentState);
+            numUpdate += (int)ngine.apply(currentState,ngine.getAction());
           break;
           default : break;
         }
       }
+      if (numUpdate > 0)
+        scene.setCurrentState(currentState);
       scene.draw(window);
   }
 }

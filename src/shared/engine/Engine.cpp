@@ -14,43 +14,6 @@ Engine::~Engine()
 
 }
 
-
-/*
-void Engine::update()
-{
-  //engine_mutex.lock();
-
-  switch(command.getAction())
-  {
-    case MOVE_LEFT :
-      currentState.move(currentState.getTurnID(),state::TANK,-2,0);
-      currentState.move(currentState.getTurnID(),state::TURRET,-2,0);
-      currentState.move(currentState.getTurnID(),state::BULLET,-2,0);
-      command.Move(currentState,-2);
-    break;
-    case MOVE_RIGHT :
-      currentState.move(currentState.getTurnID(),state::TANK,2,0);
-      currentState.move(currentState.getTurnID(),state::TURRET,2,0);
-      currentState.move(currentState.getTurnID(),state::BULLET,2,0);
-      //command.Move(currentState,2);
-    break;
-    case TURN_ANTICLOCKWISE :
-      currentState.turn(currentState.getTurnID(),state::TURRET,-2);
-      currentState.turn(currentState.getTurnID(),state::BULLET,-2);
-    break;
-    case TURN_CLOCKWISE :
-      currentState.turn(currentState.getTurnID(),state::TURRET,2);
-      currentState.turn(currentState.getTurnID(),state::BULLET,2);
-    break;
-    case FIRE :
-      currentState.nextTurnID();
-    break;
-    default : break;
-  }
-  //engine_mutex.lock();
-  //sf::sleep(sf::milliseconds(20));
-}*/
-
 Action Engine::convert(sf::Event event)
 {
   switch(event.key.code)
@@ -74,7 +37,7 @@ Action Engine::getAction() const
   return this->action;
 }
 
-void Engine::apply(state::State& currentState, Action action)
+bool Engine::apply(state::State& currentState, Action action)
 {
   switch(action)
   {
@@ -82,13 +45,11 @@ void Engine::apply(state::State& currentState, Action action)
       currentState.move(currentState.getTurnID(),state::TANK,-2,0);
       currentState.move(currentState.getTurnID(),state::TURRET,-2,0);
       currentState.move(currentState.getTurnID(),state::BULLET,-2,0);
-      //command.Move(currentState,-2);
     break;
     case MOVE_RIGHT :
       currentState.move(currentState.getTurnID(),state::TANK,2,0);
       currentState.move(currentState.getTurnID(),state::TURRET,2,0);
       currentState.move(currentState.getTurnID(),state::BULLET,2,0);
-      //command.Move(currentState,2);
     break;
     case TURN_ANTICLOCKWISE :
       currentState.turn(currentState.getTurnID(),state::TURRET,-2);
@@ -101,8 +62,9 @@ void Engine::apply(state::State& currentState, Action action)
     case FIRE :
       currentState.nextTurnID();
     break;
-    default : break;
+    default : return false;
   }
+  return true;
 }
 
 state::State& Engine::getCurrentState()
