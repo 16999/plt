@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 using namespace state;
+using namespace std;
+
 
 
 Map::Map()
@@ -21,11 +23,11 @@ void Map::init (std::string path)  //charge une map externe présente dans un fi
   std::stringstream strStream;
   file.open(path);
   strStream << file.rdbuf(); //read the file
-  this->vector = strStream.str(); //str holds the content of the file
+  this->bloc = strStream.str(); //str holds the content of the file
   file.close();
 }
 
-const std::string& Map::getVector() const
+const std::string& Map::getBloc() const
 {
-  return this->vector;
+  return this->bloc;
 }

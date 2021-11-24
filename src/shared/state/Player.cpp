@@ -21,7 +21,6 @@ std::string Player::getTextData() const
   std::string data =
   "PLAYER ID = " + to_string(this->ID) +
   "\nTANK TYPE = " + to_string(this->tankType) +
-  "\nPLAYER STATUS = " + to_string(this->playerStatus) +
   "\nLIFE = " + to_string(this->life) +
   "\nDAMAGE = " + to_string(this->damage)+
   "\nTank : X = " + to_string((int)this->tank.getX()) +
@@ -46,11 +45,6 @@ void Player::setID(int ID)
 void Player::setTankType(TankType tankType)
 {
   this->tankType = tankType;
-}
-
-void Player::setPlayerStatus(PlayerStatus playerStatus)
-{
-  this->playerStatus = playerStatus;
 }
 
 void Player::setLife(int life)
@@ -93,18 +87,17 @@ void Player::setData(int ID, TankType tankType)
   this->tankType = tankType;
   this->life = lifeVector[ID];
   this->damage = damageVector[ID];
-  this->playerStatus = AWAITING;
   this->tank.setX(IDvectorX[ID]);
   this->tank.setY(IDvectorY[ID]);
   this->turret.setX(IDvectorX[ID]);
   this->turret.setY(IDvectorY[ID]-62);
-  this->turret.setAngle(-45);
+  this->turret.setAngle(-90);
   this->bullet.setX(IDvectorX[ID]);
   this->bullet.setY(IDvectorY[ID]-62);
-  this->bullet.setAngle(-45);
+  this->bullet.setAngle(-90);
 }
 
-void Player::move(int elemType, float dx, float dy)
+void Player::move(ElemType elemType, float dx, float dy)
 {
   switch(elemType)
   {
@@ -116,7 +109,7 @@ void Player::move(int elemType, float dx, float dy)
 
 }
 
-void Player::turn(int elemType, float dPhi)
+void Player::turn(ElemType elemType, float dPhi)
 {
   switch(elemType)
   {

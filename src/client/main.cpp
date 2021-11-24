@@ -16,7 +16,7 @@ void display(void)
 {
   while (window.isOpen())
   {
-      int numUpdate = 0;
+
       while (window.pollEvent(event))
       {
         switch(event.type)
@@ -24,13 +24,13 @@ void display(void)
           case sf::Event::Closed : window.close();  break;
           case sf::Event::KeyPressed :
             ngine.setAction(ngine.convert(event));
-            numUpdate += (int)ngine.apply(currentState,ngine.getAction());
+            ngine.apply(currentState,ngine.getAction());
           break;
           default : break;
         }
       }
-      if (numUpdate > 0)
-        scene.setCurrentState(currentState);
+
+      scene.setCurrentState(currentState);
       scene.draw(window);
   }
 }
@@ -45,9 +45,7 @@ int main(int argc,char* argv[])
   else if (argc == 2 && strcmp(argv[1],"render") == 0)
     display();
   else if (argc == 2 && strcmp(argv[1],"engine") == 0)
-  {
     display();
-  }
   else
     std::cout << "ERROR : Invalid arguments !!!" << endl;
 }

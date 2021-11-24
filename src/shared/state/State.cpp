@@ -1,4 +1,5 @@
 #include "State.h"
+#include <math.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -6,6 +7,9 @@
 using namespace state;
 using namespace std;
 
+#define BLOC_SIZE 36
+#define MAP_WIDTH 20
+#define MAP_HEIGHT 15
 
 
 State::State ()
@@ -55,6 +59,41 @@ void State::turn (int ID, ElemType elemType, float dPhi)
 void State::nextTurnID ()
 {
   this->turnID = 1 - this->turnID;
+  this->status = MOVING;
+}
+
+void State::setStatus(Status status)
+{
+  this->status = status;
+}
+
+Status State::getStatus() const
+{
+  return this->status;
+}
+
+BlocType State::getBlocType (Element element)
+{
+  BlocType ret;
+  int index = floor(element.getX()/BLOC_SIZE)+(MAP_WIDTH*floor(element.getY()/BLOC_SIZE));
+
+  if (index >= 0 && index < MAP_WIDTH*MAP_HEIGHT)
+  {
+    char val = this->map.getBloc()[index];
+    switch (val)
+    {
+      case 0x7 : ret = LEFT_BORDER;  break;
+      case 0x8 : ret = PRACTICABLE;  break;
+      case 0x9 : ret = RIGHT_BORDER;  break;
+      default : ret = NOTHING; break;
+    }
+  }
+  else
+  {
+      ret = INVALID;
+  }
+
+  return ret;
 }
 
 void State::endGame ()
