@@ -32,6 +32,7 @@ float positionBullet (float t)
 
     float xinit = elem.getX();
     float yinit = elem.getY();
+    float dx,dy;
 
     Vinit = getV();
     RADinit = getRAD();
@@ -43,10 +44,10 @@ float positionBullet (float t)
 
         //x = xinit + Vinit * cos(RADinit) * t;
         //y = yinit + Vinit * sin(RADinit) * t - 0.5 * g * pow(t,2);
-        std::cout << "La position finale à " << t << "s soit ("<< Element::positionFin.x << "," << Element::positionFin.y << ")" << endl;
+        //std::cout << "La position finale à " << t << "s soit ("<< Element::positionFin.x << "," << Element::positionFin.y << ")" << endl;
     }
 
-    return x;
+    return dx,dy;
 }
 
 
