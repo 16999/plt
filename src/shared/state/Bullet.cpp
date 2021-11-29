@@ -30,17 +30,15 @@ float positionBullet (float t)
     //state::Element xinit,yinit;
     state::Element elem;
 
-    float xinit = elem.getX();
-    float yinit = elem.getY();
-    float dx,dy;
+
+    float Vx,Vy;
 
     Vinit = getV();
-    RADinit = getRAD();
 
     for(t=0;t<2;t+=0.1)
     {
-        dx = Vinit * cos(RADinit) * t;
-        dy = Vinit * sin(RADinit) * t - 0.5 * g * pow(t,2);
+        Vx = Vinit * cos(RADinit);
+        Vy = Vinit * sin(RADinit) - g*t;
 
         //x = xinit + Vinit * cos(RADinit) * t;
         //y = yinit + Vinit * sin(RADinit) * t - 0.5 * g * pow(t,2);
