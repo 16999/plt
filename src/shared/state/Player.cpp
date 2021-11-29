@@ -57,17 +57,17 @@ void Player::setDamage(int damage)
   this->damage = damage;
 }
 
-const Tank& Player::getTank() const
+Tank& Player::getTank()
 {
   return this->tank;
 }
 
-const Turret& Player::getTurret() const
+Turret& Player::getTurret()
 {
   return this->turret;
 }
 
-const Bullet& Player::getBullet() const
+Bullet& Player::getBullet()
 {
   return this->bullet;
 }
@@ -95,28 +95,4 @@ void Player::setData(int ID, TankType tankType)
   this->bullet.setX(IDvectorX[ID]);
   this->bullet.setY(IDvectorY[ID]-62);
   this->bullet.setAngle(-90);
-}
-
-void Player::move(ElemType elemType, float dx, float dy)
-{
-  switch(elemType)
-  {
-    case TANK: this->tank.move(dx,dy); break;
-    case TURRET: this->turret.move(dx,dy); break;
-    case BULLET: this->bullet.move(dx,dy); break;
-    default: break;
-  }
-
-}
-
-void Player::turn(ElemType elemType, float dPhi)
-{
-  switch(elemType)
-  {
-    case TANK: this->tank.turn(dPhi); break;
-    case TURRET: this->turret.turn(dPhi); break;
-    case BULLET: this->bullet.turn(dPhi); break;
-    default: break;
-  }
-
 }

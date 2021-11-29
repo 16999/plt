@@ -31,9 +31,9 @@ const Map& State::getMap() const
   return this->map;
 }
 
-const std::vector<Player>& State::getPlayer() const
+Player& State::getPlayer(int ID)
 {
-  return this->player;
+  return this->player[ID];
 }
 
 int State::getPlayerID() const
@@ -46,20 +46,10 @@ int State::getTurnID() const
   return this->turnID;
 }
 
-void State::move (int ID, ElemType elemType, float dx, float dy)
-{
-  this->player[ID].move(elemType,dx,dy);
-}
-
-void State::turn (int ID, ElemType elemType, float dPhi)
-{
-  this->player[ID].turn(elemType,dPhi);
-}
-
 void State::nextTurnID ()
 {
   this->turnID = 1 - this->turnID;
-  this->status = MOVING;
+  //this->status = MOVING;
 }
 
 void State::setStatus(Status status)

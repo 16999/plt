@@ -4,10 +4,6 @@
 using namespace engine;
 
 
-#include <unistd.h>
-#include <iostream>
-using namespace std;
-
 
 
 //sf::Mutex engine_mutex;
@@ -45,53 +41,65 @@ Action Engine::getAction() const
   return this->action;
 }
 
-bool Engine::apply(state::State& currentState, Action action)
+bool Engine::update(state::State& currentState, Action action)
 {
-  switch(action)
+  if (this->currentState.getStatus() == state::MOVING)
   {
-    case MOVE_LEFT :
-      if (currentState.getBlocType(currentState.getPlayer()[currentState.getTurnID()].getTank()) != state::LEFT_BORDER)
-      {
-        currentState.move(currentState.getTurnID(),state::TANK,-3,0);
-        currentState.move(currentState.getTurnID(),state::TURRET,-3,0);
-        currentState.move(currentState.getTurnID(),state::BULLET,-3,0);
-      }
-    break;
-    case MOVE_RIGHT :
-      if (currentState.getBlocType(currentState.getPlayer()[currentState.getTurnID()].getTank()) != state::RIGHT_BORDER)
-      {
-        currentState.getBlocType(currentState.getPlayer()[currentState.getTurnID()].getTank());
-        currentState.move(currentState.getTurnID(),state::TANK,3,0);
-        currentState.move(currentState.getTurnID(),state::TURRET,3,0);
-        currentState.move(currentState.getTurnID(),state::BULLET,3,0);
-      }
-    break;
-    case TURN_ANTICLOCKWISE :
-    if (currentState.getPlayer()[currentState.getTurnID()].getTurret().getAngle() > -180)
+    switch(action)
     {
-      currentState.turn(currentState.getTurnID(),state::TURRET,-3);
-      currentState.turn(currentState.getTurnID(),state::BULLET,-3);
+      case MOVE_LEFT :
+        if (currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getTank()) != state::LEFT_BORDER)
+        {
+          currentState.getPlayer(currentState.getTurnID()).getTank().move(-3,0);
+          currentState.getPlayer(currentState.getTurnID()).getTurret().move(-3,0);
+          currentState.getPlayer(currentState.getTurnID()).getBullet().move(-3,0);
+        }
+      break;
+      case MOVE_RIGHT :
+        if (currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getTank()) != state::RIGHT_BORDER)
+        {
+          currentState.getPlayer(currentState.getTurnID()).getTank().move(3,0);
+          currentState.getPlayer(currentState.getTurnID()).getTurret().move(3,0);
+          currentState.getPlayer(currentState.getTurnID()).getBullet().move(3,0);
+        }
+      break;
+      case TURN_ANTICLOCKWISE :
+        if (currentState.getPlayer(currentState.getTurnID()).getTurret().getAngle() > -180)
+        {
+          currentState.getPlayer(currentState.getTurnID()).getTurret().turn(-3);
+          currentState.getPlayer(currentState.getTurnID()).getBullet().turn(-3);
+        }
+      break;
+      case TURN_CLOCKWISE :
+        if (currentState.getPlayer(currentState.getTurnID()).getTurret().getAngle() < 0)
+        {
+          currentState.getPlayer(currentState.getTurnID()).getTurret().turn(3);
+          currentState.getPlayer(currentState.getTurnID()).getBullet().turn(3);
+        }
+      break;
+      case FIRE :
+        this->currentState.setStatus(state::SHOOTING);
+      break;
+      default : return false;
     }
-    break;
-    case TURN_CLOCKWISE :
-    if (currentState.getPlayer()[currentState.getTurnID()].getTurret().getAngle() < 0)
-    {
-      currentState.turn(currentState.getTurnID(),state::TURRET,3);
-      currentState.turn(currentState.getTurnID(),state::BULLET,3);
-    }
-    break;
-    case FIRE :
-      //currentState.getPlayer()[currentState.getTurnID()].setPlayerStatus(state::SHOOTING);
-
-      /*while(currentState.getBlocType(currentState.getPlayer()[currentState.getTurnID()].getBullet()) == state::NOTHING)
-      {
-        currentState.move(currentState.getTurnID(),state::BULLET,1*cos(currentState.getPlayer()[currentState.getTurnID()].getBullet().getAngle()/57.2958),1*sin(currentState.getPlayer()[currentState.getTurnID()].getBullet().getAngle()/57.2958));
-      }*/
-      currentState.nextTurnID();
-
-    break;
-    default : return false;
   }
+  else if (this->currentState.getStatus() == state::SHOOTING)
+  {
+
+    if(currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getBullet()) == state::NOTHING)
+    {
+        currentState.getPlayer(currentState.getTurnID()).getBullet().update();
+        currentState.getPlayer(currentState.getTurnID()).getBullet().move(currentState.getPlayer(currentState.getTurnID()).getBullet().getVx(),currentState.getPlayer(currentState.getTurnID()).getBullet().getVy());
+    }
+    else
+    {
+      currentState.nextTurnID();
+      this->currentState.setStatus(state::MOVING);
+    }
+
+  }
+
+
   return true;
 }
 
