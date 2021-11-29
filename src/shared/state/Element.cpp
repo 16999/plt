@@ -3,7 +3,7 @@ using namespace state;
 
 Element::Element()
 {
-
+    float x,y;
 }
 
 Element::~Element()
