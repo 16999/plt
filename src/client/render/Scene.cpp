@@ -4,7 +4,7 @@ using namespace std;
 using namespace render;
 using namespace state;
 
-#define WINDOW_WIDTH 1080
+#define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 540
 
 Scene::Scene(sf::RenderWindow& window) : window(window)

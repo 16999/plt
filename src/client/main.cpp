@@ -9,7 +9,6 @@ sf::RenderWindow window;
 render::Scene scene(window);
 state::State currentState;
 sf::Event event;
-bool val;
 
 
 void display(void)
@@ -17,20 +16,20 @@ void display(void)
   while (window.isOpen())
   {
 
-      ngine.setAction(engine::NOTHING);
+      ngine.getCommand().setAction(engine::NOTHING);
       while (window.pollEvent(event))
       {
         switch(event.type)
         {
           case sf::Event::Closed : window.close();  break;
           case sf::Event::KeyPressed :
-            ngine.setAction(ngine.convert(event));
+            ngine.getCommand().setAction(ngine.getCommand().convert(event));
           break;
           default : break;
         }
       }
 
-      ngine.update(currentState,ngine.getAction());
+      ngine.update(currentState,ngine.getCommand().getAction());
       scene.setCurrentState(currentState);
       scene.draw(window);
   }

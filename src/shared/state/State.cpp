@@ -52,16 +52,6 @@ void State::nextTurnID ()
   //this->status = MOVING;
 }
 
-void State::setStatus(Status status)
-{
-  this->status = status;
-}
-
-Status State::getStatus() const
-{
-  return this->status;
-}
-
 BlocType State::getBlocType (Element element)
 {
   BlocType ret;

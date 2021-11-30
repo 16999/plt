@@ -10,7 +10,7 @@ using namespace engine;
 
 Engine::Engine()
 {
-  this->currentState.setStatus(state::MOVING);
+  this->status = MOVING;
 }
 
 Engine::~Engine()
@@ -18,32 +18,19 @@ Engine::~Engine()
 
 }
 
-Action Engine::convert(sf::Event event)
+Command& Engine::getCommand()
 {
-  switch(event.key.code)
-  {
-    case sf::Keyboard::Left : return MOVE_LEFT;       break;
-    case sf::Keyboard::Right : return MOVE_RIGHT;     break;
-    case sf::Keyboard::W : return TURN_ANTICLOCKWISE; break;
-    case sf::Keyboard::X : return TURN_CLOCKWISE;     break;
-    case sf::Keyboard::Space : return FIRE;           break;
-    default : return NOTHING;
-  }
+  return this->command;
 }
 
-void Engine::setAction(Action action)
+void Engine::setCommand(Command& command)
 {
-  this->action = action;
-}
-
-Action Engine::getAction() const
-{
-  return this->action;
+  this->command = command;
 }
 
 bool Engine::update(state::State& currentState, Action action)
 {
-  if (this->currentState.getStatus() == state::MOVING)
+  if (this->status == MOVING)
   {
     switch(action)
     {
@@ -78,32 +65,31 @@ bool Engine::update(state::State& currentState, Action action)
         }
       break;
       case FIRE :
-        this->currentState.setStatus(state::SHOOTING);
+        currentState.getPlayer(currentState.getTurnID()).getBullet().init();
+        this->status = SHOOTING;
       break;
       default : return false;
     }
   }
-  else if (this->currentState.getStatus() == state::SHOOTING)
+  else if (this->status == SHOOTING)
   {
 
     if(currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getBullet()) == state::NOTHING)
     {
-        currentState.getPlayer(currentState.getTurnID()).getBullet().update();
-        currentState.getPlayer(currentState.getTurnID()).getBullet().move(currentState.getPlayer(currentState.getTurnID()).getBullet().getVx(),currentState.getPlayer(currentState.getTurnID()).getBullet().getVy());
+      currentState.getPlayer(currentState.getTurnID()).getBullet().update();
+      currentState.getPlayer(currentState.getTurnID()).getBullet().move(currentState.getPlayer(currentState.getTurnID()).getBullet().getVx(),currentState.getPlayer(currentState.getTurnID()).getBullet().getVy());
     }
     else
     {
+      currentState.getPlayer(currentState.getTurnID()).getBullet().setX(currentState.getPlayer(currentState.getTurnID()).getTurret().getX());
+      currentState.getPlayer(currentState.getTurnID()).getBullet().setY(currentState.getPlayer(currentState.getTurnID()).getTurret().getY());
+      currentState.getPlayer(currentState.getTurnID()).getBullet().setAngle(currentState.getPlayer(currentState.getTurnID()).getTurret().getAngle());
       currentState.nextTurnID();
-      this->currentState.setStatus(state::MOVING);
+      this->status = MOVING;
     }
 
   }
 
-
+  //test();
   return true;
-}
-
-state::State& Engine::getCurrentState()
-{
-  return currentState;
 }

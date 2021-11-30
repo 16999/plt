@@ -6,7 +6,7 @@ using namespace std;
 #define BLOC_SIZE 36
 #define MAP_WIDTH 20
 #define MAP_HEIGHT 15
-#define WINDOW_WIDTH 1080
+#define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 540
 
 
@@ -39,11 +39,8 @@ void PlayerSurface::initPlayer(std::vector<std::string> path)
 
 void PlayerSurface::loadText(state::Player player)
 {
-  this->panel.setFillColor(sf::Color(64,64,64*player.getID()));
-  this->panel.setSize(sf::Vector2f(WINDOW_WIDTH-(BLOC_SIZE*MAP_WIDTH),WINDOW_HEIGHT/2));
-  this->panel.setPosition(BLOC_SIZE*MAP_WIDTH,player.getID()*WINDOW_HEIGHT/2);
   this->text.setString(player.getTextData());
-  this->text.setCharacterSize(16);
+  this->text.setCharacterSize(14);
   this->text.setFillColor(sf::Color(255,255,255));
   this->text.setPosition((BLOC_SIZE*MAP_WIDTH)+8,(player.getID()*WINDOW_HEIGHT/2)+8);
 }
@@ -63,7 +60,6 @@ void PlayerSurface::loadPlayer(state::Player player)
 
 void PlayerSurface::draw(sf::RenderWindow& window)
 {
-  window.draw(this->panel);
   window.draw(this->text);
   window.draw(this->playerSprite[2]);
   window.draw(this->playerSprite[1]);
