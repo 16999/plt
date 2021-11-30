@@ -103,7 +103,15 @@ bool Engine::update(state::State& currentState, Action action)
         }
       }
     break;
-    
+
+    case GAMEOVER :
+      if (action == FIRE)
+      {
+        this->status = MOVING;
+        std::cout << "GAME START" << endl;
+      }
+    break;
+
     default : break;
   }
 
