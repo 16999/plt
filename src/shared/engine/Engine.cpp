@@ -90,6 +90,5 @@ bool Engine::update(state::State& currentState, Action action)
 
   }
 
-  //test();
   return true;
 }

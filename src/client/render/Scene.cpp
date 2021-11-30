@@ -19,7 +19,7 @@ Scene::Scene(sf::RenderWindow& window) : window(window)
   this->playerSurface[1].initPlayer({"../res/tank1.png","../res/turret0.png","../res/bullet0.png"});
 }
 
-Scene::~Scene ()
+Scene::~Scene()
 {
 
 }
@@ -46,4 +46,10 @@ const state::State& Scene::getCurrentState() const
 void Scene::setCurrentState(const state::State& currentState)
 {
   this->currentState = currentState;
+}
+
+void Scene::checkCollision(state::State& currentState)
+{
+  currentState.setCollision(this->playerSurface[currentState.getTurnID()].getPlayerSprite(2).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(0).getGlobalBounds()));
+  std::cout << " - " << this->playerSurface[currentState.getTurnID()].getPlayerSprite(2).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(0).getGlobalBounds()) << endl;
 }

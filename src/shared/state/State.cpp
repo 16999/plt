@@ -76,6 +76,11 @@ BlocType State::getBlocType (Element element)
   return ret;
 }
 
+void State::setCollision(bool collision)
+{
+  this->collision = collision;
+}
+
 void State::endGame ()
 {
 
