@@ -14,7 +14,6 @@ using namespace std;
 
 State::State ()
 {
-  std::cout << "State launched" << endl;
   this->map.init("../res/map.hex");
   this->player.resize(2);
   this->player[0].setData(0,GREY_TANK);

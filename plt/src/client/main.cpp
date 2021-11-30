@@ -6,17 +6,25 @@ using namespace std;
 
 sf::RenderWindow window;
 sf::Event event;
-engine::Engine ngine;
-render::Scene scene(window);
 state::State currentState;
+render::Scene scene(window);
 
-
-
-void playEngine(void)
+void playRender(void)
 {
   while (window.isOpen())
   {
+      while (window.pollEvent(event))
+        if(event.type == sf::Event::Closed)
+          window.close();
+      scene.draw(window);
+  }
+}
 
+void playEngine(void)
+{
+  engine::Engine ngine;
+  while (window.isOpen())
+  {
       ngine.getCommand().setAction(engine::NOTHING);
       while (window.pollEvent(event))
       {
@@ -45,7 +53,7 @@ int main(int argc,char* argv[])
   if (argc == 1)
     std::cout << "Arguments :\n- render\n- engine\n- dumb_AI\n- heuristic_AI\n- advanced_AI" << endl;
   else if (argc == 2 && strcmp(argv[1],"render") == 0)
-    playEngine();
+    playRender();
   else if (argc == 2 && strcmp(argv[1],"engine") == 0)
     playEngine();
   else
