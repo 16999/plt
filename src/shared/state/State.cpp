@@ -85,9 +85,14 @@ void State::setCollision(bool collision)
   this->collision = collision;
 }
 
-void State::endGame (int ID)
+void State::startGame ()
 {
-  std::cout << "GAME OVER\nThe winner is player " << ID << "!" << endl;
+  std::cout << "GAME START" << endl;
   this->player[0].setData(0,this->player[0].getTankType());
   this->player[1].setData(1,this->player[1].getTankType());
+}
+
+void State::endGame (int ID)
+{
+    std::cout << "GAME OVER\nThe winner is player " << ID << "!" << endl;
 }
