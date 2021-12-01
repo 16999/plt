@@ -8,6 +8,9 @@ sf::RenderWindow window;
 sf::Event event;
 state::State currentState;
 render::Scene scene(window);
+engine::Engine ngine;
+
+
 
 void playRender(void)
 {
@@ -22,26 +25,22 @@ void playRender(void)
 
 void playEngine(void)
 {
-  engine::Engine ngine;
   while (window.isOpen())
   {
-      ngine.getCommand().setAction(engine::NOTHING);
-      while (window.pollEvent(event))
-      {
-        switch(event.type)
-        {
-          case sf::Event::Closed : window.close();  break;
-          case sf::Event::KeyPressed :
-            ngine.getCommand().setAction(ngine.getCommand().convert(event));
-          break;
-          default : break;
-        }
-      }
 
-      ngine.update(currentState,ngine.getCommand().getAction());
-      scene.setCurrentState(currentState);
-      scene.checkCollision(currentState);
-      scene.draw(window);
+    ngine.getCommand().setAction(engine::NOTHING);
+    while (window.pollEvent(event))
+    {
+      if(event.type == sf::Event::Closed)
+        window.close();
+      if(event.type == sf::Event::KeyPressed)
+        ngine.getCommand().setAction(ngine.getCommand().convert(event));
+    }
+
+    ngine.update(currentState,ngine.getCommand().getAction());
+    scene.setCurrentState(currentState);
+    scene.checkCollision(currentState);
+    scene.draw(window);
   }
 }
 
