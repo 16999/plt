@@ -1,8 +1,10 @@
-
 #include <boost/test/unit_test.hpp>
-
 #include <SFML/Graphics.hpp>
-/*
+
+#include "../../src/client/render/Scene.h"
+
+//using namespace ::render;
+
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
   BOOST_CHECK(1);

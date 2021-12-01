@@ -12,7 +12,7 @@ using namespace std;
 Engine::Engine()
 {
   std::cout << "Engine launched" << endl;
-  this->status = MOVING;
+  this->status = GAMEOVER;
 }
 
 Engine::~Engine()
@@ -108,7 +108,7 @@ bool Engine::update(state::State& currentState, Action action)
       if (action == FIRE)
       {
         this->status = MOVING;
-        std::cout << "GAME START" << endl;
+        currentState.startGame();
       }
     break;
 
