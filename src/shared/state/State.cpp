@@ -14,7 +14,6 @@ using namespace std;
 
 State::State ()
 {
-  std::cout << "Welcome to TANKS GAME" << endl;
   this->map.init("../res/map.hex");
   this->player.resize(2);
   this->player[0].setData(0,GREY_TANK);
@@ -76,12 +75,19 @@ BlocType State::getBlocType (Element element)
   return ret;
 }
 
+bool State::getCollision() const
+{
+  return this->collision;
+}
+
 void State::setCollision(bool collision)
 {
   this->collision = collision;
 }
 
-void State::endGame ()
+void State::endGame (int ID)
 {
-
+  std::cout << "GAME OVER\nThe winner is player " << ID << "!" << endl;
+  this->player[0].setData(0,this->player[0].getTankType());
+  this->player[1].setData(1,this->player[1].getTankType());
 }

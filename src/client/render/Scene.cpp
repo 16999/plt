@@ -9,6 +9,7 @@ using namespace state;
 
 Scene::Scene(sf::RenderWindow& window) : window(window)
 {
+  std::cout << "Render launched" << endl;
   this->window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),"TANKS GAME");
   this->window.setFramerateLimit(60);
   this->mapSurface.initTileset("../res/tileset.png");
@@ -51,5 +52,4 @@ void Scene::setCurrentState(const state::State& currentState)
 void Scene::checkCollision(state::State& currentState)
 {
   currentState.setCollision(this->playerSurface[currentState.getTurnID()].getPlayerSprite(2).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(0).getGlobalBounds()));
-  std::cout << " - " << this->playerSurface[currentState.getTurnID()].getPlayerSprite(2).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(0).getGlobalBounds()) << endl;
 }
