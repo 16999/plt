@@ -69,9 +69,9 @@ void AIvsAI(ai::AI* selectedAI1,ai::AI* selectedAI2)  //AI vs AI
     if (window.pollEvent(event))
       if(event.type == sf::Event::Closed)
         window.close();
-    if(currentState.getTurnID() == 0  && ngine.getStatus() == engine::MOVING)
+    if(currentState.getTurnID() == 0 && ngine.getStatus() == engine::MOVING)
       ngine.getCommand().setAction(selectedAI1->run(currentState));
-    else if(currentState.getTurnID() == 1  && ngine.getStatus() == engine::MOVING)
+    else if(currentState.getTurnID() == 1 && ngine.getStatus() == engine::MOVING)
       ngine.getCommand().setAction(selectedAI2->run(currentState));
     else if (ngine.getStatus() == engine::GAMEOVER)
       ngine.getCommand().setAction(engine::FIRE);
