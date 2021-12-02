@@ -12,22 +12,11 @@ state::State currentState;
 render::Scene scene(window);
 engine::Engine ngine;
 ai::DumbAI dumbAI;
+ai::DumbAI dumbAI2;
 
 
 
-
-void playRender(void)
-{
-  while (window.isOpen())
-  {
-      if (window.pollEvent(event))
-        if(event.type == sf::Event::Closed)
-          window.close();
-      scene.draw(window);
-  }
-}
-
-void playEngine(void)
+void playEngine(void)   //player vs player
 {
   while (window.isOpen())
   {
@@ -48,7 +37,7 @@ void playEngine(void)
   }
 }
 
-void playAI(ai::DumbAI selectedAI)
+void playAI(ai::AI* selectedAI)   //player vs AI
 {
   while (window.isOpen())
   {
@@ -58,12 +47,12 @@ void playAI(ai::DumbAI selectedAI)
     {
       if(event.type == sf::Event::Closed)
         window.close();
-      if(event.type == sf::Event::KeyPressed && currentState.getPlayerID() == currentState.getTurnID())
+      if(event.type == sf::Event::KeyPressed && currentState.getTurnID() == currentState.getPlayerID())
         ngine.getCommand().setAction(ngine.getCommand().convert(event));
     }
 
-    if(currentState.getPlayerID() != currentState.getTurnID())
-      ngine.getCommand().setAction(selectedAI.run(currentState));
+    if(currentState.getTurnID() != currentState.getPlayerID() && ngine.getStatus() != engine::SHOOTING)
+      ngine.getCommand().setAction(selectedAI->run(currentState));
 
     ngine.update(currentState,ngine.getCommand().getAction());
     scene.setCurrentState(currentState);
@@ -72,7 +61,7 @@ void playAI(ai::DumbAI selectedAI)
   }
 }
 
-void DumbAIvsDumbAI(ai::DumbAI selectedAI)
+void AIvsAI(ai::AI* selectedAI1,ai::AI* selectedAI2)  //AI vs AI
 {
   while (window.isOpen())
   {
@@ -83,7 +72,12 @@ void DumbAIvsDumbAI(ai::DumbAI selectedAI)
       if(event.type == sf::Event::Closed)
         window.close();
     }
-    ngine.getCommand().setAction(selectedAI.run(currentState));
+
+    if(currentState.getTurnID() == 0  && ngine.getStatus() != engine::SHOOTING)
+      ngine.getCommand().setAction(selectedAI1->run(currentState));
+    else if(currentState.getTurnID() == 1  && ngine.getStatus() != engine::SHOOTING)
+      ngine.getCommand().setAction(selectedAI2->run(currentState));
+
     ngine.update(currentState,ngine.getCommand().getAction());
     scene.setCurrentState(currentState);
     scene.checkCollision(currentState);
@@ -98,14 +92,12 @@ int main(int argc,char* argv[])
 {
   if (argc == 1)
     std::cout << "Arguments :\n- render\n- engine\n- dumbAI\n- heuristicAI\n- advancedAI" << endl;
-  else if (argc == 2 && strcmp(argv[1],"render") == 0)
-    playRender();
   else if (argc == 2 && strcmp(argv[1],"engine") == 0)
     playEngine();
   else if (argc == 2 && strcmp(argv[1],"dumbAI") == 0)
-    playAI(dumbAI);
-  else if (argc == 2 && strcmp(argv[1],"dumbAI2") == 0)
-    DumbAIvsDumbAI(dumbAI);
+    playAI(&dumbAI);
+  else if (argc == 2 && strcmp(argv[1],"AIvsAI") == 0)
+    AIvsAI(&dumbAI,&dumbAI2);
   else
     std::cout << "ERROR : Invalid arguments !!!" << endl;
 }
