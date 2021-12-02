@@ -34,12 +34,12 @@ void PlayerSurface::initText(std::string path)
 
 void PlayerSurface::initPlayer(std::vector<std::string> path)
 {
-  this->playerTexture[0].loadFromFile(path[0]);
-  this->playerTexture[1].loadFromFile(path[1]);
-  this->playerTexture[2].loadFromFile(path[2]);
-  this->playerSprite[0].setOrigin((float)(this->playerTexture[0].getSize().x)/2,(float)(this->playerTexture[0].getSize().y));
-  this->playerSprite[1].setOrigin(0,(float)(this->playerTexture[1].getSize().y)/2);
-  this->playerSprite[2].setOrigin((float)(this->playerTexture[2].getSize().x)/2,(float)(this->playerTexture[2].getSize().y)/2);
+  this->playerTexture[TANK].loadFromFile(path[TANK]);
+  this->playerTexture[TURRET].loadFromFile(path[TURRET]);
+  this->playerTexture[BULLET].loadFromFile(path[BULLET]);
+  this->playerSprite[TANK].setOrigin((float)(this->playerTexture[TANK].getSize().x)/2,(float)(this->playerTexture[0].getSize().y));
+  this->playerSprite[TURRET].setOrigin(0,(float)(this->playerTexture[TURRET].getSize().y)/2);
+  this->playerSprite[BULLET].setOrigin((float)(this->playerTexture[BULLET].getSize().x)/2,(float)(this->playerTexture[BULLET].getSize().y)/2);
 }
 
 void PlayerSurface::loadText(state::Player player)
@@ -52,21 +52,21 @@ void PlayerSurface::loadText(state::Player player)
 
 void PlayerSurface::loadPlayer(state::Player player)
 {
-  this->playerSprite[0].setTexture(this->playerTexture[0]);
-  this->playerSprite[1].setTexture(this->playerTexture[1]);
-  this->playerSprite[2].setTexture(this->playerTexture[2]);
-  this->playerSprite[0].setPosition(player.getTank().getX(),player.getTank().getY());
-  this->playerSprite[1].setPosition(player.getTurret().getX(),player.getTurret().getY());
-  this->playerSprite[2].setPosition(player.getBullet().getX(),player.getBullet().getY());
-  this->playerSprite[0].setRotation(player.getTank().getAngle());
-  this->playerSprite[1].setRotation(player.getTurret().getAngle());
-  this->playerSprite[2].setRotation(player.getBullet().getAngle());
+  this->playerSprite[TANK].setTexture(this->playerTexture[TANK]);
+  this->playerSprite[TURRET].setTexture(this->playerTexture[TURRET]);
+  this->playerSprite[BULLET].setTexture(this->playerTexture[BULLET]);
+  this->playerSprite[TANK].setPosition(player.getTank().getX(),player.getTank().getY());
+  this->playerSprite[TURRET].setPosition(player.getTurret().getX(),player.getTurret().getY());
+  this->playerSprite[BULLET].setPosition(player.getBullet().getX(),player.getBullet().getY());
+  this->playerSprite[TANK].setRotation(player.getTank().getAngle());
+  this->playerSprite[TURRET].setRotation(player.getTurret().getAngle());
+  this->playerSprite[BULLET].setRotation(player.getBullet().getAngle());
 }
 
 void PlayerSurface::draw(sf::RenderWindow& window)
 {
   window.draw(this->text);
-  window.draw(this->playerSprite[2]);
-  window.draw(this->playerSprite[1]);
-  window.draw(this->playerSprite[0]);
+  window.draw(this->playerSprite[BULLET]);
+  window.draw(this->playerSprite[TURRET]);
+  window.draw(this->playerSprite[TANK]);
 }
