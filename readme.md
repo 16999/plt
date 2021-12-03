@@ -31,7 +31,11 @@ missile fire following an oblique trajectory.
 
 The projet will be make and code in C++ on Linux and create a github account
 
+### Game options
 
+- ./client engine : the user can control all the tanks.
+- ./client dumbAI : the user plays against a random AI.
+- ./client AIvsAI : two random AIs plays the one against the other.
 
 
 ### Installation
