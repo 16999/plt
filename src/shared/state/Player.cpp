@@ -91,8 +91,9 @@ void Player::setData(int ID, TankType tankType)
 {
   int lifeVector[] = {60,80,100};
   int damageVector[] = {25,20,15};
-  int IDvectorX[] = {70,650};
+  int IDvectorX[] = {160,560};
   int IDvectorY[] = {433,433};
+  int IDvectorAngle[] = {-45,-135};
   this->ID = ID;
   this->tankType = tankType;
   this->life = lifeVector[ID];
@@ -101,8 +102,8 @@ void Player::setData(int ID, TankType tankType)
   this->tank.setY(IDvectorY[ID]);
   this->turret.setX(IDvectorX[ID]);
   this->turret.setY(IDvectorY[ID]-62);
-  this->turret.setAngle(-90);
+  this->turret.setAngle(IDvectorAngle[ID]);
   this->bullet.setX(IDvectorX[ID]);
   this->bullet.setY(IDvectorY[ID]-62);
-  this->bullet.setAngle(-90);
+  this->bullet.setAngle(IDvectorAngle[ID]);
 }

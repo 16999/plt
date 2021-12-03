@@ -51,5 +51,5 @@ void Scene::setCurrentState(const state::State& currentState)
 
 void Scene::checkCollision(state::State& currentState)
 {
-  currentState.setCollision(this->playerSurface[currentState.getTurnID()].getPlayerSprite(2).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(0).getGlobalBounds()));
+  currentState.setCollision(this->playerSurface[currentState.getTurnID()].getPlayerSprite(BULLET).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(TANK).getGlobalBounds()));
 }

@@ -100,4 +100,5 @@ void State::startGame ()
 void State::endGame (int ID)
 {
     std::cout << "GAME OVER\nThe winner is player " << ID << "!" << endl;
+    this->turnID = 0;
 }

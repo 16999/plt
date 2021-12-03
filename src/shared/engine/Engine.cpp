@@ -11,13 +11,18 @@ using namespace std;
 
 Engine::Engine()
 {
-  std::cout << "Engine launched" << endl;
+  std::cout << "Engine launched\nPRESS SPACE TO PLAY" << endl;
   this->status = GAMEOVER;
 }
 
 Engine::~Engine()
 {
 
+}
+
+Status Engine::getStatus() const
+{
+  return this->status;
 }
 
 Command& Engine::getCommand()
