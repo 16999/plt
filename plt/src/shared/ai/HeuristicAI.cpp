@@ -35,16 +35,17 @@ engine::Action HeuristicAI::run(state::State& aiState)
   }
   else if (this->iteration == 12)
   {
-    this->optimalAngle = 57.2958*0.5*atan((aiState.getPlayer(aiState.getTurnID()).getTank().getX()-aiState.getPlayer(1-aiState.getTurnID()).getTank().getX())*aiState.getPlayer(aiState.getTurnID()).getBullet().getG()/pow(aiState.getPlayer(aiState.getTurnID()).getBullet().getV0(),2)) - 180*(aiState.getTurnID() == 1);
+    this->optimalAngle = 57.2958*0.5*asin((aiState.getPlayer(1-aiState.getTurnID()).getTank().getX()-aiState.getPlayer(aiState.getTurnID()).getTank().getX())*aiState.getPlayer(aiState.getTurnID()).getBullet().getG()/pow(aiState.getPlayer(aiState.getTurnID()).getBullet().getV0(),2)) - 90;
+    this->epsilon = 2;
     this->iteration++;
   }
   else
   {
-    if (this->optimalAngle > aiState.getPlayer(aiState.getTurnID()).getTurret().getAngle() + this->epsilon)
+    if (this->optimalAngle - this->epsilon > aiState.getPlayer(aiState.getTurnID()).getTurret().getAngle())
     {
       this->action = engine::TURN_CLOCKWISE;
     }
-    else if (this->optimalAngle < aiState.getPlayer(aiState.getTurnID()).getTurret().getAngle() - this->epsilon)
+    else if (this->optimalAngle + this->epsilon < aiState.getPlayer(aiState.getTurnID()).getTurret().getAngle())
     {
       this->action = engine::TURN_ANTICLOCKWISE;
     }
