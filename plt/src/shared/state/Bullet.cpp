@@ -6,8 +6,8 @@ using namespace state;
 
 Bullet::Bullet()
 {
-  this->v0 = 5;
-  this->g = 0.05;
+  this->v0 = 6;
+  this->g = 0.06;
 }
 
 void Bullet::init()
@@ -38,4 +38,14 @@ float Bullet::getVy() const
 float Bullet::getTheta() const
 {
   return this->theta;
+}
+
+float Bullet::getG() const
+{
+  return this->g;
+}
+
+float Bullet::getV0() const
+{
+  return this->v0;
 }

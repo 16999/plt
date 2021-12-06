@@ -26,7 +26,10 @@ std::string Player::getTextData() const
   "\nTank : X = " + to_string((int)this->tank.getX()) +
   "; Y = " + to_string((int)this->tank.getY()) +
   "; Phi = " + to_string((int)this->tank.getAngle()) +
-  "\nWeapon : X = " + to_string((int)this->bullet.getX()) +
+  "\nTurret : X = " + to_string((int)this->turret.getX()) +
+  "; Y = " + to_string((int)this->turret.getY()) +
+  "; Phi = " + to_string((int)this->turret.getAngle()) +
+  "\nBullet : X = " + to_string((int)this->bullet.getX()) +
   "; Y = " + to_string((int)this->bullet.getY()) +
   "; Phi = " + to_string((int)this->bullet.getAngle());
   return data;
