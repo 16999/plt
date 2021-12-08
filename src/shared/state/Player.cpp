@@ -19,19 +19,20 @@ Player::~Player()
 std::string Player::getTextData() const
 {
   std::string data =
-  "PLAYER ID = " + to_string(this->ID) +
-  "\nTANK TYPE = " + to_string(this->tankType) +
-  "\nLIFE = " + to_string(this->life) +
-  "\nDAMAGE = " + to_string(this->damage)+
-  "\nTank : X = " + to_string((int)this->tank.getX()) +
-  "; Y = " + to_string((int)this->tank.getY()) +
-  "; Phi = " + to_string((int)this->tank.getAngle()) +
-  "\nTurret : X = " + to_string((int)this->turret.getX()) +
-  "; Y = " + to_string((int)this->turret.getY()) +
-  "; Phi = " + to_string((int)this->turret.getAngle()) +
-  "\nBullet : X = " + to_string((int)this->bullet.getX()) +
-  "; Y = " + to_string((int)this->bullet.getY()) +
-  "; Phi = " + to_string((int)this->bullet.getAngle());
+  "ID=" + to_string(this->ID) +
+  " - TYPE=" + to_string(this->tankType) +
+  " - LIFE=" + to_string(this->life) +
+  " - DAMAGE=" + to_string(this->damage)+
+  " - Tank:(" + to_string((int)this->tank.getX()) +
+  ";" + to_string((int)this->tank.getY()) +
+  ";" + to_string((int)this->tank.getAngle()) +
+  "d) - Turret:(" + to_string((int)this->turret.getX()) +
+  ";" + to_string((int)this->turret.getY()) +
+  ";" + to_string((int)this->turret.getAngle()) +
+  "d) - Bullet:(" + to_string((int)this->bullet.getX()) +
+  ";" + to_string((int)this->bullet.getY()) +
+  ";" + to_string((int)this->bullet.getAngle()) +
+  "d)";
   return data;
 }
 
@@ -94,7 +95,7 @@ void Player::setData(int ID, TankType tankType)
 {
   int lifeVector[] = {60,80,100};
   int damageVector[] = {25,20,15};
-  int IDvectorX[] = {160,560};
+  int IDvectorX[] = {196,668};
   int IDvectorY[] = {433,433};
   int IDvectorAngle[] = {-45,-135};
   this->ID = ID;

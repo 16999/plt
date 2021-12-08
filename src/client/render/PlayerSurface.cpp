@@ -3,11 +3,6 @@
 using namespace render;
 using namespace std;
 
-#define BLOC_SIZE 36
-#define MAP_WIDTH 24
-#define MAP_HEIGHT 15
-#define WINDOW_WIDTH 960
-#define WINDOW_HEIGHT 540
 
 
 PlayerSurface::PlayerSurface()
@@ -47,7 +42,7 @@ void PlayerSurface::loadText(state::Player player)
   this->text.setString(player.getTextData());
   this->text.setCharacterSize(14);
   this->text.setFillColor(sf::Color(255,255,255));
-  this->text.setPosition((BLOC_SIZE*MAP_WIDTH)+8,(player.getID()*WINDOW_HEIGHT/2)+8);
+  this->text.setPosition(2,2+16*player.getID());
 }
 
 void PlayerSurface::loadPlayer(state::Player player)
