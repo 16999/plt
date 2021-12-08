@@ -110,10 +110,13 @@ bool Engine::update(state::State& currentState, Action action)
     break;
 
     case GAMEOVER :
-      if (action == FIRE)
+      switch(action)
       {
-        this->status = MOVING;
-        currentState.startGame();
+        case FIRE :
+          this->status = MOVING;
+          currentState.startGame();
+        break;
+        default : break;
       }
     break;
 

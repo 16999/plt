@@ -16,8 +16,8 @@ Scene::Scene(sf::RenderWindow& window) : window(window)
   this->playerSurface.resize(2);
   this->playerSurface[0].initText("../res/arial.ttf");
   this->playerSurface[1].initText("../res/arial.ttf");
-  this->playerSurface[0].initPlayer({"../res/tank0.png","../res/turret0.png","../res/bullet0.png"});
-  this->playerSurface[1].initPlayer({"../res/tank1.png","../res/turret0.png","../res/bullet0.png"});
+  this->playerSurface[0].initPlayer({"../res/tank"+to_string(this->currentState.getPlayer(0).getTankType())+".png","../res/turret0.png","../res/bullet0.png"});
+  this->playerSurface[1].initPlayer({"../res/tank"+to_string(this->currentState.getPlayer(1).getTankType())+".png","../res/turret0.png","../res/bullet0.png"});
 }
 
 Scene::~Scene()

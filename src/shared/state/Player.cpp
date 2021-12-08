@@ -100,8 +100,8 @@ void Player::setData(int ID, TankType tankType)
   int IDvectorPhi[] = {-45,-135};
   this->ID = ID;
   this->tankType = tankType;
-  this->life = lifeVector[ID];
-  this->damage = damageVector[ID];
+  this->life = lifeVector[tankType];
+  this->damage = damageVector[tankType];
   this->tank.setX(IDvectorX[ID]);
   this->tank.setY(IDvectorY[ID]);
   this->turret.setX(IDvectorX[ID]);
