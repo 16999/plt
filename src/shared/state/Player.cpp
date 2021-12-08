@@ -95,7 +95,7 @@ void Player::setData(int ID, TankType tankType)
 {
   int lifeVector[] = {60,80,100};
   int damageVector[] = {25,20,15};
-  int IDvectorX[] = {196,668};
+  int IDvectorX[] = {196,704};
   int IDvectorY[] = {433,433};
   int IDvectorPhi[] = {-45,-135};
   this->ID = ID;
