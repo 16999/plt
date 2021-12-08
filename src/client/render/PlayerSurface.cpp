@@ -4,7 +4,7 @@ using namespace render;
 using namespace std;
 
 #define BLOC_SIZE 36
-#define MAP_WIDTH 20
+#define MAP_WIDTH 24
 #define MAP_HEIGHT 15
 #define WINDOW_WIDTH 960
 #define WINDOW_HEIGHT 540

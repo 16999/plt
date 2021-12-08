@@ -3,7 +3,7 @@
 using namespace render;
 
 #define BLOC_SIZE 36
-#define MAP_WIDTH 20
+#define MAP_WIDTH 24
 #define MAP_HEIGHT 15
 
 

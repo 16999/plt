@@ -16,11 +16,20 @@ DumbAI::~DumbAI()
 engine::Action DumbAI::run(state::State& aiState)
 {
   if (this->iteration == 0)
-    this->selectedAction = engine::Action(1+rand()%4);  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
+  {
+    switch(rand()%4)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
+    {
+      case 0 : this->preAction = engine::MOVE_LEFT; break;
+      case 1 : this->preAction = engine::MOVE_RIGHT; break;
+      case 2 : this->preAction = engine::TURN_ANTICLOCKWISE; break;
+      case 3 : this->preAction = engine::TURN_CLOCKWISE; break;
+      default : break;
+    }
+  }
 
   if (this->iteration < 12)
   {
-    this->action = this->selectedAction;
+    this->action = this->preAction;
     this->iteration++;
   }
   else

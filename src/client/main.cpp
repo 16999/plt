@@ -1,6 +1,7 @@
 #include <render/Scene.h>
 #include <../shared/engine/Engine.h>
 #include <../shared/ai/DumbAI.h>
+#include <../shared/ai/HeuristicAI.h>
 #include <string.h>
 #include <iostream>
 using namespace std;
@@ -12,7 +13,7 @@ state::State currentState;
 render::Scene scene(window);
 engine::Engine ngine;
 ai::DumbAI dumbAI;
-ai::DumbAI dumbAI2;
+ai::HeuristicAI heuristicAI;
 
 
 
@@ -96,8 +97,10 @@ int main(int argc,char* argv[])
     playEngine();
   else if (argc == 2 && strcmp(argv[1],"dumbAI") == 0)
     playAI(&dumbAI);
+  else if (argc == 2 && strcmp(argv[1],"heuristicAI") == 0)
+    playAI(&heuristicAI);
   else if (argc == 2 && strcmp(argv[1],"AIvsAI") == 0)
-    AIvsAI(&dumbAI,&dumbAI2);
+    AIvsAI(&dumbAI,&heuristicAI);
   else
     std::cout << "ERROR : Invalid arguments !!!" << endl;
 }
