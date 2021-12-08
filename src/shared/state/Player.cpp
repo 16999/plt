@@ -25,13 +25,13 @@ std::string Player::getTextData() const
   " - DAMAGE=" + to_string(this->damage)+
   " - Tank:(" + to_string((int)this->tank.getX()) +
   ";" + to_string((int)this->tank.getY()) +
-  ";" + to_string((int)this->tank.getAngle()) +
+  ";" + to_string((int)this->tank.getPhi()) +
   "d) - Turret:(" + to_string((int)this->turret.getX()) +
   ";" + to_string((int)this->turret.getY()) +
-  ";" + to_string((int)this->turret.getAngle()) +
+  ";" + to_string((int)this->turret.getPhi()) +
   "d) - Bullet:(" + to_string((int)this->bullet.getX()) +
   ";" + to_string((int)this->bullet.getY()) +
-  ";" + to_string((int)this->bullet.getAngle()) +
+  ";" + to_string((int)this->bullet.getPhi()) +
   "d)";
   return data;
 }
@@ -97,7 +97,7 @@ void Player::setData(int ID, TankType tankType)
   int damageVector[] = {25,20,15};
   int IDvectorX[] = {196,668};
   int IDvectorY[] = {433,433};
-  int IDvectorAngle[] = {-45,-135};
+  int IDvectorPhi[] = {-45,-135};
   this->ID = ID;
   this->tankType = tankType;
   this->life = lifeVector[ID];
@@ -106,8 +106,8 @@ void Player::setData(int ID, TankType tankType)
   this->tank.setY(IDvectorY[ID]);
   this->turret.setX(IDvectorX[ID]);
   this->turret.setY(IDvectorY[ID]-62);
-  this->turret.setAngle(IDvectorAngle[ID]);
+  this->turret.setPhi(IDvectorPhi[ID]);
   this->bullet.setX(IDvectorX[ID]);
   this->bullet.setY(IDvectorY[ID]-62);
-  this->bullet.setAngle(IDvectorAngle[ID]);
+  this->bullet.setPhi(IDvectorPhi[ID]);
 }

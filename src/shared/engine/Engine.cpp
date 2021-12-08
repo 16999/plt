@@ -59,14 +59,14 @@ bool Engine::update(state::State& currentState, Action action)
           }
         break;
         case TURN_ANTICLOCKWISE :
-          if (currentState.getPlayer(currentState.getTurnID()).getTurret().getAngle() > -180)
+          if (currentState.getPlayer(currentState.getTurnID()).getTurret().getPhi() > -180)
           {
             currentState.getPlayer(currentState.getTurnID()).getTurret().turn(-3);
             currentState.getPlayer(currentState.getTurnID()).getBullet().turn(-3);
           }
         break;
         case TURN_CLOCKWISE :
-          if (currentState.getPlayer(currentState.getTurnID()).getTurret().getAngle() < 0)
+          if (currentState.getPlayer(currentState.getTurnID()).getTurret().getPhi() < 0)
           {
             currentState.getPlayer(currentState.getTurnID()).getTurret().turn(3);
             currentState.getPlayer(currentState.getTurnID()).getBullet().turn(3);
@@ -95,7 +95,7 @@ bool Engine::update(state::State& currentState, Action action)
         }
         currentState.getPlayer(currentState.getTurnID()).getBullet().setX(currentState.getPlayer(currentState.getTurnID()).getTurret().getX());
         currentState.getPlayer(currentState.getTurnID()).getBullet().setY(currentState.getPlayer(currentState.getTurnID()).getTurret().getY());
-        currentState.getPlayer(currentState.getTurnID()).getBullet().setAngle(currentState.getPlayer(currentState.getTurnID()).getTurret().getAngle());
+        currentState.getPlayer(currentState.getTurnID()).getBullet().setPhi(currentState.getPlayer(currentState.getTurnID()).getTurret().getPhi());
         if (currentState.getPlayer(1-currentState.getTurnID()).getLife() > 0)
         {
           this->status = MOVING;

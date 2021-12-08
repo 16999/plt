@@ -8,13 +8,13 @@ using namespace state;
 using namespace std;
 
 #define BLOC_SIZE 36
-#define MAP_WIDTH 24
+#define MAP_WIDTH 25
 #define MAP_HEIGHT 15
 
 
 State::State ()
 {
-  this->map.init("../res/map2.hex");
+  this->map.init("../res/map0.hex");
   this->player.resize(2);
   this->player[0].setData(0,GREY_TANK);
   this->player[1].setData(1,GREEN_TANK);
@@ -48,7 +48,6 @@ int State::getTurnID() const
 void State::nextTurnID ()
 {
   this->turnID = 1 - this->turnID;
-  //this->status = MOVING;
 }
 
 BlocType State::getBlocType (Element element)

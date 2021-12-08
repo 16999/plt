@@ -41,11 +41,11 @@ engine::Action HeuristicAI::run(state::State& aiState)
   }
   else
   {
-    if (this->optimalAngle - this->epsilon > aiState.getPlayer(aiState.getTurnID()).getTurret().getAngle())
+    if (this->optimalAngle - this->epsilon > aiState.getPlayer(aiState.getTurnID()).getTurret().getPhi())
     {
       this->action = engine::TURN_CLOCKWISE;
     }
-    else if (this->optimalAngle + this->epsilon < aiState.getPlayer(aiState.getTurnID()).getTurret().getAngle())
+    else if (this->optimalAngle + this->epsilon < aiState.getPlayer(aiState.getTurnID()).getTurret().getPhi())
     {
       this->action = engine::TURN_ANTICLOCKWISE;
     }
