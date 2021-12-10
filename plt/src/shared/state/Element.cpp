@@ -21,9 +21,9 @@ float Element::getY() const
   return this->y;
 }
 
-float Element::getAngle() const
+float Element::getPhi() const
 {
-  return this->angle;
+  return this->phi;
 }
 
 void Element::setX(float x)
@@ -36,9 +36,9 @@ void Element::setY(float y)
   this->y = y;
 }
 
-void Element::setAngle(float angle)
+void Element::setPhi(float phi)
 {
-  this->angle = angle;
+  this->phi = phi;
 }
 
 void Element::move(float dx, float dy)
@@ -49,5 +49,5 @@ void Element::move(float dx, float dy)
 
 void Element::turn(float dPhi)
 {
-  this->angle += dPhi;
+  this->phi += dPhi;
 }

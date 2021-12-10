@@ -1943,7 +1943,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#angle#</dia:string>
+            <dia:string>#phi#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#float#</dia:string>
@@ -2618,8 +2618,8 @@
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-35.7067,43.5343"/>
-        <dia:point val="-37.8095,43.5343"/>
-        <dia:point val="-37.8095,49.8331"/>
+        <dia:point val="-37.8096,43.5343"/>
+        <dia:point val="-37.8096,49.8331"/>
         <dia:point val="-39.1124,49.8331"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -3137,16 +3137,16 @@
         <dia:point val="8.30182,50.266"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.84829,50.216;8.74829,53.3171"/>
+        <dia:rectangle val="7.84829,50.216;8.74829,53.3172"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="8.30182,50.266"/>
-        <dia:point val="8.30182,51.3665"/>
-        <dia:point val="8.29829,51.3665"/>
-        <dia:point val="8.29829,52.8671"/>
+        <dia:point val="8.30182,51.3666"/>
+        <dia:point val="8.29829,51.3666"/>
+        <dia:point val="8.29829,52.8672"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

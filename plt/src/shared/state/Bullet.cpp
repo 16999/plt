@@ -18,10 +18,10 @@ void Bullet::init()
 void Bullet::update()
 {
   if (this->t == 0)
-    this->theta = this->angle;
+    this->theta = this->phi;
   this->vx = this->v0*cos(this->theta/57.2958);
   this->vy = this->v0*sin(this->theta/57.2958) + this->g * this->t;
-  this->angle = 57.2958*atan(this->vy/this->vx)+180*(this->vx<0);
+  this->phi = 57.2958*atan(this->vy/this->vx)+180*(this->vx<0);
   this->t++;
 }
 
