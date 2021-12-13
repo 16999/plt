@@ -3,7 +3,9 @@ using namespace state;
 
 Element::Element()
 {
-
+  this->x = 0;
+  this->y = 0;
+  this->phi = 0;
 }
 
 Element::~Element()

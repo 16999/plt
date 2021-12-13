@@ -6,6 +6,7 @@ using namespace ai;
 DumbAI::DumbAI()
 {
   srand(time(NULL));
+  this->maxIteration = 12;
 }
 
 DumbAI::~DumbAI()
@@ -27,7 +28,7 @@ engine::Action DumbAI::run(state::State& aiState)
     }
   }
 
-  if (this->iteration < 12)
+  if (this->iteration < this->maxIteration)
   {
     this->action = this->preAction;
     this->iteration++;

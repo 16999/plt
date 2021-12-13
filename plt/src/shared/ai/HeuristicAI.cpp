@@ -7,6 +7,8 @@ using namespace ai;
 HeuristicAI::HeuristicAI()
 {
   srand(time(NULL));
+  this->maxIteration = 12;
+  this->epsilon = 20;
 }
 
 HeuristicAI::~HeuristicAI()
@@ -26,24 +28,23 @@ engine::Action HeuristicAI::run(state::State& aiState)
     }
   }
 
-  if (this->iteration < 12)
+  if (this->iteration < this->maxIteration)
   {
     this->action = this->preAction;
     this->iteration++;
   }
-  else if (this->iteration == 12)
+  else if (this->iteration == this->maxIteration)
   {
-    this->optimalAngle = RAD_TO_DEG*0.5*asin((aiState.getAdversePlayer().getTank().getX()-aiState.getCurrentPlayer().getTank().getX())*aiState.getCurrentPlayer().getBullet().getG()/pow(aiState.getCurrentPlayer().getBullet().getV0(),2)) - 90;
-    this->epsilon = 2;
+    this->optimalAngle = RAD_TO_DEG*0.5*asin((aiState.getAdversePlayer().getTank().getX()-aiState.getCurrentPlayer().getTank().getX())*this->physics.getG()/pow(this->physics.getV0(),2)) + rand()%this->epsilon - rand()%this->epsilon - 90;
     this->iteration++;
   }
   else
   {
-    if (this->optimalAngle - this->epsilon > aiState.getCurrentPlayer().getTurret().getPhi())
+    if (this->optimalAngle - this->physics.getInc() > aiState.getCurrentPlayer().getTurret().getPhi())
     {
       this->action = engine::TURN_CLOCKWISE;
     }
-    else if (this->optimalAngle + this->epsilon < aiState.getCurrentPlayer().getTurret().getPhi())
+    else if (this->optimalAngle + this->physics.getInc() < aiState.getCurrentPlayer().getTurret().getPhi())
     {
       this->action = engine::TURN_ANTICLOCKWISE;
     }

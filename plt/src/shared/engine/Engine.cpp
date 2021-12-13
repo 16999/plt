@@ -4,7 +4,7 @@
 #include <math.h>
 using namespace engine;
 using namespace std;
-
+#define RAD_TO_DEG 57.2958
 
 
 //sf::Mutex engine_mutex;
@@ -45,35 +45,35 @@ bool Engine::update(state::State& currentState, Action action)
         case MOVE_LEFT :
           if (currentState.getBlocType(currentState.getCurrentPlayer().getTank()) != state::LEFT_BORDER)
           {
-            currentState.getCurrentPlayer().getTank().move(-3,0);
-            currentState.getCurrentPlayer().getTurret().move(-3,0);
-            currentState.getCurrentPlayer().getBullet().move(-3,0);
+            currentState.getCurrentPlayer().getTank().move(-this->inc,0);
+            currentState.getCurrentPlayer().getTurret().move(-this->inc,0);
+            currentState.getCurrentPlayer().getBullet().move(-this->inc,0);
           }
         break;
         case MOVE_RIGHT :
           if (currentState.getBlocType(currentState.getCurrentPlayer().getTank()) != state::RIGHT_BORDER)
           {
-            currentState.getCurrentPlayer().getTank().move(3,0);
-            currentState.getCurrentPlayer().getTurret().move(3,0);
-            currentState.getCurrentPlayer().getBullet().move(3,0);
+            currentState.getCurrentPlayer().getTank().move(this->inc,0);
+            currentState.getCurrentPlayer().getTurret().move(this->inc,0);
+            currentState.getCurrentPlayer().getBullet().move(this->inc,0);
           }
         break;
         case TURN_ANTICLOCKWISE :
           if (currentState.getCurrentPlayer().getTurret().getPhi() > -180)
           {
-            currentState.getCurrentPlayer().getTurret().turn(-3);
-            currentState.getCurrentPlayer().getBullet().turn(-3);
+            currentState.getCurrentPlayer().getTurret().turn(-this->inc);
+            currentState.getCurrentPlayer().getBullet().turn(-this->inc);
           }
         break;
         case TURN_CLOCKWISE :
           if (currentState.getCurrentPlayer().getTurret().getPhi() < 0)
           {
-            currentState.getCurrentPlayer().getTurret().turn(3);
-            currentState.getCurrentPlayer().getBullet().turn(3);
+            currentState.getCurrentPlayer().getTurret().turn(this->inc);
+            currentState.getCurrentPlayer().getBullet().turn(this->inc);
           }
         break;
         case FIRE :
-          currentState.getCurrentPlayer().getBullet().init();
+          this->t = 0;
           this->status = SHOOTING;
         break;
         default : return false;
@@ -83,8 +83,13 @@ bool Engine::update(state::State& currentState, Action action)
     case SHOOTING :
       if(currentState.getBlocType(currentState.getCurrentPlayer().getBullet()) == state::NOTHING && currentState.getCollision() == false)
       {
-        currentState.getCurrentPlayer().getBullet().update();
-        currentState.getCurrentPlayer().getBullet().move(currentState.getCurrentPlayer().getBullet().getVx(),currentState.getCurrentPlayer().getBullet().getVy());
+        if (this->t == 0)
+          this->theta = currentState.getCurrentPlayer().getBullet().getPhi();
+        this->vx = this->v0*cos(this->theta/RAD_TO_DEG);
+        this->vy = this->v0*sin(this->theta/RAD_TO_DEG) + this->g * this->t;
+        this->t++;
+        currentState.getCurrentPlayer().getBullet().setPhi(RAD_TO_DEG*atan(this->vy/this->vx)+180*(this->vx<0));
+        currentState.getCurrentPlayer().getBullet().move(this->vx,this->vy);
       }
       else
       {
