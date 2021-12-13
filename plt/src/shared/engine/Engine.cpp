@@ -43,37 +43,37 @@ bool Engine::update(state::State& currentState, Action action)
       switch(action)
       {
         case MOVE_LEFT :
-          if (currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getTank()) != state::LEFT_BORDER)
+          if (currentState.getBlocType(currentState.getCurrentPlayer().getTank()) != state::LEFT_BORDER)
           {
-            currentState.getPlayer(currentState.getTurnID()).getTank().move(-3,0);
-            currentState.getPlayer(currentState.getTurnID()).getTurret().move(-3,0);
-            currentState.getPlayer(currentState.getTurnID()).getBullet().move(-3,0);
+            currentState.getCurrentPlayer().getTank().move(-3,0);
+            currentState.getCurrentPlayer().getTurret().move(-3,0);
+            currentState.getCurrentPlayer().getBullet().move(-3,0);
           }
         break;
         case MOVE_RIGHT :
-          if (currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getTank()) != state::RIGHT_BORDER)
+          if (currentState.getBlocType(currentState.getCurrentPlayer().getTank()) != state::RIGHT_BORDER)
           {
-            currentState.getPlayer(currentState.getTurnID()).getTank().move(3,0);
-            currentState.getPlayer(currentState.getTurnID()).getTurret().move(3,0);
-            currentState.getPlayer(currentState.getTurnID()).getBullet().move(3,0);
+            currentState.getCurrentPlayer().getTank().move(3,0);
+            currentState.getCurrentPlayer().getTurret().move(3,0);
+            currentState.getCurrentPlayer().getBullet().move(3,0);
           }
         break;
         case TURN_ANTICLOCKWISE :
-          if (currentState.getPlayer(currentState.getTurnID()).getTurret().getPhi() > -180)
+          if (currentState.getCurrentPlayer().getTurret().getPhi() > -180)
           {
-            currentState.getPlayer(currentState.getTurnID()).getTurret().turn(-3);
-            currentState.getPlayer(currentState.getTurnID()).getBullet().turn(-3);
+            currentState.getCurrentPlayer().getTurret().turn(-3);
+            currentState.getCurrentPlayer().getBullet().turn(-3);
           }
         break;
         case TURN_CLOCKWISE :
-          if (currentState.getPlayer(currentState.getTurnID()).getTurret().getPhi() < 0)
+          if (currentState.getCurrentPlayer().getTurret().getPhi() < 0)
           {
-            currentState.getPlayer(currentState.getTurnID()).getTurret().turn(3);
-            currentState.getPlayer(currentState.getTurnID()).getBullet().turn(3);
+            currentState.getCurrentPlayer().getTurret().turn(3);
+            currentState.getCurrentPlayer().getBullet().turn(3);
           }
         break;
         case FIRE :
-          currentState.getPlayer(currentState.getTurnID()).getBullet().init();
+          currentState.getCurrentPlayer().getBullet().init();
           this->status = SHOOTING;
         break;
         default : return false;
@@ -81,22 +81,22 @@ bool Engine::update(state::State& currentState, Action action)
     break;
 
     case SHOOTING :
-      if(currentState.getBlocType(currentState.getPlayer(currentState.getTurnID()).getBullet()) == state::NOTHING && currentState.getCollision() == false)
+      if(currentState.getBlocType(currentState.getCurrentPlayer().getBullet()) == state::NOTHING && currentState.getCollision() == false)
       {
-        currentState.getPlayer(currentState.getTurnID()).getBullet().update();
-        currentState.getPlayer(currentState.getTurnID()).getBullet().move(currentState.getPlayer(currentState.getTurnID()).getBullet().getVx(),currentState.getPlayer(currentState.getTurnID()).getBullet().getVy());
+        currentState.getCurrentPlayer().getBullet().update();
+        currentState.getCurrentPlayer().getBullet().move(currentState.getCurrentPlayer().getBullet().getVx(),currentState.getCurrentPlayer().getBullet().getVy());
       }
       else
       {
         if (currentState.getCollision() == true)
         {
           std::cout << "HIT from player " << currentState.getTurnID() << "!" << endl;
-          currentState.getPlayer(1-currentState.getTurnID()).setLife(currentState.getPlayer(1-currentState.getTurnID()).getLife()-currentState.getPlayer(currentState.getTurnID()).getDamage());
+          currentState.getAdversePlayer().setLife(currentState.getAdversePlayer().getLife()-currentState.getCurrentPlayer().getDamage());
         }
-        currentState.getPlayer(currentState.getTurnID()).getBullet().setX(currentState.getPlayer(currentState.getTurnID()).getTurret().getX());
-        currentState.getPlayer(currentState.getTurnID()).getBullet().setY(currentState.getPlayer(currentState.getTurnID()).getTurret().getY());
-        currentState.getPlayer(currentState.getTurnID()).getBullet().setPhi(currentState.getPlayer(currentState.getTurnID()).getTurret().getPhi());
-        if (currentState.getPlayer(1-currentState.getTurnID()).getLife() > 0)
+        currentState.getCurrentPlayer().getBullet().setX(currentState.getCurrentPlayer().getTurret().getX());
+        currentState.getCurrentPlayer().getBullet().setY(currentState.getCurrentPlayer().getTurret().getY());
+        currentState.getCurrentPlayer().getBullet().setPhi(currentState.getCurrentPlayer().getTurret().getPhi());
+        if (currentState.getAdversePlayer().getLife() > 0)
         {
           this->status = MOVING;
           currentState.nextTurnID();

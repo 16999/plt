@@ -1,9 +1,7 @@
 #include "HeuristicAI.h"
 #include <math.h>
 using namespace ai;
-
-#include <iostream>
-using namespace std;
+#define RAD_TO_DEG 57.2958
 
 
 HeuristicAI::HeuristicAI()
@@ -35,17 +33,17 @@ engine::Action HeuristicAI::run(state::State& aiState)
   }
   else if (this->iteration == 12)
   {
-    this->optimalAngle = 57.2958*0.5*asin((aiState.getPlayer(1-aiState.getTurnID()).getTank().getX()-aiState.getPlayer(aiState.getTurnID()).getTank().getX())*aiState.getPlayer(aiState.getTurnID()).getBullet().getG()/pow(aiState.getPlayer(aiState.getTurnID()).getBullet().getV0(),2)) - 90;
+    this->optimalAngle = RAD_TO_DEG*0.5*asin((aiState.getAdversePlayer().getTank().getX()-aiState.getCurrentPlayer().getTank().getX())*aiState.getCurrentPlayer().getBullet().getG()/pow(aiState.getCurrentPlayer().getBullet().getV0(),2)) - 90;
     this->epsilon = 2;
     this->iteration++;
   }
   else
   {
-    if (this->optimalAngle - this->epsilon > aiState.getPlayer(aiState.getTurnID()).getTurret().getPhi())
+    if (this->optimalAngle - this->epsilon > aiState.getCurrentPlayer().getTurret().getPhi())
     {
       this->action = engine::TURN_CLOCKWISE;
     }
-    else if (this->optimalAngle + this->epsilon < aiState.getPlayer(aiState.getTurnID()).getTurret().getPhi())
+    else if (this->optimalAngle + this->epsilon < aiState.getCurrentPlayer().getTurret().getPhi())
     {
       this->action = engine::TURN_ANTICLOCKWISE;
     }

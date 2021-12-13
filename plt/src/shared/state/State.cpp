@@ -30,9 +30,19 @@ const Map& State::getMap() const
   return this->map;
 }
 
-Player& State::getPlayer(int ID)
+const std::vector<Player>& State::getPlayer() const
 {
-  return this->player[ID];
+  return this->player;
+}
+
+Player& State::getCurrentPlayer()
+{
+  return this->player[this->turnID];
+}
+
+Player& State::getAdversePlayer()
+{
+  return this->player[1-this->turnID];
 }
 
 int State::getPlayerID() const
