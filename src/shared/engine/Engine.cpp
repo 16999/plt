@@ -2,15 +2,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <math.h>
-#include <json/json.h>
 using namespace engine;
 using namespace std;
 #define RAD_TO_DEG 57.2958
 
 
-#include <fstream>      // std::ofstream
+
 //sf::Mutex engine_mutex;
-std::ofstream outfile;
 
 Engine::Engine()
 {
@@ -27,14 +25,27 @@ Status Engine::getStatus() const
   return this->status;
 }
 
-Command& Engine::getCommand()
+void Engine::setAction(Action action)
 {
-  return this->command;
+  this->action = action;
 }
 
-void Engine::setCommand(Command& command)
+Action Engine::getAction() const
 {
-  this->command = command;
+  return this->action;
+}
+
+Action Engine::convert(sf::Event event)
+{
+  switch(event.key.code)
+  {
+    case sf::Keyboard::Left : return MOVE_LEFT;       break;
+    case sf::Keyboard::Right : return MOVE_RIGHT;     break;
+    case sf::Keyboard::W : return TURN_ANTICLOCKWISE; break;
+    case sf::Keyboard::X : return TURN_CLOCKWISE;     break;
+    case sf::Keyboard::Space : return FIRE;           break;
+    default : return NOTHING;
+  }
 }
 
 bool Engine::update(state::State& currentState, Action action)
@@ -42,9 +53,7 @@ bool Engine::update(state::State& currentState, Action action)
   switch (this->status)
   {
     case MOVING:
-
-      this->action["action_"+to_string(this->actionNumber++)] = action;
-
+      this->record.addAction(action);
       switch(action)
       {
         case MOVE_LEFT :
@@ -78,6 +87,7 @@ bool Engine::update(state::State& currentState, Action action)
           }
         break;
         case FIRE :
+          this->record.addTurn();
           this->t = 0;
           this->status = SHOOTING;
         break;
@@ -98,15 +108,6 @@ bool Engine::update(state::State& currentState, Action action)
       }
       else
       {
-
-        this->turn["turn_"+to_string(this->turnNumber++)] = this->action;
-
-        outfile.open("test.txt");
-        outfile << this->fastWriter.write(this->turn);
-        outfile.close();
-        //std::cout << this->file << endl;
-
-        this->actionNumber = 0;
         if (currentState.getCollision() == true)
         {
           std::cout << "HIT from player " << currentState.getTurnID() << "!" << endl;

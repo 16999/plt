@@ -22,16 +22,16 @@ void playEngine(void)   //player vs player
   while (window.isOpen())
   {
 
-    ngine.getCommand().setAction(engine::NOTHING);
+    ngine.setAction(engine::NOTHING);
     if (window.pollEvent(event))
     {
       if(event.type == sf::Event::Closed)
         window.close();
       if(event.type == sf::Event::KeyPressed)
-        ngine.getCommand().setAction(ngine.getCommand().convert(event));
+        ngine.setAction(ngine.convert(event));
     }
 
-    ngine.update(currentState,ngine.getCommand().getAction());
+    ngine.update(currentState,ngine.getAction());
     scene.setCurrentState(currentState);
     scene.checkCollision(currentState);
     scene.draw(window);
@@ -43,19 +43,19 @@ void playAI(ai::AI* selectedAI)   //player vs AI
   while (window.isOpen())
   {
 
-    ngine.getCommand().setAction(engine::NOTHING);
+    ngine.setAction(engine::NOTHING);
     if (window.pollEvent(event))
     {
       if(event.type == sf::Event::Closed)
         window.close();
       if(event.type == sf::Event::KeyPressed && currentState.getTurnID() == currentState.getPlayerID())
-        ngine.getCommand().setAction(ngine.getCommand().convert(event));
+        ngine.setAction(ngine.convert(event));
     }
 
     if(currentState.getTurnID() != currentState.getPlayerID() && ngine.getStatus() != engine::SHOOTING)
-      ngine.getCommand().setAction(selectedAI->run(currentState));
+      ngine.setAction(selectedAI->run(currentState));
 
-    ngine.update(currentState,ngine.getCommand().getAction());
+    ngine.update(currentState,ngine.getAction());
     scene.setCurrentState(currentState);
     scene.checkCollision(currentState);
     scene.draw(window);
@@ -71,15 +71,15 @@ void AIvsAI(ai::AI* selectedAI1,ai::AI* selectedAI2)  //AI vs AI
       if(event.type == sf::Event::Closed)
         window.close();
     if(currentState.getTurnID() == 0 && ngine.getStatus() == engine::MOVING)
-      ngine.getCommand().setAction(selectedAI1->run(currentState));
+      ngine.setAction(selectedAI1->run(currentState));
     else if(currentState.getTurnID() == 1 && ngine.getStatus() == engine::MOVING)
-      ngine.getCommand().setAction(selectedAI2->run(currentState));
+      ngine.setAction(selectedAI2->run(currentState));
     else if (ngine.getStatus() == engine::GAMEOVER)
-      ngine.getCommand().setAction(engine::FIRE);
+      ngine.setAction(engine::FIRE);
     else
-      ngine.getCommand().setAction(engine::NOTHING);
+      ngine.setAction(engine::NOTHING);
 
-    ngine.update(currentState,ngine.getCommand().getAction());
+    ngine.update(currentState,ngine.getAction());
     scene.setCurrentState(currentState);
     scene.checkCollision(currentState);
     scene.draw(window);
