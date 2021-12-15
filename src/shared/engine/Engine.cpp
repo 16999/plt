@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <math.h>
+#include <json/json.h>
 using namespace engine;
 using namespace std;
 #define RAD_TO_DEG 57.2958
