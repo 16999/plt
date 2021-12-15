@@ -8,7 +8,9 @@ using namespace std;
 #define RAD_TO_DEG 57.2958
 
 
+#include <fstream>      // std::ofstream
 //sf::Mutex engine_mutex;
+std::ofstream outfile;
 
 Engine::Engine()
 {
@@ -18,7 +20,6 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-
 }
 
 Status Engine::getStatus() const
@@ -41,6 +42,9 @@ bool Engine::update(state::State& currentState, Action action)
   switch (this->status)
   {
     case MOVING:
+
+      this->action["action_"+to_string(this->actionNumber++)] = action;
+
       switch(action)
       {
         case MOVE_LEFT :
@@ -94,6 +98,15 @@ bool Engine::update(state::State& currentState, Action action)
       }
       else
       {
+
+        this->turn["turn_"+to_string(this->turnNumber++)] = this->action;
+
+        outfile.open("test.txt");
+        outfile << this->fastWriter.write(this->turn);
+        outfile.close();
+        //std::cout << this->file << endl;
+
+        this->actionNumber = 0;
         if (currentState.getCollision() == true)
         {
           std::cout << "HIT from player " << currentState.getTurnID() << "!" << endl;

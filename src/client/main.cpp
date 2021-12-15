@@ -91,14 +91,6 @@ void AIvsAI(ai::AI* selectedAI1,ai::AI* selectedAI2)  //AI vs AI
 
 int main(int argc,char* argv[])
 {
-
-  /*std::string json_file;
-  Json::Value root;
-  Json::FastWriter writer;
-  root["action"] = "run";
-  json_file = writer.write(root);
-  std::cout << json_file << std::endl;*/
-
   if (argc == 1)
     std::cout << "Arguments :\n- render\n- engine\n- dumbAI\n- heuristicAI\n- advancedAI" << endl;
   else if (argc == 2 && strcmp(argv[1],"engine") == 0)
