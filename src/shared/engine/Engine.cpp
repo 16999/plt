@@ -124,6 +124,7 @@ bool Engine::update(state::State& currentState, Action action)
         else
         {
           this->status = GAMEOVER;
+          this->record.addGame();
           currentState.endGame(currentState.getTurnID());
         }
       }
