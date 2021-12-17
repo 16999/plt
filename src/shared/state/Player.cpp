@@ -111,3 +111,15 @@ void Player::setData(int ID, TankType tankType)
   this->bullet.setY(IDvectorY[ID]-62);
   this->bullet.setPhi(IDvectorPhi[ID]);
 }
+
+/*
+void Element::move(float dx, float dy)
+{
+  this->x += dx;
+  this->y += dy;
+}
+
+void Element::turn(float dPhi)
+{
+  this->phi += dPhi;
+}*/
