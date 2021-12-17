@@ -57,34 +57,16 @@ bool Engine::update(state::State& currentState, Action action)
       switch(action)
       {
         case MOVE_LEFT :
-          if (currentState.getBlocType(currentState.getCurrentPlayer().getTank()) != state::LEFT_BORDER)
-          {
-            currentState.getCurrentPlayer().getTank().move(-this->inc,0);
-            currentState.getCurrentPlayer().getTurret().move(-this->inc,0);
-            currentState.getCurrentPlayer().getBullet().move(-this->inc,0);
-          }
+          currentState.getCurrentPlayer().move(-this->inc,0,currentState.getMap());
         break;
         case MOVE_RIGHT :
-          if (currentState.getBlocType(currentState.getCurrentPlayer().getTank()) != state::RIGHT_BORDER)
-          {
-            currentState.getCurrentPlayer().getTank().move(this->inc,0);
-            currentState.getCurrentPlayer().getTurret().move(this->inc,0);
-            currentState.getCurrentPlayer().getBullet().move(this->inc,0);
-          }
+          currentState.getCurrentPlayer().move(this->inc,0,currentState.getMap());
         break;
         case TURN_ANTICLOCKWISE :
-          if (currentState.getCurrentPlayer().getTurret().getPhi() > -180)
-          {
-            currentState.getCurrentPlayer().getTurret().turn(-this->inc);
-            currentState.getCurrentPlayer().getBullet().turn(-this->inc);
-          }
+          currentState.getCurrentPlayer().turn(-this->inc);
         break;
         case TURN_CLOCKWISE :
-          if (currentState.getCurrentPlayer().getTurret().getPhi() < 0)
-          {
-            currentState.getCurrentPlayer().getTurret().turn(this->inc);
-            currentState.getCurrentPlayer().getBullet().turn(this->inc);
-          }
+          currentState.getCurrentPlayer().turn(this->inc);
         break;
         case FIRE :
           this->record.addTurn();

@@ -7,9 +7,13 @@ using namespace std;
 
 
 
+const int BLOC_SIZE = 36;
+const int MAP_WIDTH = 25;
+const int MAP_HEIGHT = 15;
+
 Map::Map()
 {
-
+  
 }
 
 Map::~Map()

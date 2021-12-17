@@ -1,5 +1,12 @@
 #include "Element.h"
+#include <math.h>
 using namespace state;
+
+#define BLOC_SIZE 36
+#define MAP_WIDTH 25
+#define MAP_HEIGHT 15
+
+
 
 Element::Element()
 {
@@ -52,4 +59,28 @@ void Element::move(float dx, float dy)
 void Element::turn(float dPhi)
 {
   this->phi += dPhi;
+}
+
+BlocType Element::getBlocType (Map map)
+{
+  BlocType ret;
+  int index = floor(this->x/BLOC_SIZE)+(MAP_WIDTH*floor(this->y/BLOC_SIZE));
+
+  if (index >= 0 && index < MAP_WIDTH*MAP_HEIGHT)
+  {
+    char val = map.getBloc()[index];
+    switch (val)
+    {
+      case 0x7 : ret = LEFT_BORDER;  break;
+      case 0x8 : ret = PRACTICABLE;  break;
+      case 0x9 : ret = RIGHT_BORDER;  break;
+      default : ret = NOTHING; break;
+    }
+  }
+  else
+  {
+      ret = INVALID;
+  }
+
+  return ret;
 }

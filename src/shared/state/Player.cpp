@@ -112,14 +112,22 @@ void Player::setData(int ID, TankType tankType)
   this->bullet.setPhi(IDvectorPhi[ID]);
 }
 
-/*
-void Element::move(float dx, float dy)
+
+void Player::move(float dx, float dy, Map map)
 {
-  this->x += dx;
-  this->y += dy;
+  if ((this->tank.getBlocType(map) != state::LEFT_BORDER && dx < 0) || (this->tank.getBlocType(map) != state::RIGHT_BORDER && dx > 0))
+  {
+    this->tank.move(dx,dy);
+    this->turret.move(dx,dy);
+    this->bullet.move(dx,dy);
+  }
 }
 
-void Element::turn(float dPhi)
+void Player::turn(float dPhi)
 {
-  this->phi += dPhi;
-}*/
+  if ((this->turret.getPhi() > -180 && dPhi < 0) || (this->turret.getPhi() < 0 && dPhi > 0))
+  {
+    this->turret.turn(dPhi);
+    this->bullet.turn(dPhi);
+  }
+}
