@@ -51,11 +51,11 @@ void PlayerSurface::loadPlayer(state::Player player)
   this->playerSprite[TURRET].setTexture(this->playerTexture[TURRET]);
   this->playerSprite[BULLET].setTexture(this->playerTexture[BULLET]);
   this->playerSprite[TANK].setPosition(player.getTank().getX(),player.getTank().getY());
-  this->playerSprite[TURRET].setPosition(player.getTurret().getX(),player.getTurret().getY());
-  this->playerSprite[BULLET].setPosition(player.getBullet().getX(),player.getBullet().getY());
+  this->playerSprite[TURRET].setPosition(player.getTank().getTurret().getX(),player.getTank().getTurret().getY());
+  this->playerSprite[BULLET].setPosition(player.getTank().getTurret().getBullet().getX(),player.getTank().getTurret().getBullet().getY());
   this->playerSprite[TANK].setRotation(player.getTank().getPhi());
-  this->playerSprite[TURRET].setRotation(player.getTurret().getPhi());
-  this->playerSprite[BULLET].setRotation(player.getBullet().getPhi());
+  this->playerSprite[TURRET].setRotation(player.getTank().getTurret().getPhi());
+  this->playerSprite[BULLET].setRotation(player.getTank().getTurret().getBullet().getPhi());
 }
 
 void PlayerSurface::draw(sf::RenderWindow& window)

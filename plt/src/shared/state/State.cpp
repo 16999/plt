@@ -60,29 +60,6 @@ void State::nextTurnID ()
   this->turnID = 1 - this->turnID;
 }
 
-BlocType State::getBlocType (Element element)
-{
-  BlocType ret;
-  int index = floor(element.getX()/BLOC_SIZE)+(MAP_WIDTH*floor(element.getY()/BLOC_SIZE));
-
-  if (index >= 0 && index < MAP_WIDTH*MAP_HEIGHT)
-  {
-    char val = this->map.getBloc()[index];
-    switch (val)
-    {
-      case 0x7 : ret = LEFT_BORDER;  break;
-      case 0x8 : ret = PRACTICABLE;  break;
-      case 0x9 : ret = RIGHT_BORDER;  break;
-      default : ret = NOTHING; break;
-    }
-  }
-  else
-  {
-      ret = INVALID;
-  }
-
-  return ret;
-}
 
 bool State::getCollision() const
 {

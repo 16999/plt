@@ -2,9 +2,9 @@
 #include <iostream>
 using namespace render;
 
-#define BLOC_SIZE 36
-#define MAP_WIDTH 25
-#define MAP_HEIGHT 15
+const int BLOC_SIZE = 36;
+const int MAP_WIDTH = 25;
+const int MAP_HEIGHT = 15;
 
 
 
