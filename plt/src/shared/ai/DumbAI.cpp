@@ -14,7 +14,7 @@ DumbAI::~DumbAI()
 
 }
 
-engine::Action DumbAI::run(state::State& aiState)
+void DumbAI::run(engine::Engine& ngine)
 {
   if (this->iteration == 0)
   {
@@ -30,14 +30,12 @@ engine::Action DumbAI::run(state::State& aiState)
 
   if (this->iteration < this->maxIteration)
   {
-    this->action = this->preAction;
+    ngine.setAction(this->preAction);
     this->iteration++;
   }
   else
   {
-    this->action = engine::FIRE;
+    ngine.setAction(engine::FIRE);
     this->iteration = 0;
   }
-
-  return this->action;
 }

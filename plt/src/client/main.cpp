@@ -7,10 +7,8 @@
 using namespace std;
 
 
-sf::RenderWindow window;
 sf::Event event;
-state::State currentState;
-render::Scene scene(window);
+render::Scene scene;
 engine::Engine ngine;
 ai::DumbAI dumbAI;
 ai::HeuristicAI heuristicAI;
@@ -19,70 +17,63 @@ ai::HeuristicAI heuristicAI;
 
 void playEngine(void)   //player vs player
 {
-  while (window.isOpen())
+  while (scene.getWindow().isOpen())
   {
-
-    ngine.setAction(engine::NOTHING);
-    if (window.pollEvent(event))
+    if (scene.getWindow().pollEvent(event))
     {
       if(event.type == sf::Event::Closed)
-        window.close();
+        scene.getWindow().close();
       if(event.type == sf::Event::KeyPressed)
         ngine.setAction(ngine.convert(event));
+      else
+        ngine.setAction(engine::NOTHING);
     }
-
-    ngine.update(currentState,ngine.getAction());
-    scene.setCurrentState(currentState);
-    scene.checkCollision(currentState);
-    scene.draw(window);
+    ngine.update();
+    scene.setCurrentState(ngine.getCurrentState());
+    scene.draw();
   }
 }
 
 void playAI(ai::AI* selectedAI)   //player vs AI
 {
-  while (window.isOpen())
+  while (scene.getWindow().isOpen())
   {
-
-    ngine.setAction(engine::NOTHING);
-    if (window.pollEvent(event))
+    if (scene.getWindow().pollEvent(event))
     {
       if(event.type == sf::Event::Closed)
-        window.close();
-      if(event.type == sf::Event::KeyPressed && currentState.getTurnID() == currentState.getPlayerID())
+        scene.getWindow().close();
+      if(event.type == sf::Event::KeyPressed && ngine.getCurrentState().getTurnID() == ngine.getCurrentState().getPlayerID())
         ngine.setAction(ngine.convert(event));
+      else
+        ngine.setAction(engine::NOTHING);
     }
-
-    if(currentState.getTurnID() != currentState.getPlayerID() && ngine.getStatus() != engine::SHOOTING)
-      ngine.setAction(selectedAI->run(currentState));
-
-    ngine.update(currentState,ngine.getAction());
-    scene.setCurrentState(currentState);
-    scene.checkCollision(currentState);
-    scene.draw(window);
+    if(ngine.getCurrentState().getTurnID() != ngine.getCurrentState().getPlayerID() && ngine.getStatus() != engine::SHOOTING)
+      selectedAI->run(ngine);
+    ngine.update();
+    scene.setCurrentState(ngine.getCurrentState());
+    scene.draw();
   }
 }
 
 void AIvsAI(ai::AI* selectedAI1,ai::AI* selectedAI2)  //AI vs AI
 {
-  while (window.isOpen())
+  while (scene.getWindow().isOpen())
   {
 
-    if (window.pollEvent(event))
+    if (scene.getWindow().pollEvent(event))
       if(event.type == sf::Event::Closed)
-        window.close();
-    if(currentState.getTurnID() == 0 && ngine.getStatus() == engine::MOVING)
-      ngine.setAction(selectedAI1->run(currentState));
-    else if(currentState.getTurnID() == 1 && ngine.getStatus() == engine::MOVING)
-      ngine.setAction(selectedAI2->run(currentState));
+        scene.getWindow().close();
+    if(ngine.getCurrentState().getTurnID() == 0 && ngine.getStatus() == engine::MOVING)
+      selectedAI1->run(ngine);
+    else if(ngine.getCurrentState().getTurnID() == 1 && ngine.getStatus() == engine::MOVING)
+      selectedAI2->run(ngine);
     else if (ngine.getStatus() == engine::GAMEOVER)
       ngine.setAction(engine::FIRE);
     else
       ngine.setAction(engine::NOTHING);
-
-    ngine.update(currentState,ngine.getAction());
-    scene.setCurrentState(currentState);
-    scene.checkCollision(currentState);
-    scene.draw(window);
+    ngine.update();
+    scene.setCurrentState(ngine.getCurrentState());
+    scene.draw();
   }
 }
 

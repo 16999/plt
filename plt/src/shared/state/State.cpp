@@ -60,20 +60,9 @@ void State::nextTurnID ()
   this->turnID = 1 - this->turnID;
 }
 
-
-bool State::getCollision() const
-{
-  return this->collision;
-}
-
 void State::setPlayerID(int playerID)
 {
   this->playerID = playerID;
-}
-
-void State::setCollision(bool collision)
-{
-  this->collision = collision;
 }
 
 void State::startGame ()

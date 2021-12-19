@@ -16,7 +16,7 @@ HeuristicAI::~HeuristicAI()
 
 }
 
-engine::Action HeuristicAI::run(state::State& aiState)
+void HeuristicAI::run(engine::Engine& ngine)
 {
   if (this->iteration == 0)
   {
@@ -30,30 +30,24 @@ engine::Action HeuristicAI::run(state::State& aiState)
 
   if (this->iteration < this->maxIteration)
   {
-    this->action = this->preAction;
+    ngine.setAction(this->preAction);
     this->iteration++;
   }
   else if (this->iteration == this->maxIteration)
   {
-    this->optimalAngle = RAD_TO_DEG*0.5*asin((aiState.getAdversePlayer().getTank().getX()-aiState.getCurrentPlayer().getTank().getX())*this->physics.getG()/pow(this->physics.getV0(),2)) + rand()%this->epsilon - rand()%this->epsilon - 90;
+    this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*this->physics.getG()/pow(this->physics.getV0(),2)) + rand()%this->epsilon - rand()%this->epsilon - 90;
     this->iteration++;
   }
   else
   {
-    if (this->optimalAngle - this->physics.getInc() > aiState.getCurrentPlayer().getTank().getTurret().getPhi())
-    {
-      this->action = engine::TURN_CLOCKWISE;
-    }
-    else if (this->optimalAngle + this->physics.getInc() < aiState.getCurrentPlayer().getTank().getTurret().getPhi())
-    {
-      this->action = engine::TURN_ANTICLOCKWISE;
-    }
+    if (this->optimalAngle - this->physics.getInc() > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+      ngine.setAction(engine::TURN_CLOCKWISE);
+    else if (this->optimalAngle + this->physics.getInc() < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+      ngine.setAction(engine::TURN_ANTICLOCKWISE);
     else
     {
-      this->action = engine::FIRE;
+      ngine.setAction(engine::FIRE);
       this->iteration = 0;
     }
   }
-
-  return this->action;
 }
