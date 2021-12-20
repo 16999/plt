@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <math.h>
 using namespace engine;
@@ -38,25 +37,6 @@ Action Engine::getAction() const
 state::State Engine::getCurrentState()
 {
   return this->currentState;
-}
-
-void Engine::convert(sf::Event event)
-{
-  if(event.type == sf::Event::KeyPressed)
-    if(event.key.code == sf::Keyboard::Left)
-      this->action = MOVE_LEFT;
-    else if(event.key.code == sf::Keyboard::Right)
-      this->action = MOVE_RIGHT;
-    else if(event.key.code == sf::Keyboard::W)
-      this->action = TURN_ANTICLOCKWISE;
-    else if(event.key.code == sf::Keyboard::X)
-      this->action = TURN_CLOCKWISE;
-    else if(event.key.code == sf::Keyboard::Space)
-      this->action = FIRE;
-    else
-      this->action = NOTHING;
-  else
-    this->action = NOTHING;
 }
 
 bool Engine::update()

@@ -1,6 +1,6 @@
 #include "DumbAI.h"
 using namespace ai;
-
+using namespace engine;
 
 
 DumbAI::DumbAI()
@@ -18,15 +18,15 @@ void DumbAI::run(engine::Engine& ngine)
 {
   switch (ngine.getStatus())
   {
-    case engine::MOVING:
+    case MOVING:
       if (this->iteration == 0)
       {
         switch(rand()%4)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
         {
-          case 0 : this->preAction = engine::MOVE_LEFT; break;
-          case 1 : this->preAction = engine::MOVE_RIGHT; break;
-          case 2 : this->preAction = engine::TURN_ANTICLOCKWISE; break;
-          case 3 : this->preAction = engine::TURN_CLOCKWISE; break;
+          case 0 : this->preAction = MOVE_LEFT; break;
+          case 1 : this->preAction = MOVE_RIGHT; break;
+          case 2 : this->preAction = TURN_ANTICLOCKWISE; break;
+          case 3 : this->preAction = TURN_CLOCKWISE; break;
           default : break;
         }
       }
@@ -38,15 +38,15 @@ void DumbAI::run(engine::Engine& ngine)
       }
       else
       {
-        ngine.setAction(engine::FIRE);
+        ngine.setAction(FIRE);
         this->iteration = 0;
       }
     break;
-    case engine::GAMEOVER:
-      ngine.setAction(engine::FIRE);
+    case GAMEOVER:
+      ngine.setAction(FIRE);
     break;
     default :
-      ngine.setAction(engine::NOTHING);
+      ngine.setAction(NOTHING);
     break;
   }
 }

@@ -1,6 +1,7 @@
 #include "HeuristicAI.h"
 #include <math.h>
 using namespace ai;
+using namespace engine;
 #define RAD_TO_DEG 57.2958
 
 
@@ -20,13 +21,13 @@ void HeuristicAI::run(engine::Engine& ngine)
 {
   switch (ngine.getStatus())
   {
-    case engine::MOVING:
+    case MOVING:
       if (this->iteration == 0)
       {
         switch(rand()%2)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
         {
-          case 0 : this->preAction = engine::MOVE_LEFT; break;
-          case 1 : this->preAction = engine::MOVE_RIGHT; break;
+          case 0 : this->preAction = MOVE_LEFT; break;
+          case 1 : this->preAction = MOVE_RIGHT; break;
           default : break;
         }
       }
@@ -44,21 +45,21 @@ void HeuristicAI::run(engine::Engine& ngine)
       else
       {
         if (this->optimalAngle - this->physics.getInc() > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
-          ngine.setAction(engine::TURN_CLOCKWISE);
+          ngine.setAction(TURN_CLOCKWISE);
         else if (this->optimalAngle + this->physics.getInc() < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
-          ngine.setAction(engine::TURN_ANTICLOCKWISE);
+          ngine.setAction(TURN_ANTICLOCKWISE);
         else
         {
-          ngine.setAction(engine::FIRE);
+          ngine.setAction(FIRE);
           this->iteration = 0;
         }
       }
     break;
-    case engine::GAMEOVER:
-      ngine.setAction(engine::FIRE);
+    case GAMEOVER:
+      ngine.setAction(FIRE);
     break;
     default :
-      ngine.setAction(engine::NOTHING);
+      ngine.setAction(NOTHING);
     break;
   }
 }
