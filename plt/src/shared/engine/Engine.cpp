@@ -7,8 +7,6 @@ using namespace std;
 
 
 
-//sf::Mutex engine_mutex;
-
 Engine::Engine()
 {
   std::cout << "Engine launched\nPRESS SPACE TO PLAY" << endl;

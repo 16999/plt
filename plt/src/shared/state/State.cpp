@@ -76,14 +76,14 @@ void State::endGame ()
 {
     if (this->turnID == this->playerID)
     {
-      std::cout << "You win !" << endl;
-      this->win++;
+      std::cout << "You won !" << endl;
+      this->won++;
     }
     else
     {
       std::cout << "You lost !" << endl;
       this->lost++;
     }
-    std::cout << "Win = " << this->win << " ; Lost = " << this->lost << endl;
+    std::cout << "Won = " << this->won << " ; Lost = " << this->lost << " ; Efficiency = " << 100*this->won/(this->won+this->lost) << "%" << endl;
     this->turnID = 0;
 }
