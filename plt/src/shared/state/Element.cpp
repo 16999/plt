@@ -131,7 +131,7 @@ BlocType Element::getBlocType (Map map)
   }
 }
 
-bool Element::checkCollision (Element element)
+bool Element::intersects (Element element)
 {
   if ((element.getX() - element.getX0() < this->x - this->x0 + this->width)
   && (element.getX() - element.getX0() + element.getWidth() > this->x - this->x0)

@@ -40,17 +40,23 @@ state::State Engine::getCurrentState()
   return this->currentState;
 }
 
-Action Engine::convert(sf::Event event)
+void Engine::convert(sf::Event event)
 {
-  switch(event.key.code)
-  {
-    case sf::Keyboard::Left : return MOVE_LEFT;       break;
-    case sf::Keyboard::Right : return MOVE_RIGHT;     break;
-    case sf::Keyboard::W : return TURN_ANTICLOCKWISE; break;
-    case sf::Keyboard::X : return TURN_CLOCKWISE;     break;
-    case sf::Keyboard::Space : return FIRE;           break;
-    default : return NOTHING;
-  }
+  if(event.type == sf::Event::KeyPressed)
+    if(event.key.code == sf::Keyboard::Left)
+      this->action = MOVE_LEFT;
+    else if(event.key.code == sf::Keyboard::Right)
+      this->action = MOVE_RIGHT;
+    else if(event.key.code == sf::Keyboard::W)
+      this->action = TURN_ANTICLOCKWISE;
+    else if(event.key.code == sf::Keyboard::X)
+      this->action = TURN_CLOCKWISE;
+    else if(event.key.code == sf::Keyboard::Space)
+      this->action = FIRE;
+    else
+      this->action = NOTHING;
+  else
+    this->action = NOTHING;
 }
 
 bool Engine::update()
@@ -78,7 +84,7 @@ bool Engine::update()
     break;
 
     case SHOOTING :
-      if(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getBlocType(this->currentState.getMap()) == state::NOTHING && this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().checkCollision(this->currentState.getAdversePlayer().getTank()) == false)
+      if(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getBlocType(this->currentState.getMap()) == state::NOTHING && this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().intersects(this->currentState.getAdversePlayer().getTank()) == false)
       {
         if (this->t == 0)
           this->theta = this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi();
@@ -90,7 +96,7 @@ bool Engine::update()
       }
       else
       {
-        if (this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().checkCollision(this->currentState.getAdversePlayer().getTank()) == true)
+        if (this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().intersects(this->currentState.getAdversePlayer().getTank()) == true)
         {
           std::cout << "HIT from player " << this->currentState.getTurnID() << "!" << endl;
           this->currentState.getAdversePlayer().setLife(this->currentState.getAdversePlayer().getLife()-this->currentState.getCurrentPlayer().getDamage());
