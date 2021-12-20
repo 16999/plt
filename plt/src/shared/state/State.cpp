@@ -72,8 +72,18 @@ void State::startGame ()
   this->player[1].setData(1,this->player[1].getTankType());
 }
 
-void State::endGame (int ID)
+void State::endGame ()
 {
-    std::cout << "GAME OVER\nThe winner is player " << ID << "!" << endl;
+    if (this->turnID == this->playerID)
+    {
+      std::cout << "You win !" << endl;
+      this->win++;
+    }
+    else
+    {
+      std::cout << "You lost !" << endl;
+      this->lost++;
+    }
+    std::cout << "Win = " << this->win << " ; Lost = " << this->lost << endl;
     this->turnID = 0;
 }

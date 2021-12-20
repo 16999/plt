@@ -95,7 +95,7 @@ bool Engine::update()
           std::cout << "HIT from player " << this->currentState.getTurnID() << "!" << endl;
           this->currentState.getAdversePlayer().setLife(this->currentState.getAdversePlayer().getLife()-this->currentState.getCurrentPlayer().getDamage());
         }
-        this->currentState.getCurrentPlayer().getTank().getTurret().replaceBullet();
+        this->currentState.getCurrentPlayer().getTank().getTurret().replace();
         if (this->currentState.getAdversePlayer().getLife() > 0)
         {
           this->status = MOVING;
@@ -105,7 +105,7 @@ bool Engine::update()
         {
           this->status = GAMEOVER;
           this->record.addGame();
-          this->currentState.endGame(this->currentState.getTurnID());
+          this->currentState.endGame();
         }
       }
     break;

@@ -14,10 +14,3 @@ Bullet& Turret::getBullet()
 {
   return this->bullet;
 }
-
-void Turret::replaceBullet()
-{
-  this->next->setX(this->x);
-  this->next->setY(this->y);
-  this->next->setPhi(this->phi);
-}

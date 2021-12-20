@@ -99,6 +99,17 @@ void Element::update(float dx, float dy, float dPhi)
     this->next->update(dx,dy,dPhi);
 }
 
+void Element::replace()
+{
+  if (this->next != NULL)
+  {
+    this->next->setX(this->x);
+    this->next->setY(this->y);
+    this->next->setPhi(this->phi);
+    this->next->replace();
+  }
+}
+
 BlocType Element::getBlocType (Map map)
 {
   int index = floor(this->x/BLOC_SIZE)+(MAP_WIDTH*floor(this->y/BLOC_SIZE));
