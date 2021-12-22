@@ -19,7 +19,7 @@ Record::~Record()
 
 void Record::addAction(Action action)
 {
-  if (action != NOTHING)
+  if (action != NO_ACTION)
     this->actionRecord["action_"+to_string(this->actionNumber++)] = action;
 }
 

@@ -85,5 +85,4 @@ void State::endGame ()
       this->lost++;
     }
     std::cout << "Won = " << this->won << " ; Lost = " << this->lost << " ; Efficiency = " << 100*this->won/(this->won+this->lost) << "%" << endl;
-    this->turnID = 0;
 }

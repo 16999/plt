@@ -1,10 +1,13 @@
 #include "DumbAI.h"
 using namespace ai;
 using namespace engine;
+using namespace state;
 
 
-DumbAI::DumbAI()
+
+DumbAI::DumbAI(int commandID)
 {
+  this->commandID = commandID;
   srand(time(NULL));
   this->maxIteration = 12;
 }
@@ -16,7 +19,7 @@ DumbAI::~DumbAI()
 
 void DumbAI::run(engine::Engine& ngine)
 {
-  switch (ngine.getStatus())
+  switch (ngine.getCurrentState().getCurrentPlayer().getStatus())
   {
     case MOVING:
       if (this->iteration == 0)
@@ -46,7 +49,7 @@ void DumbAI::run(engine::Engine& ngine)
       ngine.setAction(FIRE);
     break;
     default :
-      ngine.setAction(NOTHING);
+      ngine.setAction(NO_ACTION);
     break;
   }
 }

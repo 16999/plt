@@ -8,30 +8,36 @@
 #include <mutex>
 #include <chrono>
 using namespace std;
+using namespace this_thread;
+using namespace chrono;
 
 
 sf::Event event;
 render::Scene scene;
 engine::Engine ngine;
-ai::DumbAI dumbAI;
-ai::HeuristicAI heuristicAI;
-engine::KeyboardCommand player;
 
+ai::DumbAI dumbAI(0);
+ai::HeuristicAI heuristicAI(1);
+engine::KeyboardCommand realPlayer0(0);
+engine::KeyboardCommand realPlayer1(1);
+
+thread playerThread[2];
+thread displayThread;
 mutex myMutex;
 
 
-void play(engine::Command* player1,engine::Command* player2)  //AI vs AI
+void play(engine::Command* command)
 {
   while (1)
   {
     myMutex.lock();
-    if(ngine.getCurrentState().getTurnID() == ngine.getCurrentState().getPlayerID())
-      player1->run(ngine);
-    else
-      player2->run(ngine);
-    ngine.update();
+    if(ngine.getCurrentState().getTurnID() == command->getCommandID())
+    {
+      command->run(ngine);
+      ngine.update();
+    }
     myMutex.unlock();
-    this_thread::sleep_for(chrono::milliseconds(10));
+    sleep_for(milliseconds(10));
   }
 }
 
@@ -46,14 +52,11 @@ void display()
     scene.setCurrentState(ngine.getCurrentState());
     scene.draw();
     myMutex.unlock();
-    this_thread::sleep_for(chrono::milliseconds(10));
+    sleep_for(milliseconds(10));
   }
 }
 
 
-
-thread playThread;
-thread displayThread(&display);
 
 int main(int argc,char* argv[])
 {
@@ -62,15 +65,29 @@ int main(int argc,char* argv[])
   else if (argc == 2)
   {
     if (strcmp(argv[1],"engine") == 0)
-      playThread = std::thread(&play,&player,&player);
+    {
+      playerThread[0] = std::thread(&play,&realPlayer0);
+      playerThread[1] = std::thread(&play,&realPlayer1);
+    }
     else if (strcmp(argv[1],"dumbAI") == 0)
-      playThread = std::thread(&play,&player,&dumbAI);
+    {
+      playerThread[0] = std::thread(&play,&dumbAI);
+      playerThread[1] = std::thread(&play,&realPlayer1);
+    }
     else if (strcmp(argv[1],"heuristicAI") == 0)
-      playThread = std::thread(&play,&player,&heuristicAI);
+    {
+      playerThread[0] = std::thread(&play,&realPlayer0);
+      playerThread[1] = std::thread(&play,&heuristicAI);
+    }
     else if (strcmp(argv[1],"AIvsAI") == 0)
-      playThread = std::thread(&play,&dumbAI,&heuristicAI);
+    {
+      playerThread[0] = std::thread(&play,&dumbAI);
+      playerThread[1] = std::thread(&play,&heuristicAI);
+    }
+    displayThread = std::thread(&display);
     displayThread.join();
-    playThread.join();
+    playerThread[0].join();
+    playerThread[1].join();
   }
   else
     std::cout << "ERROR : Invalid arguments !!!" << endl;

@@ -2,14 +2,17 @@
 #include <math.h>
 using namespace ai;
 using namespace engine;
+using namespace state;
 #define RAD_TO_DEG 57.2958
 
 
-HeuristicAI::HeuristicAI()
+HeuristicAI::HeuristicAI(int commandID)
 {
+  this->commandID = commandID;
   srand(time(NULL));
   this->maxIteration = 12;
-  this->epsilon = 20;
+  this->delta = 20;
+  this->epsilon = 3;
 }
 
 HeuristicAI::~HeuristicAI()
@@ -19,7 +22,7 @@ HeuristicAI::~HeuristicAI()
 
 void HeuristicAI::run(engine::Engine& ngine)
 {
-  switch (ngine.getStatus())
+  switch (ngine.getCurrentState().getCurrentPlayer().getStatus())
   {
     case MOVING:
       if (this->iteration == 0)
@@ -39,14 +42,14 @@ void HeuristicAI::run(engine::Engine& ngine)
       }
       else if (this->iteration == this->maxIteration)
       {
-        this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*this->physics.getG()/pow(this->physics.getV0(),2)) + rand()%this->epsilon - rand()%this->epsilon - 90;
+        this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*this->physics.getG()/pow(this->physics.getV0(),2)) + rand()%this->delta - rand()%this->delta - 90;
         this->iteration++;
       }
       else
       {
-        if (this->optimalAngle - this->physics.getInc() > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+        if (this->optimalAngle - this->epsilon > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
           ngine.setAction(TURN_CLOCKWISE);
-        else if (this->optimalAngle + this->physics.getInc() < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+        else if (this->optimalAngle + this->epsilon < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
           ngine.setAction(TURN_ANTICLOCKWISE);
         else
         {
@@ -59,7 +62,7 @@ void HeuristicAI::run(engine::Engine& ngine)
       ngine.setAction(FIRE);
     break;
     default :
-      ngine.setAction(NOTHING);
+      ngine.setAction(NO_ACTION);
     break;
   }
 }

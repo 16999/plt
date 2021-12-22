@@ -61,8 +61,8 @@ BOOST_AUTO_TEST_CASE(TestBullet)
   {
     Engine ngine {};
 
-    ngine.setInc(3);
-    BOOST_CHECK_EQUAL(ngine.getInc(), 3);
+    //ngine.setInc(3);
+    //BOOST_CHECK_EQUAL(ngine.getInc(), 3);
     ngine.setV0(5);
     BOOST_CHECK_EQUAL(ngine.getV0(), 5);
     ngine.setVx(2.5);
@@ -71,9 +71,9 @@ BOOST_AUTO_TEST_CASE(TestBullet)
     BOOST_CHECK_EQUAL(ngine.getVy(), 3.25);
     ngine.setG(9.75);
     BOOST_CHECK_EQUAL(ngine.getG(), 9.75);
-    ngine.setT(15);
-    BOOST_CHECK_EQUAL(ngine.getT(), 15);
-    ngine.setTheta(68.25);
-    BOOST_CHECK_EQUAL(ngine.getTheta(), 68.25);
+    //ngine.setT(15);
+    //BOOST_CHECK_EQUAL(ngine.getT(), 15);
+    //ngine.setTheta(68.25);
+    //BOOST_CHECK_EQUAL(ngine.getTheta(), 68.25);
   }
 }

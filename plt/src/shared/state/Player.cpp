@@ -35,6 +35,16 @@ int Player::getID() const
   return this->ID;
 }
 
+Status Player::getStatus() const
+{
+  return this->status;
+}
+
+void Player::setStatus(Status status)
+{
+  this->status = status;
+}
+
 void Player::setID(int ID)
 {
   this->ID = ID;

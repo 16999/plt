@@ -5,9 +5,9 @@ using namespace engine;
 using namespace std;
 
 
-KeyboardCommand::KeyboardCommand()
+KeyboardCommand::KeyboardCommand(int commandID)
 {
-
+  this->commandID = commandID;
 }
 
 KeyboardCommand::~KeyboardCommand()
@@ -28,5 +28,5 @@ void KeyboardCommand::run(Engine& ngine)
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       ngine.setAction(FIRE);
     else
-      ngine.setAction(NOTHING);
+      ngine.setAction(NO_ACTION);
 }
