@@ -27,6 +27,8 @@ void KeyboardCommand::run(Engine& ngine)
       ngine.setAction(TURN_CLOCKWISE);
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
       ngine.setAction(FIRE);
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+      ngine.setAction(START_GAME);
     else
       ngine.setAction(NO_ACTION);
 }

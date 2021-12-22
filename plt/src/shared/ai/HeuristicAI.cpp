@@ -59,7 +59,7 @@ void HeuristicAI::run(engine::Engine& ngine)
       }
     break;
     case GAMEOVER:
-      ngine.setAction(FIRE);
+      ngine.setAction(START_GAME);
     break;
     default :
       ngine.setAction(NO_ACTION);

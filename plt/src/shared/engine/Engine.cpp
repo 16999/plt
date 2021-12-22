@@ -90,11 +90,14 @@ bool Engine::update()
     break;
 
     case GAMEOVER :
-      if(this->action == FIRE)
+      if(this->action == START_GAME)
       {
           this->currentState.getCurrentPlayer().setStatus(MOVING);
           this->currentState.startGame();
       }
+    break;
+
+    case AWAITING :
     break;
 
     default : break;

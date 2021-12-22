@@ -19,7 +19,8 @@ Player::~Player()
 std::string Player::getTextData() const
 {
   std::string data =
-  "ID=" + to_string(this->ID) +
+  "STATUS=" + to_string((int)this->status) +
+  " - ID=" + to_string(this->ID) +
   " - TYPE=" + to_string(this->tankType) +
   " - LIFE=" + to_string(this->life) +
   " - DAMAGE=" + to_string(this->damage)+
@@ -27,6 +28,8 @@ std::string Player::getTextData() const
   ";" + to_string((int)this->tank.getY()) +
   ";" + to_string((int)this->tank.getPhi()) +
   "d)";
+  if (this->status == GAMEOVER)
+    data += " - PRESS ENTER TO START GAME";
   return data;
 }
 

@@ -16,11 +16,6 @@ PlayerSurface::~PlayerSurface()
 
 }
 
-sf::Sprite PlayerSurface::getPlayerSprite(int elementID)
-{
-  return playerSprite[elementID];
-}
-
 void PlayerSurface::initText(std::string path)
 {
   this->font.loadFromFile(path);
