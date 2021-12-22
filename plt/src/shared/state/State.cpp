@@ -14,6 +14,8 @@ using namespace std;
 
 State::State ()
 {
+  this->speed = 6;
+  this->g = 0.06;
   this->map.init("../res/map0.hex");
   this->player.resize(2);
   this->player[0].setData(0,GREEN_TANK);
@@ -54,6 +56,27 @@ int State::getTurnID() const
 {
   return this->turnID;
 }
+
+float State::getG() const
+{
+  return this->g;
+}
+
+float State::getSpeed() const
+{
+  return this->speed;
+}
+
+void State::setG(float g)
+{
+  this->g = g;
+}
+
+void State::setSpeed(float speed)
+{
+  this->speed = speed;
+}
+
 
 void State::nextTurnID ()
 {

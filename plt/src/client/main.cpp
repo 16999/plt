@@ -1,5 +1,6 @@
 #include <render/Scene.h>
 #include <../shared/engine/KeyboardCommand.h>
+#include <../shared/engine/Engine.h>
 #include <../shared/ai/DumbAI.h>
 #include <../shared/ai/HeuristicAI.h>
 #include <string.h>
@@ -31,13 +32,9 @@ void play(engine::Command* command)
   while (1)
   {
     myMutex.lock();
-    if(ngine.getCurrentState().getTurnID() == command->getCommandID())
-    {
-      command->run(ngine);
-      ngine.update();
-    }
+    ngine.update(command);
     myMutex.unlock();
-    sleep_for(milliseconds(10));
+    sleep_for(milliseconds(25));
   }
 }
 

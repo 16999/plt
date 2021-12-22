@@ -20,9 +20,9 @@ HeuristicAI::~HeuristicAI()
 
 }
 
-void HeuristicAI::run(engine::Engine& ngine)
+engine::Action HeuristicAI::run(state::State currentState)
 {
-  switch (ngine.getCurrentState().getCurrentPlayer().getStatus())
+  switch (currentState.getCurrentPlayer().getStatus())
   {
     case MOVING:
       if (this->iteration == 0)
@@ -37,32 +37,33 @@ void HeuristicAI::run(engine::Engine& ngine)
 
       if (this->iteration < this->maxIteration)
       {
-        ngine.setAction(this->preAction);
         this->iteration++;
+        return this->preAction;
       }
       else if (this->iteration == this->maxIteration)
       {
-        this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*this->physics.getG()/pow(this->physics.getV0(),2)) + rand()%this->delta - rand()%this->delta - 90;
+        this->optimalAngle = RAD_TO_DEG*0.5*asin((currentState.getAdversePlayer().getTank().getX()-currentState.getCurrentPlayer().getTank().getX())*currentState.getG()/pow(currentState.getSpeed(),2)) + rand()%this->delta - rand()%this->delta - 90;
         this->iteration++;
+        return NO_ACTION;
       }
       else
       {
-        if (this->optimalAngle - this->epsilon > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
-          ngine.setAction(TURN_CLOCKWISE);
-        else if (this->optimalAngle + this->epsilon < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
-          ngine.setAction(TURN_ANTICLOCKWISE);
+        if (this->optimalAngle - this->epsilon > currentState.getCurrentPlayer().getTank().getTurret().getPhi())
+          return TURN_CLOCKWISE;
+        else if (this->optimalAngle + this->epsilon < currentState.getCurrentPlayer().getTank().getTurret().getPhi())
+          return TURN_ANTICLOCKWISE;
         else
         {
-          ngine.setAction(FIRE);
           this->iteration = 0;
+          return FIRE;
         }
       }
     break;
     case GAMEOVER:
-      ngine.setAction(START_GAME);
+      return START_GAME;
     break;
     default :
-      ngine.setAction(NO_ACTION);
+      return NO_ACTION;
     break;
   }
 }

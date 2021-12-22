@@ -17,9 +17,9 @@ DumbAI::~DumbAI()
 
 }
 
-void DumbAI::run(engine::Engine& ngine)
+engine::Action DumbAI::run(state::State currentState)
 {
-  switch (ngine.getCurrentState().getCurrentPlayer().getStatus())
+  switch (currentState.getCurrentPlayer().getStatus())
   {
     case MOVING:
       if (this->iteration == 0)
@@ -36,20 +36,20 @@ void DumbAI::run(engine::Engine& ngine)
 
       if (this->iteration < this->maxIteration)
       {
-        ngine.setAction(this->preAction);
         this->iteration++;
+        return this->preAction;
       }
       else
       {
-        ngine.setAction(FIRE);
         this->iteration = 0;
+        return FIRE;
       }
     break;
     case GAMEOVER:
-      ngine.setAction(START_GAME);
+      return START_GAME;
     break;
     default :
-      ngine.setAction(NO_ACTION);
+      return NO_ACTION;
     break;
   }
 }

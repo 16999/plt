@@ -15,20 +15,20 @@ KeyboardCommand::~KeyboardCommand()
 
 }
 
-void KeyboardCommand::run(Engine& ngine)
+engine::Action KeyboardCommand::run(state::State currentState)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-      ngine.setAction(MOVE_LEFT);
+      return MOVE_LEFT;
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-      ngine.setAction(MOVE_RIGHT);
+      return MOVE_RIGHT;
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-      ngine.setAction(TURN_ANTICLOCKWISE);
+      return TURN_ANTICLOCKWISE;
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::X))
-      ngine.setAction(TURN_CLOCKWISE);
+      return TURN_CLOCKWISE;
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-      ngine.setAction(FIRE);
+      return FIRE;
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-      ngine.setAction(START_GAME);
+      return START_GAME;
     else
-      ngine.setAction(NO_ACTION);
+      return NO_ACTION;
 }
