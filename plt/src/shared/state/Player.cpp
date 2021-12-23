@@ -8,7 +8,7 @@ using namespace std;
 
 Player::Player()
 {
-
+  this->score = 0;
 }
 
 Player::~Player()
@@ -43,14 +43,29 @@ Status Player::getStatus() const
   return this->status;
 }
 
-void Player::setStatus(Status status)
+int Player::getScore() const
 {
-  this->status = status;
+  return this->score;
 }
 
 void Player::setID(int ID)
 {
   this->ID = ID;
+}
+
+void Player::setStatus(Status status)
+{
+  this->status = status;
+}
+
+void Player::setScore(int score)
+{
+  this->score = score;
+}
+
+void Player::incScore()
+{
+  this->score++;
 }
 
 void Player::setTankType(TankType tankType)

@@ -97,15 +97,10 @@ void State::startGame ()
 
 void State::endGame ()
 {
+    this->player[this->turnID].incScore();
     if (this->turnID == this->playerID)
-    {
       std::cout << "You won !" << endl;
-      this->won++;
-    }
     else
-    {
       std::cout << "You lost !" << endl;
-      this->lost++;
-    }
-    std::cout << "Won = " << this->won << " ; Lost = " << this->lost << " ; Efficiency = " << 100*this->won/(this->won+this->lost) << "%" << endl;
+    std::cout << "Won = " << this->player[this->playerID].getScore() << " ; Lost = " << this->player[1-this->playerID].getScore() << endl;
 }
