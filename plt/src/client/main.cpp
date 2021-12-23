@@ -11,41 +11,34 @@
 using namespace std;
 using namespace this_thread;
 using namespace chrono;
+using namespace render;
+using namespace engine;
+using namespace ai;
 
 
 
-render::Scene scene;
-engine::Engine ngine;
+Scene scene;
+Engine ngine;
 
-ai::DumbAI dumbAI(0);
-ai::HeuristicAI heuristicAI(1);
-engine::KeyboardCommand realPlayer0(0);
-engine::KeyboardCommand realPlayer1(1);
+DumbAI dumbAI(0);
+HeuristicAI heuristicAI(1);
+KeyboardCommand realPlayer0(0);
+KeyboardCommand realPlayer1(1);
 
 thread playerThread[2];
 thread displayThread;
-sf::Mutex myMutex;
 
 
-void play(engine::Command* command)
-{
-  while (1)
-  {
-    myMutex.lock();
-    ngine.update(command);
-    myMutex.unlock();
-    sleep_for(milliseconds(25));
-  }
-}
+
 
 void display()
 {
   while (scene.getWindow().isOpen())
   {
-    myMutex.lock();
+    ngine.mute.lock();
     scene.setCurrentState(ngine.getCurrentState());
     scene.draw();
-    myMutex.unlock();
+    ngine.mute.unlock();
     sleep_for(milliseconds(10));
   }
 }
@@ -60,23 +53,23 @@ int main(int argc,char* argv[])
   {
     if (strcmp(argv[1],"engine") == 0)
     {
-      playerThread[0] = std::thread(&play,&realPlayer0);
-      playerThread[1] = std::thread(&play,&realPlayer1);
+      playerThread[0] = std::thread(&Engine::update,ref(ngine),&realPlayer0);
+      playerThread[1] = std::thread(&Engine::update,ref(ngine),&realPlayer1);
     }
     else if (strcmp(argv[1],"dumbAI") == 0)
     {
-      playerThread[0] = std::thread(&play,&dumbAI);
-      playerThread[1] = std::thread(&play,&realPlayer1);
+      playerThread[0] = std::thread(&Engine::update,ref(ngine),&dumbAI);
+      playerThread[1] = std::thread(&Engine::update,ref(ngine),&realPlayer1);
     }
     else if (strcmp(argv[1],"heuristicAI") == 0)
     {
-      playerThread[0] = std::thread(&play,&realPlayer0);
-      playerThread[1] = std::thread(&play,&heuristicAI);
+      playerThread[0] = std::thread(&Engine::update,ref(ngine),&realPlayer0);
+      playerThread[1] = std::thread(&Engine::update,ref(ngine),&heuristicAI);
     }
     else if (strcmp(argv[1],"AIvsAI") == 0)
     {
-      playerThread[0] = std::thread(&play,&dumbAI);
-      playerThread[1] = std::thread(&play,&heuristicAI);
+      playerThread[0] = std::thread(&Engine::update,ref(ngine),&dumbAI);
+      playerThread[1] = std::thread(&Engine::update,ref(ngine),&heuristicAI);
     }
     displayThread = std::thread(&display);
     displayThread.join();
