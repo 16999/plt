@@ -13,7 +13,7 @@ using namespace this_thread;
 using namespace chrono;
 
 
-sf::Event event;
+
 render::Scene scene;
 engine::Engine ngine;
 
@@ -24,7 +24,7 @@ engine::KeyboardCommand realPlayer1(1);
 
 thread playerThread[2];
 thread displayThread;
-mutex myMutex;
+sf::Mutex myMutex;
 
 
 void play(engine::Command* command)
@@ -43,9 +43,6 @@ void display()
   while (scene.getWindow().isOpen())
   {
     myMutex.lock();
-    if (scene.getWindow().pollEvent(event))
-      if(event.type == sf::Event::Closed)
-        scene.getWindow().close();
     scene.setCurrentState(ngine.getCurrentState());
     scene.draw();
     myMutex.unlock();

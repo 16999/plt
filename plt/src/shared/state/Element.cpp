@@ -90,13 +90,13 @@ void Element::setHeight(float height)
   this->height = height;
 }
 
-void Element::update(float dx, float dy, float dPhi)
+void Element::place(float dx, float dy, float dPhi)
 {
   this->phi += dPhi;
   this->x += dx;
   this->y += dy;
   if (this->next != NULL)
-    this->next->update(dx,dy,dPhi);
+    this->next->place(dx,dy,dPhi);
 }
 
 void Element::replace()

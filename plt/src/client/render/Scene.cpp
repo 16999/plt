@@ -28,6 +28,9 @@ Scene::~Scene()
 
 void Scene::draw()
 {
+  if (this->window.pollEvent(this->event))
+    if(this->event.type == sf::Event::Closed)
+      this->window.close();
   this->window.clear(sf::Color(0,0,64));
   this->mapSurface.loadTileset(this->currentState.getMap().getBloc());
   this->window.draw(this->mapSurface);

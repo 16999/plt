@@ -45,13 +45,13 @@ void Engine::update(Command* command)
     case MOVING:
       this->record.addAction(this->action);
       if (this->action == MOVE_LEFT && this->currentState.getCurrentPlayer().getTank().getBlocType(this->currentState.getMap()) != state::LEFT_BORDER)
-        this->currentState.getCurrentPlayer().getTank().update(-this->currentState.getSpeed()/2,0,0);
+        this->currentState.getCurrentPlayer().getTank().place(-this->currentState.getSpeed()/2,0,0);
       else if (this->action == MOVE_RIGHT && this->currentState.getCurrentPlayer().getTank().getBlocType(this->currentState.getMap()) != state::RIGHT_BORDER)
-        this->currentState.getCurrentPlayer().getTank().update(this->currentState.getSpeed()/2,0,0);
+        this->currentState.getCurrentPlayer().getTank().place(this->currentState.getSpeed()/2,0,0);
       else if (this->action == TURN_ANTICLOCKWISE && this->currentState.getCurrentPlayer().getTank().getTurret().getPhi() > -180)
-        this->currentState.getCurrentPlayer().getTank().getTurret().update(0,0,-this->currentState.getSpeed()/2);
+        this->currentState.getCurrentPlayer().getTank().getTurret().place(0,0,-this->currentState.getSpeed()/2);
       else if (this->action == TURN_CLOCKWISE && this->currentState.getCurrentPlayer().getTank().getTurret().getPhi() < 0)
-        this->currentState.getCurrentPlayer().getTank().getTurret().update(0,0,this->currentState.getSpeed()/2);
+        this->currentState.getCurrentPlayer().getTank().getTurret().place(0,0,this->currentState.getSpeed()/2);
       else if (this->action == FIRE)
       {
         this->record.addTurn();
@@ -66,7 +66,7 @@ void Engine::update(Command* command)
       {
         this->vy += this->currentState.getG();
         this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().setPhi(RAD_TO_DEG*atan(this->vy/this->vx)+180*(this->vx<0));
-        this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().update(this->vx,this->vy,0);
+        this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().place(this->vx,this->vy,0);
       }
       else
       {

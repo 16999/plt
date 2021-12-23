@@ -450,7 +450,7 @@
         <dia:point val="10.1376,15.3444"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.0876,15.2944;26.8576,23.5944"/>
+        <dia:rectangle val="10.0876,15.2944;26.8576,24.3944"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10.1376,15.3444"/>
@@ -459,7 +459,7 @@
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.2000000000000011"/>
+        <dia:real val="9"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Scene#</dia:string>
@@ -558,6 +558,29 @@
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#sf::RenderWindow#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="1"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#event#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#sf::Event#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1379,16 +1402,16 @@
     </dia:object>
     <dia:object type="UML - Dependency" version="1" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="18.4726,23.5444"/>
+        <dia:point val="18.4726,24.3444"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.4226,23.4944;76.9131,31.4681"/>
+        <dia:rectangle val="18.4226,24.2944;76.9131,31.4681"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="18.4726,23.5444"/>
+        <dia:point val="18.4726,24.3444"/>
         <dia:point val="18.4726,30.6281"/>
         <dia:point val="76.4631,30.6281"/>
         <dia:point val="76.4631,28.9413"/>
