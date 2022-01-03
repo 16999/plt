@@ -65,8 +65,8 @@ void Engine::update(Command* command)
         else if (this->action == FIRE)
         {
           this->record.addTurn();
-          this->vx = this->currentState.getSpeed()*cos(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi()/RAD_TO_DEG);
-          this->vy = this->currentState.getSpeed()*sin(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi()/RAD_TO_DEG);
+          this->dx = this->currentState.getSpeed()*cos(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi()/RAD_TO_DEG);
+          this->dy = this->currentState.getSpeed()*sin(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi()/RAD_TO_DEG);
           this->currentState.getCurrentPlayer().setStatus(SHOOTING);
         }
       break;
@@ -74,9 +74,9 @@ void Engine::update(Command* command)
       case SHOOTING :
         if(this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().getBlocType(this->currentState.getMap()) == state::NOTHING && this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().intersects(this->currentState.getAdversePlayer().getTank()) == false)
         {
-          this->vy += this->currentState.getG();
-          this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().setPhi(RAD_TO_DEG*atan(this->vy/this->vx)+180*(this->vx<0));
-          this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().place(this->vx,this->vy,0);
+          this->dy += this->currentState.getG();
+          this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().setPhi(RAD_TO_DEG*atan(this->dy/this->dx)+180*(this->dx<0));
+          this->currentState.getCurrentPlayer().getTank().getTurret().getBullet().place(this->dx,this->dy,0);
         }
         else
         {

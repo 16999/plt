@@ -14,22 +14,22 @@ Physics::~Physics()
 
 }
 
-float Physics::getVx() const
+float Physics::getDx() const
 {
-  return this->vx;
+  return this->dx;
 }
 
-float Physics::getVy() const
+float Physics::getDy() const
 {
-  return this->vy;
+  return this->dy;
 }
 
-void Physics::setVx(float vx)
+void Physics::setDx(float dx)
 {
-  this->vx = vx;
+  this->dx = dx;
 }
 
-void Physics::setVy(float vy)
+void Physics::setDy(float dy)
 {
-  this->vy = vy;
+  this->dy = dy;
 }
