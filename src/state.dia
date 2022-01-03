@@ -87,22 +87,22 @@
   <dia:layer name="Arrière-plan" visible="true" connectable="true" active="true">
     <dia:object type="UML - LargePackage" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-64.7364,29.2152"/>
+        <dia:point val="-55.192,32.3718"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.7864,28.1652;8.95981,63.1784"/>
+        <dia:rectangle val="-55.242,31.3218;8.08866,61.6467"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-64.7364,29.2152"/>
+        <dia:point val="-55.192,32.3718"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="73.646210704878911"/>
+        <dia:real val="63.23065873729545"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="33.913195036579559"/>
+        <dia:real val="29.224902026140207"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#state#</dia:string>
@@ -3571,7 +3571,7 @@
         <dia:point val="-16.4888,51.9786"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.9115,51.9286;-16.0115,54.2872"/>
+        <dia:rectangle val="-16.9115,51.9272;-16.0115,54.2458"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3632,8 +3632,8 @@
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-24.4388,43.2786"/>
-        <dia:point val="-25.0652,43.2786"/>
-        <dia:point val="-25.0652,36.2915"/>
+        <dia:point val="-25.0653,43.2786"/>
+        <dia:point val="-25.0653,36.2915"/>
         <dia:point val="-26.0917,36.2915"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
