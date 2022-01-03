@@ -14,6 +14,8 @@ using namespace std;
 
 State::State ()
 {
+  this->speed = 6;
+  this->g = 0.06;
   this->map.init("../res/map0.hex");
   this->player.resize(2);
   this->player[0].setData(0,GREEN_TANK);
@@ -55,48 +57,35 @@ int State::getTurnID() const
   return this->turnID;
 }
 
+float State::getG() const
+{
+  return this->g;
+}
+
+float State::getSpeed() const
+{
+  return this->speed;
+}
+
+void State::setG(float g)
+{
+  this->g = g;
+}
+
+void State::setSpeed(float speed)
+{
+  this->speed = speed;
+}
+
+
 void State::nextTurnID ()
 {
   this->turnID = 1 - this->turnID;
 }
 
-BlocType State::getBlocType (Element element)
-{
-  BlocType ret;
-  int index = floor(element.getX()/BLOC_SIZE)+(MAP_WIDTH*floor(element.getY()/BLOC_SIZE));
-
-  if (index >= 0 && index < MAP_WIDTH*MAP_HEIGHT)
-  {
-    char val = this->map.getBloc()[index];
-    switch (val)
-    {
-      case 0x7 : ret = LEFT_BORDER;  break;
-      case 0x8 : ret = PRACTICABLE;  break;
-      case 0x9 : ret = RIGHT_BORDER;  break;
-      default : ret = NOTHING; break;
-    }
-  }
-  else
-  {
-      ret = INVALID;
-  }
-
-  return ret;
-}
-
-bool State::getCollision() const
-{
-  return this->collision;
-}
-
 void State::setPlayerID(int playerID)
 {
   this->playerID = playerID;
-}
-
-void State::setCollision(bool collision)
-{
-  this->collision = collision;
 }
 
 void State::startGame ()
@@ -106,8 +95,12 @@ void State::startGame ()
   this->player[1].setData(1,this->player[1].getTankType());
 }
 
-void State::endGame (int ID)
+void State::endGame ()
 {
-    std::cout << "GAME OVER\nThe winner is player " << ID << "!" << endl;
-    this->turnID = 0;
+    this->player[this->turnID].incScore();
+    if (this->turnID == this->playerID)
+      std::cout << "You won !" << endl;
+    else
+      std::cout << "You lost !" << endl;
+    std::cout << "Won = " << this->player[this->playerID].getScore() << " ; Lost = " << this->player[1-this->playerID].getScore() << endl;
 }

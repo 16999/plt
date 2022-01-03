@@ -8,7 +8,7 @@ using namespace std;
 
 Player::Player()
 {
-
+  this->score = 0;
 }
 
 Player::~Player()
@@ -19,20 +19,17 @@ Player::~Player()
 std::string Player::getTextData() const
 {
   std::string data =
-  "ID=" + to_string(this->ID) +
+  "STATUS=" + to_string((int)this->status) +
+  " - ID=" + to_string(this->ID) +
   " - TYPE=" + to_string(this->tankType) +
   " - LIFE=" + to_string(this->life) +
   " - DAMAGE=" + to_string(this->damage)+
   " - Tank:(" + to_string((int)this->tank.getX()) +
   ";" + to_string((int)this->tank.getY()) +
   ";" + to_string((int)this->tank.getPhi()) +
-  "d) - Turret:(" + to_string((int)this->turret.getX()) +
-  ";" + to_string((int)this->turret.getY()) +
-  ";" + to_string((int)this->turret.getPhi()) +
-  "d) - Bullet:(" + to_string((int)this->bullet.getX()) +
-  ";" + to_string((int)this->bullet.getY()) +
-  ";" + to_string((int)this->bullet.getPhi()) +
   "d)";
+  if (this->status == GAMEOVER)
+    data += " - PRESS ENTER TO START GAME";
   return data;
 }
 
@@ -41,9 +38,34 @@ int Player::getID() const
   return this->ID;
 }
 
+Status Player::getStatus() const
+{
+  return this->status;
+}
+
+int Player::getScore() const
+{
+  return this->score;
+}
+
 void Player::setID(int ID)
 {
   this->ID = ID;
+}
+
+void Player::setStatus(Status status)
+{
+  this->status = status;
+}
+
+void Player::setScore(int score)
+{
+  this->score = score;
+}
+
+void Player::incScore()
+{
+  this->score++;
 }
 
 void Player::setTankType(TankType tankType)
@@ -64,16 +86,6 @@ void Player::setDamage(int damage)
 Tank& Player::getTank()
 {
   return this->tank;
-}
-
-Turret& Player::getTurret()
-{
-  return this->turret;
-}
-
-Bullet& Player::getBullet()
-{
-  return this->bullet;
 }
 
 TankType Player::getTankType() const
@@ -102,32 +114,19 @@ void Player::setData(int ID, TankType tankType)
   this->tankType = tankType;
   this->life = lifeVector[tankType];
   this->damage = damageVector[tankType];
+
   this->tank.setX(IDvectorX[ID]);
   this->tank.setY(IDvectorY[ID]);
-  this->turret.setX(IDvectorX[ID]);
-  this->turret.setY(IDvectorY[ID]-62);
-  this->turret.setPhi(IDvectorPhi[ID]);
-  this->bullet.setX(IDvectorX[ID]);
-  this->bullet.setY(IDvectorY[ID]-62);
-  this->bullet.setPhi(IDvectorPhi[ID]);
-}
-
-
-void Player::move(float dx, float dy, Map map)
-{
-  if ((this->tank.getBlocType(map) != state::LEFT_BORDER && dx < 0) || (this->tank.getBlocType(map) != state::RIGHT_BORDER && dx > 0))
-  {
-    this->tank.move(dx,dy);
-    this->turret.move(dx,dy);
-    this->bullet.move(dx,dy);
-  }
-}
-
-void Player::turn(float dPhi)
-{
-  if ((this->turret.getPhi() > -180 && dPhi < 0) || (this->turret.getPhi() < 0 && dPhi > 0))
-  {
-    this->turret.turn(dPhi);
-    this->bullet.turn(dPhi);
-  }
+  this->tank.setX0(this->tank.getWidth()/2);
+  this->tank.setY0(this->tank.getHeight());
+  this->tank.getTurret().setX(IDvectorX[ID]);
+  this->tank.getTurret().setY(IDvectorY[ID]-62);
+  this->tank.getTurret().setX0(0);
+  this->tank.getTurret().setY0(this->tank.getTurret().getHeight()/2);
+  this->tank.getTurret().setPhi(IDvectorPhi[ID]);
+  this->tank.getTurret().getBullet().setX(IDvectorX[ID]);
+  this->tank.getTurret().getBullet().setY(IDvectorY[ID]-62);
+  this->tank.getTurret().getBullet().setX0(this->tank.getTurret().getBullet().getWidth()/2);
+  this->tank.getTurret().getBullet().setY0(this->tank.getTurret().getBullet().getHeight()/2);
+  this->tank.getTurret().getBullet().setPhi(IDvectorPhi[ID]);
 }

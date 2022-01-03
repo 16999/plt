@@ -7,7 +7,7 @@ using namespace state;
 #define WINDOW_WIDTH 900
 #define WINDOW_HEIGHT 540
 
-Scene::Scene(sf::RenderWindow& window) : window(window)
+Scene::Scene()
 {
   std::cout << "Render launched" << endl;
   this->window.create(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT),"TANKS GAME");
@@ -17,7 +17,7 @@ Scene::Scene(sf::RenderWindow& window) : window(window)
   for(int i=0;i<2;i++)
   {
     this->playerSurface[i].initText("../res/arial.ttf");
-    this->playerSurface[i].initPlayer({"../res/tank"+to_string(this->currentState.getPlayer()[i].getTankType())+".png","../res/turret0.png","../res/bullet0.png"});
+    this->playerSurface[i].initPlayer(this->currentState.getPlayer()[i],{"../res/tank"+to_string(this->currentState.getPlayer()[i].getTankType())+".png","../res/turret0.png","../res/bullet0.png"});
   }
 }
 
@@ -26,18 +26,26 @@ Scene::~Scene()
 
 }
 
-void Scene::draw(sf::RenderWindow& window)
+void Scene::draw()
 {
+  if (this->window.pollEvent(this->event))
+    if(this->event.type == sf::Event::Closed)
+      this->window.close();
   this->window.clear(sf::Color(0,0,64));
   this->mapSurface.loadTileset(this->currentState.getMap().getBloc());
-  window.draw(this->mapSurface);
+  this->window.draw(this->mapSurface);
   for(int i=0;i<2;i++)
   {
     this->playerSurface[i].loadText(this->currentState.getPlayer()[i]);
     this->playerSurface[i].loadPlayer(this->currentState.getPlayer()[i]);
-    this->playerSurface[i].draw(window);
+    this->playerSurface[i].draw(this->window);
   }
   this->window.display();
+}
+
+sf::RenderWindow& Scene::getWindow()
+{
+  return this->window;
 }
 
 const state::State& Scene::getCurrentState() const
@@ -48,9 +56,4 @@ const state::State& Scene::getCurrentState() const
 void Scene::setCurrentState(const state::State& currentState)
 {
   this->currentState = currentState;
-}
-
-void Scene::checkCollision(state::State& currentState)
-{
-  currentState.setCollision(this->playerSurface[currentState.getTurnID()].getPlayerSprite(BULLET).getGlobalBounds().intersects(this->playerSurface[1-currentState.getTurnID()].getPlayerSprite(TANK).getGlobalBounds()));
 }
