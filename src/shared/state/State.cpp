@@ -14,6 +14,7 @@ using namespace std;
 
 State::State ()
 {
+  this->turnID = 0;
   this->speed = 6;
   this->g = 0.06;
   this->map.init("../res/map0.hex");
