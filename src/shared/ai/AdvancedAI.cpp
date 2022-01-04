@@ -44,6 +44,10 @@ engine::Action AdvancedAI::run(state::State currentState)
       else if (this->iteration == this->maxIteration)
       {
         this->optimalAngle = RAD_TO_DEG*0.5*asin((currentState.getAdversePlayer().getTank().getX()-currentState.getCurrentPlayer().getTank().getX())*this->w);
+        if (this->optimalAngle > 0)
+          this->optimalAngle = 0;
+        else if (this->optimalAngle < -180)
+          this->optimalAngle = -180;
         this->iteration++;
         return NO_ACTION;
       }
@@ -56,16 +60,19 @@ engine::Action AdvancedAI::run(state::State currentState)
         else
         {
           this->iteration = 0;
+          this->updateWeight = true;
           return FIRE;
         }
       }
     break;
     case SHOOTING:
-      std::cout << "w = " << this->w << endl;
-      if(currentState.getCurrentPlayer().getTank().getTurret().getBullet().getBlocType(currentState.getMap()) != state::NOTHING || currentState.getCurrentPlayer().getTank().getTurret().getBullet().intersects(currentState.getAdversePlayer().getTank()) == true)
+      if(this->updateWeight == true)
       {
-        this->w += this->k*(currentState.getCurrentPlayer().getTank().getTurret().getBullet().getX() - currentState.getAdversePlayer().getTank().getX());
+        std::cout << "w = " << this->w << endl;
+        this->w += this->k*this->lastBulletDelta;
+        this->updateWeight = false;
       }
+      this->lastBulletDelta = (currentState.getCurrentPlayer().getTank().getTurret().getBullet().getX() - currentState.getAdversePlayer().getTank().getX());
       return NO_ACTION;
     break;
     case GAMEOVER:

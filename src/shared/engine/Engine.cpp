@@ -116,7 +116,7 @@ void Engine::update(Command* command)
     }
 
     this->mute.unlock();
-    sleep_for(milliseconds(25));
+    //sleep_for(milliseconds(25));
   }
 
 }

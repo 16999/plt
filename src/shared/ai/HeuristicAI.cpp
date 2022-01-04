@@ -11,7 +11,7 @@ HeuristicAI::HeuristicAI(int commandID)
   this->commandID = commandID;
   srand(time(NULL));
   this->maxIteration = 12;
-  this->delta = 20;
+  this->delta = 11;
   this->epsilon = 3;
 }
 
