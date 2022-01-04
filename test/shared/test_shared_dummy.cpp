@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(TestPlayer)
   }
 }
 
-/*
+
 BOOST_AUTO_TEST_CASE(TestEngine)
 {
   {
@@ -66,4 +66,4 @@ BOOST_AUTO_TEST_CASE(TestEngine)
     ngine.setAction(FIRE);
     BOOST_CHECK_EQUAL(ngine.getAction(),FIRE);
   }
-}*/
+}

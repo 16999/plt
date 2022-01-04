@@ -3,6 +3,7 @@
 #include <../shared/engine/Engine.h>
 #include <../shared/ai/DumbAI.h>
 #include <../shared/ai/HeuristicAI.h>
+#include <../shared/ai/AdvancedAI.h>
 #include <string.h>
 #include <iostream>
 #include <thread>
@@ -22,6 +23,7 @@ Engine ngine;
 
 DumbAI dumbAI(0);
 HeuristicAI heuristicAI(1);
+AdvancedAI advancedAI(0);
 KeyboardCommand realPlayer0(0);
 KeyboardCommand realPlayer1(1);
 
@@ -70,6 +72,11 @@ int main(int argc,char* argv[])
     {
       playerThread[0] = std::thread(&Engine::update,ref(ngine),&dumbAI);
       playerThread[1] = std::thread(&Engine::update,ref(ngine),&heuristicAI);
+    }
+    else if (strcmp(argv[1],"AIvsAI2") == 0)
+    {
+      playerThread[0] = std::thread(&Engine::update,ref(ngine),&heuristicAI);
+      playerThread[1] = std::thread(&Engine::update,ref(ngine),&advancedAI);
     }
     displayThread = std::thread(&display);
     displayThread.join();
