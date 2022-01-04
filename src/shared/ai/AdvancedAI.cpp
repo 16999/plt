@@ -61,19 +61,10 @@ engine::Action AdvancedAI::run(state::State currentState)
       }
     break;
     case SHOOTING:
-      std::cout << "SHOOTING" << endl;
-      this->lastBulletDelta =  currentState.getCurrentPlayer().getTank().getTurret().getBullet().getX() - currentState.getAdversePlayer().getTank().getX();
-      if (this->updateWeight == false)
-        this->updateWeight = true;
-      return NO_ACTION;
-    break;
-    case AWAITING:
-      std::cout << "AWAITING" << endl;
-      if (this->updateWeight == true)
+      std::cout << "w = " << this->w << endl;
+      if(currentState.getCurrentPlayer().getTank().getTurret().getBullet().getBlocType(currentState.getMap()) != state::NOTHING || currentState.getCurrentPlayer().getTank().getTurret().getBullet().intersects(currentState.getAdversePlayer().getTank()) == true)
       {
-        this->w += this->k*this->lastBulletDelta;
-        std::cout << "w = " << this->w << endl;
-        this->updateWeight = false;
+        this->w += this->k*(currentState.getCurrentPlayer().getTank().getTurret().getBullet().getX() - currentState.getAdversePlayer().getTank().getX());
       }
       return NO_ACTION;
     break;
