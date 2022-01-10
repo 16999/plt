@@ -127,8 +127,5 @@ _(phttps://github.com/16999/plt/tags)_
 https://github.com/16999/plt/ShumanLIN  
 https://github.com/16999/plt/16999  
 https://github.com/16999/plt/Davson1  
-## License
-
-Rhis project is on license ``exemple: WTFTPL`` - see the file [LICENSE.md](LICENSE.md) for more informations
   
 ........................................
