@@ -23,8 +23,13 @@ feu de missile à la suite d'une trajectoire oblique.
 
 Le projet sera effectué et codé en C ++ sur Linux et on créera un compte Github
 
-
-
+### Commandes de jeu
+LEFT : déplacer le tank à gauche  
+RIGHT : déplacer le tank à droite  
+W : tourner la tourelle dans le sens antihoraire  
+X : tourner la tourelle dans le sens horaire  
+ESPACE : lancer un tir  
+ENTREE : démarrer une partie  
 
 ### Installation des bibliothèques nécessaires pour la compilation
 
