@@ -99,7 +99,7 @@ sudo apt-get install libboost-test-dev
     ./client advancedAI
 #### Jalon 4.1
     cd bin  
-    ./client adavanced
+    ./client advancedAI
 
 ## Build With
 
