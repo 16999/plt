@@ -69,7 +69,7 @@ sudo apt-get install libboost-test-dev
     ./client heuristicAI
 #### Execution de l'IA Avancée :
     cd bin  
-    ./client AdvencedAI
+    ./client AdvancedAI
 #### Execution de l'IA aléatoire contre l'IA heuristique:
     cd bin  
     ./client AIvsAI
