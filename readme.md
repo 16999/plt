@@ -76,11 +76,30 @@ sudo apt-get install libboost-test-dev
 #### Execution de l'IA aléatoire contre l'IA heuristique:
     cd bin  
     ./client AIvsAI2
-#### Execution de l'IA avancée contre l'IA heuristique):
-    cd bin  
-    ./client AIvsAI  
- 
+### Exécution des jalons
 
+
+#### Jalon 1.final
+    cd bin  
+    ./client state
+#### Jalon 2.1
+    cd bin  
+    ./client 
+#### Jalon 2.2
+    cd bin  
+    ./client render
+#### Jalon 2.final
+    cd bin  
+    ./client dumbAI
+#### Jalon 3.1
+    cd bin  
+    ./client heurisricAI
+#### Jalon 3.final
+    cd bin  
+    ./client advancedAI
+#### Jalon 4.1
+    cd bin  
+    ./client adavanced
 
 ## Build With
 
