@@ -53,6 +53,9 @@ int main(int argc,char* argv[])
     std::cout << "Arguments :\n- render\n- engine\n- dumbAI\n- heuristicAI\n- advancedAI" << endl;
   else if (argc == 2)
   {
+    if (strcmp(argv[1],"render") == 0)
+    {
+    }
     if (strcmp(argv[1],"engine") == 0)
     {
       playerThread[0] = std::thread(&Engine::update,ref(ngine),&realPlayer0);
