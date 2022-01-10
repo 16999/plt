@@ -73,7 +73,7 @@ sudo apt-get install libboost-test-dev
 #### Execution de l'IA aléatoire contre l'IA heuristique:
     cd bin  
     ./client AIvsAI
-#### Execution de l'IA aléatoire contre l'IA heuristique:
+#### Execution de l'IA avancée contre l'IA heuristique:
     cd bin  
     ./client AIvsAI2
 ### Exécution des jalons
