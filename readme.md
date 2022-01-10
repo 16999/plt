@@ -1,40 +1,32 @@
 
-  
-
 # Transversal Software Project(PLT)
-_This is the final Project of our journey and schooling in ENSEA Graduate School.The principle is to make in application every courses we did in specialization IT and Systems and in to do that , we have to build a game and we choose to build a 2D based on a Tank game._
+_C'est le projet final de notre voyage et de notre scolarité dans l'école d'études supérieures de l'ENSEA.Le principe est de faire appel à chaque cours que nous avons fait dans la spécialisation, et de le faire, nous devons construire un jeu et nous avons choisi de construire un 2D basé sur un jeu de Tanks._
 
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
 
-Une petite description du projet
+## Informations sur le jeu
 
-## About the Game
+### Presentation du jeu
+_Le projet de ce semestre consiste à créer un jeu appelé Tank Stars. C'est un jeu avec des mécanismes gameplay similaire à Worms, mais où les vers de terre ont été remplacés par des Tanks. Dans ce jeu, deux Tanks s'affrontent dans une bataille où le but est de détruire le Tank adverse pour gagner_  
 
-### Presentation of game
-_This semester’s project will build on the Tank Stars game. This is a game with mechanics
-similar gameplay to Worms, but where earthworms have been replaced by tanks.  
-In this game, two tanks go head-to-head in a battle where the goal is to destroy the tank
-opposing_  
+### Règles du jeu
+_C'est un jeu de combat basé sur deux joueurs.  
+- Au début de la partie, chaque joueur doit choisir un réservoir à partir de deux modèles disponibles: le premier compte 80 Points de Vie(PV) et 20 Points d'Attaque (AP). La seconde a 100 VP et 16 PA.  
+- Une fois que les deux joueurs ont choisi leurs tanks, les points de vie sont initialisés.  
+- Pendant chaque tour, le tank d'attaque peut se déplacer de gauche à droite. Il peut également ajuster la trajectoire angulaire et modifier la puissance du tir.  
+- Après 30 secondes, les prédispositions doivent être effectuées, le tank d'attaque lancera le
+feu de missile à la suite d'une trajectoire oblique.
+- Si le tir atteint le tank défensif, son nombre de points de vie diminuera par rapport à l'adversaire AP.
+- Lorsque le tir de missiles est effectué, les 2 joueurs changent leurs rôles.  
+- Si le nombre de points de vie de l'un des deux réservoirs atteint zéro, le jeu se termine et le tank qui est toujours en vie remporte le jeu._
 
-### Rules of game
-_This is a two player turn based combat game.  
-- At the start of the game, each player must choose a tank from two available models: The first has 80 health points (HP) and 20 attack points (AP). The second has 100 VP and
-16 PA.  
-- Once both players have chosen the tank, the life points are initialized.  
-- During each turn, the attacking Tank can move from left to right. It can also adjust the angular trajectory and modify the power of the shot.  
-- After 30 seconds, the predispositions must be made, the attack tank will launch the
-missile fire following an oblique trajectory.  
-- If the shot hits the defensive tank, its number of life points will decrease compared to the AP adversary.
-- When the missile firing is finished, the 2 players change their roles.  
-- If the number of life points of one of the two tanks reaches zero, the game ends and the tank still alive wins the game._
-
-The projet will be make and code in C++ on Linux and create a github account
+Le projet sera effectué et codé en C ++ sur Linux et on créera un compte Github
 
 
 
 
-### Installation
+### Installation des bibliothèques nécessaires pour la compilation
 
 sudo apt install git  
 sudo apt-get install dia  
@@ -46,13 +38,44 @@ sudo apt-get install libxml2-dev
 sudo apt-get install libsfml-dev  
 sudo apt-get install libboost-test-dev  
 
-## Work environment
+#### récupérer le projet :
+    git clone https://github.com/16999/plt. 
+    On obtient un dossier appélé plt
+#### compilation du projet :
+    make 
+#### Suppression de tous les fichiers générés :
+    make clean
+#### Exécution des tests :
+    make test
+#### Execution du state :
+    cd bin  
+    ./client state  
+#### Execution du client :
+    cd bin  
+    ./client client
+#### Execution du render :
+    cd bin  
+    ./client render
+#### Execution de l'IA simple:
+    cd bin  
+    ./client dumbAI
+#### Execution de l'IA heuristic :
+    cd bin  
+    ./client heuristicAI
+#### Execution de l'IA Avancée :
+    cd bin  
+    ./client AdvencedAI
+#### Execution de l'IA aléatoire contre l'IA heuristique:
+    cd bin  
+    ./client AIvsAI
+#### Execution de l'IA aléatoire contre l'IA heuristique:
+    cd bin  
+    ./client AIvsAI2
+#### Execution de l'IA avancée contre l'IA heuristique):
+    cd bin  
+    ./client AIvsAI  
+ 
 
-To make our project , we work on linux environment and to compile our project, we have to do this steps :   
-git clone https://github.com/16999/plt.  
-cd plt/  
-make Execution du client :
-bin/client render
 
 ## Build With
 
@@ -85,5 +108,3 @@ https://github.com/16999/plt/Davson1
 Rhis project is on license ``exemple: WTFTPL`` - see the file [LICENSE.md](LICENSE.md) for more informations
   
 ........................................
-
-29 octobre 21h40 : j'ai remis l'ancien fichier /src/client/CMakeLists.txt car le nouveau provoquait des erreurs à la compilation.
