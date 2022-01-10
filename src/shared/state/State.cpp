@@ -58,6 +58,11 @@ int State::getTurnID() const
   return this->turnID;
 }
 
+void State::setTurnID(int turnID)
+{
+  this->turnID = turnID;
+}
+
 float State::getG() const
 {
   return this->g;

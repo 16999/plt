@@ -68,6 +68,11 @@ int main(int argc,char* argv[])
       playerThread[0] = std::thread(&Engine::update,ref(ngine),&realPlayer0);
       playerThread[1] = std::thread(&Engine::update,ref(ngine),&heuristicAI);
     }
+    else if (strcmp(argv[1],"advancedAI") == 0)
+    {
+      playerThread[0] = std::thread(&Engine::update,ref(ngine),&advancedAI);
+      playerThread[1] = std::thread(&Engine::update,ref(ngine),&realPlayer1);
+    }
     else if (strcmp(argv[1],"AIvsAI") == 0)
     {
       playerThread[0] = std::thread(&Engine::update,ref(ngine),&dumbAI);

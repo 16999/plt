@@ -9,6 +9,8 @@
 
 using namespace ::state;
 using namespace ::engine;
+namespace utf = boost::unit_test;
+namespace tt = boost::test_tools;
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
@@ -21,15 +23,33 @@ BOOST_AUTO_TEST_CASE(TestState)
     State currentState {};
     currentState.setPlayerID(1);
     BOOST_CHECK_EQUAL(currentState.getPlayerID(), 1);
+    currentState.setTurnID(1);
+    BOOST_CHECK_EQUAL(currentState.getTurnID(), 1);
+    currentState.setSpeed(8);
+    BOOST_CHECK_EQUAL(currentState.getSpeed(), 8);
+    currentState.setG(9.8);
+    BOOST_TEST(currentState.getG() == 9.8, tt::tolerance(0.01)); 
+
     currentState.startGame();
   }
 }
+
+BOOST_AUTO_TEST_CASE(TestMap)
+{
+  {
+	  Map map {};
+	  map.setBloc("0123456789ABCDEF");
+	  BOOST_CHECK_EQUAL(map.getBloc(), "0123456789ABCDEF");
+  }
+}
+
+
 BOOST_AUTO_TEST_CASE(TestElement)
 {
   {
     Element currentElement {};
     currentElement.setX(1);
-    BOOST_CHECK_EQUAL(currentElement.getX(), 1);
+    BOOST_CHECK_EQUAL(currentElement.getX(),1);
     currentElement.setY(6);
     BOOST_CHECK_EQUAL(currentElement.getY(),6);
     currentElement.setPhi(35.5);
@@ -42,8 +62,8 @@ BOOST_AUTO_TEST_CASE(TestPlayer)
 {
   {
     Player currentPlayer {};
-    currentPlayer.setLife(1);
-    BOOST_CHECK_EQUAL(currentPlayer.getLife(), 1);
+    currentPlayer.setLife(33);
+    BOOST_CHECK_EQUAL(currentPlayer.getLife(), 33);
     currentPlayer.setTankType(GREEN_TANK);
     BOOST_CHECK_EQUAL(currentPlayer.getTankType(),GREEN_TANK);
     currentPlayer.setStatus(MOVING);
@@ -67,3 +87,12 @@ BOOST_AUTO_TEST_CASE(TestEngine)
     BOOST_CHECK_EQUAL(ngine.getAction(),FIRE);
   }
 }
+
+/*
+BOOST_AUTO_TEST_CASE(TestRecord)
+{
+  {
+    Record record {};
+  }
+}
+*/

@@ -9,12 +9,12 @@ std::ofstream outfile;
 
 Record::Record()
 {
-  //outfile.open(filename.c_str());
+
 }
 
 Record::~Record()
 {
-  //outfile.close();
+
 }
 
 void Record::addAction(Action action)
@@ -38,6 +38,6 @@ void Record::addGame()
   this->turnNumber = 0;
 
   outfile.open("test.json",ios::app);
-  outfile << this->writer.write(this->gameRecord);
+  outfile << this->writer.write(this->gameRecord);  //écrit l'action effectuée dans le fichier json
   outfile.close();
 }

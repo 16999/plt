@@ -13,7 +13,7 @@ const int MAP_HEIGHT = 15;
 
 Map::Map()
 {
-  
+
 }
 
 Map::~Map()
@@ -34,4 +34,9 @@ void Map::init (std::string path)  //charge une map externe présente dans un fi
 const std::string& Map::getBloc() const
 {
   return this->bloc;
+}
+
+void Map::setBloc(const std::string& bloc)
+{
+  this->bloc = bloc;
 }
