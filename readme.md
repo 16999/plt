@@ -93,7 +93,7 @@ sudo apt-get install libboost-test-dev
     ./client dumbAI
 #### Jalon 3.1
     cd bin  
-    ./client heurisricAI
+    ./client heuristicAI
 #### Jalon 3.final
     cd bin  
     ./client advancedAI
