@@ -4,6 +4,7 @@
 #include <../shared/ai/DumbAI.h>
 #include <../shared/ai/HeuristicAI.h>
 #include <../shared/ai/AdvancedAI.h>
+#include <client/Client.h>
 #include <string.h>
 #include <iostream>
 #include <thread>
@@ -15,8 +16,7 @@ using namespace chrono;
 using namespace render;
 using namespace engine;
 using namespace ai;
-
-
+using namespace client;
 
 Scene scene;
 Engine ngine;
@@ -30,6 +30,7 @@ KeyboardCommand realPlayer1(1);
 thread playerThread[2];
 thread displayThread;
 
+Client networkClient;
 
 
 
@@ -93,4 +94,6 @@ int main(int argc,char* argv[])
   }
   else
     std::cout << "ERROR : Invalid arguments !!!" << endl;
+
+  return 0;
 }
