@@ -15,6 +15,7 @@ using namespace chrono;
 
 Engine::Engine()
 {
+  this->pause = 25;
   std::cout << "Engine launched" << endl;
   this->currentState.getCurrentPlayer().setStatus(GAMEOVER);
   this->currentState.getAdversePlayer().setStatus(AWAITING);
@@ -32,6 +33,16 @@ void Engine::setAction(Action action)
 Action Engine::getAction() const
 {
   return this->action;
+}
+
+void Engine::setPause(int pause)
+{
+  this->pause = pause;
+}
+
+int Engine::getPause() const
+{
+  return this->pause;
 }
 
 state::State Engine::getCurrentState()
@@ -116,7 +127,7 @@ void Engine::update(Command* command)
     }
 
     this->mute.unlock();
-    sleep_for(milliseconds(25));
+    sleep_for(milliseconds(this->pause));
   }
 
 }

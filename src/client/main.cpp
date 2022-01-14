@@ -43,6 +43,7 @@ void display()
     ngine.mute.unlock();
     sleep_for(milliseconds(10));
   }
+  ngine.setPause(0);
 }
 
 

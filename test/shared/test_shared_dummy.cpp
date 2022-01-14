@@ -83,6 +83,8 @@ BOOST_AUTO_TEST_CASE(TestEngine)
     BOOST_CHECK_EQUAL(ngine.getDx(),2.5);
     ngine.setDy(4.25);
     BOOST_CHECK_EQUAL(ngine.getDy(),4.25);
+    ngine.setPause(20);
+    BOOST_CHECK_EQUAL(ngine.getPause(),20);
     ngine.setAction(FIRE);
     BOOST_CHECK_EQUAL(ngine.getAction(),FIRE);
   }
