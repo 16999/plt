@@ -8,12 +8,15 @@ using namespace client;
 using namespace std;
 #define PORT 8080
 
+
+
+struct sockaddr_in serv_addr;
+
 Client::Client()
 {
-  int sock = 0, valread;
-  struct sockaddr_in serv_addr;
-  char *hello = "Hello from client";
-  char buffer[1024] = {0};
+
+  buffer.resize(1024);
+
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
       std::cout << "Socket creation error" << endl;
 
@@ -26,8 +29,8 @@ Client::Client()
   if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
       std::cout << "Connection Failed" << endl;
 
-  send(sock , hello , strlen(hello) , 0);
-  std::cout << "Hello message sent" << endl;
-  valread = read( sock , buffer, 1024);
-  std::cout << buffer ;
+  send(sock , hello.c_str() , hello.size() , 0);
+  std::cout << "Hello message sent\n" << endl;
+  valread = read( sock , (char*) buffer.c_str() , buffer.size());
+  std::cout << buffer << endl;
 }

@@ -30,8 +30,6 @@ KeyboardCommand realPlayer1(1);
 thread playerThread[2];
 thread displayThread;
 
-Client networkClient;
-
 
 
 void display()
@@ -86,6 +84,10 @@ int main(int argc,char* argv[])
     {
       playerThread[0] = std::thread(&Engine::update,ref(ngine),&heuristicAI);
       playerThread[1] = std::thread(&Engine::update,ref(ngine),&advancedAI);
+    }
+    else if (strcmp(argv[1],"network") == 0)
+    {
+      Client networkClient;
     }
     displayThread = std::thread(&display);
     displayThread.join();
