@@ -8,6 +8,7 @@
 #include "../../src/shared/engine/Engine.h"
 #include "../../src/shared/engine/KeyboardCommand.h"
 
+#include "../../src/shared/ai.h"
 #include "../../src/shared/ai/DumbAI.h"
 #include "../../src/shared/ai/HeuristicAI.h"
 #include "../../src/shared/ai/AdvancedAI.h"
@@ -127,6 +128,27 @@ BOOST_AUTO_TEST_CASE(TestRecord)
     BOOST_CHECK_EQUAL(record.getActionNumber(),23);
     record.setGameNumber(8);
     BOOST_CHECK_EQUAL(record.getGameNumber(),8);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(TestDumbAI)
+{
+  {
+    AI* AI1=new DumbAI(0);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(TestHeuristicAI)
+{
+  {
+    AI* AI2=new HeuristicAI(0);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(TestAdvancedAI)
+{
+  {
+    AI* AI3=new AdvancedAI(0);
   }
 }
 
