@@ -9,3 +9,8 @@ int Command::getCommandID() const
 {
   return this->commandID;
 }
+
+void Command::setCommandID(int commandID)
+{
+  this->commandID = commandID;
+}

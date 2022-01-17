@@ -41,3 +41,33 @@ void Record::addGame()
   outfile << this->writer.write(this->gameRecord);  //écrit l'action effectuée dans le fichier json
   outfile.close();
 }
+
+int Record::getTurnNumber() const
+{
+  return this->turnNumber;
+}
+
+void Record::setTurnNumber(int turnNumber)
+{
+  this->turnNumber = turnNumber;
+}
+
+int Record::getActionNumber() const
+{
+  return this->actionNumber;
+}
+
+void Record::setActionNumber(int actionNumber)
+{
+  this->actionNumber = actionNumber;
+}
+
+int Record::getGameNumber() const
+{
+  return this->gameNumber;
+}
+
+void Record::setGameNumber(int gameNumber)
+{
+  this->gameNumber = gameNumber;
+}

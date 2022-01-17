@@ -1,10 +1,12 @@
 #include <boost/test/unit_test.hpp>
 
 #include "../../src/shared/state/State.h"
-#include "../../src/shared/engine/Engine.h"
 #include "../../src/shared/state/Element.h"
 #include "../../src/shared/state/Player.h"
 #include "../../src/shared/state/Bullet.h"
+
+#include "../../src/shared/engine/Engine.h"
+#include "../../src/shared/engine/KeyboardCommand.h"
 
 
 using namespace ::state;
@@ -100,11 +102,27 @@ BOOST_AUTO_TEST_CASE(TestEngine)
   }
 }
 
-/*
+
+BOOST_AUTO_TEST_CASE(TestCommand)
+{
+  {
+    Command* cmd = new KeyboardCommand(0);
+    cmd->setCommandID(1);
+	BOOST_CHECK_EQUAL(cmd->getCommandID(),1);
+  }
+}
+
+
 BOOST_AUTO_TEST_CASE(TestRecord)
 {
   {
     Record record {};
+    record.setTurnNumber(11);
+    BOOST_CHECK_EQUAL(record.getTurnNumber(),11);
+    record.setActionNumber(23);
+    BOOST_CHECK_EQUAL(record.getActionNumber(),23);
+    record.setGameNumber(8);
+    BOOST_CHECK_EQUAL(record.getGameNumber(),8);
   }
 }
-*/
+
