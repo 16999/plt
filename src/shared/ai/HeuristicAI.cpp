@@ -20,9 +20,9 @@ HeuristicAI::~HeuristicAI()
 
 }
 
-engine::Action HeuristicAI::run(state::State currentState)
+void HeuristicAI::run(engine::Engine& ngine)
 {
-  switch (currentState.getCurrentPlayer().getStatus())
+  switch (ngine.getStatus())
   {
     case MOVING:
       if (this->iteration == 0)
@@ -42,28 +42,28 @@ engine::Action HeuristicAI::run(state::State currentState)
       }
       else if (this->iteration == this->maxIteration)
       {
-        this->optimalAngle = RAD_TO_DEG*0.5*asin((currentState.getAdversePlayer().getTank().getX()-currentState.getCurrentPlayer().getTank().getX())*currentState.getG()/pow(currentState.getSpeed(),2)) + rand()%this->delta - rand()%this->delta - 90;
+        this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*ngine.getCurrentState().getG()/pow(ngine.getCurrentState().getSpeed(),2)) + rand()%this->delta - rand()%this->delta - 90;
         this->iteration++;
-        return NO_ACTION;
+        ngine.setAction(NO_ACTION);
       }
       else
       {
-        if (this->optimalAngle - this->epsilon > currentState.getCurrentPlayer().getTank().getTurret().getPhi())
-          return TURN_CLOCKWISE;
-        else if (this->optimalAngle + this->epsilon < currentState.getCurrentPlayer().getTank().getTurret().getPhi())
-          return TURN_ANTICLOCKWISE;
+        if (this->optimalAngle - this->epsilon > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+          ngine.setAction(TURN_CLOCKWISE);
+        else if (this->optimalAngle + this->epsilon < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+          ngine.setAction(TURN_ANTICLOCKWISE);
         else
         {
           this->iteration = 0;
-          return FIRE;
+          ngine.setAction(FIRE);
         }
       }
     break;
     case GAMEOVER:
-      return START_GAME;
+      ngine.setAction(START_GAME);
     break;
     default :
-      return NO_ACTION;
+      ngine.setAction(NO_ACTION);
     break;
   }
 }

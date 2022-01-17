@@ -15,7 +15,7 @@ KeyboardCommand::~KeyboardCommand()
 
 }
 
-engine::Action KeyboardCommand::run(state::State currentState)
+void KeyboardCommand::run(engine::Engine& ngine)
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
       return MOVE_LEFT;

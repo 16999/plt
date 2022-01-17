@@ -31,6 +31,8 @@ BOOST_AUTO_TEST_CASE(TestState)
     BOOST_CHECK_EQUAL(currentState.getSpeed(), 8);
     currentState.setG(9.8);
     BOOST_TEST(currentState.getG() == 9.8, tt::tolerance(0.01)); 
+    currentState.setStatus(MOVING);
+    BOOST_CHECK_EQUAL(currentState.getStatus(),MOVING);
 
     currentState.startGame();
   }
@@ -76,8 +78,6 @@ BOOST_AUTO_TEST_CASE(TestPlayer)
     BOOST_CHECK_EQUAL(currentPlayer.getLife(), 33);
     currentPlayer.setTankType(GREEN_TANK);
     BOOST_CHECK_EQUAL(currentPlayer.getTankType(),GREEN_TANK);
-    currentPlayer.setStatus(MOVING);
-    BOOST_CHECK_EQUAL(currentPlayer.getStatus(),MOVING);
     currentPlayer.setDamage(20);
     BOOST_CHECK_EQUAL(currentPlayer.getDamage(),20);
     currentPlayer.setScore(78);

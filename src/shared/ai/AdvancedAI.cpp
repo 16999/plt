@@ -21,9 +21,9 @@ AdvancedAI::~AdvancedAI()
 
 }
 
-engine::Action AdvancedAI::run(state::State currentState)
+void AdvancedAI::run(engine::Engine& ngine)
 {
-  switch (currentState.getCurrentPlayer().getStatus())
+  switch (ngine.getStatus())
   {
     case MOVING:
       if (this->iteration == 0)
@@ -39,29 +39,29 @@ engine::Action AdvancedAI::run(state::State currentState)
       if (this->iteration < this->maxIteration)
       {
         this->iteration++;
-        return this->preAction;
+        ngine.setAction(this->preAction);
       }
       else if (this->iteration == this->maxIteration)
       {
-        this->optimalAngle = RAD_TO_DEG*0.5*asin((currentState.getAdversePlayer().getTank().getX()-currentState.getCurrentPlayer().getTank().getX())*this->w);
+        this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*this->w);
         if (this->optimalAngle > 0)
           this->optimalAngle = 0;
         else if (this->optimalAngle < -180)
           this->optimalAngle = -180;
         this->iteration++;
-        return NO_ACTION;
+        ngine.setAction(NO_ACTION);
       }
       else
       {
-        if (this->optimalAngle - this->epsilon > currentState.getCurrentPlayer().getTank().getTurret().getPhi())
-          return TURN_CLOCKWISE;
-        else if (this->optimalAngle + this->epsilon < currentState.getCurrentPlayer().getTank().getTurret().getPhi())
-          return TURN_ANTICLOCKWISE;
+        if (this->optimalAngle - this->epsilon > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+          ngine.setAction(TURN_CLOCKWISE);
+        else if (this->optimalAngle + this->epsilon < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
+          ngine.setAction(TURN_ANTICLOCKWISE);
         else
         {
           this->iteration = 0;
           this->updateWeight = true;
-          return FIRE;
+          ngine.setAction(FIRE);
         }
       }
     break;
@@ -72,14 +72,14 @@ engine::Action AdvancedAI::run(state::State currentState)
         this->w += this->k*this->lastBulletDelta;
         this->updateWeight = false;
       }
-      this->lastBulletDelta = (currentState.getCurrentPlayer().getTank().getTurret().getBullet().getX() - currentState.getAdversePlayer().getTank().getX());
-      return NO_ACTION;
+      this->lastBulletDelta = (ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getBullet().getX() - ngine.getCurrentState().getAdversePlayer().getTank().getX());
+      ngine.setAction(NO_ACTION);
     break;
     case GAMEOVER:
-      return START_GAME;
+      ngine.setAction(START_GAME);
     break;
     default :
-      return NO_ACTION;
+      ngine.setAction(NO_ACTION);
     break;
   }
 }

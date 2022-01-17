@@ -94,6 +94,26 @@ void State::setPlayerID(int playerID)
   this->playerID = playerID;
 }
 
+float State::getDx() const
+{
+  return this->dx;
+}
+
+float State::getDy() const
+{
+  return this->dy;
+}
+
+void State::setDx(float dx)
+{
+  this->dx = dx;
+}
+
+void State::setDy(float dy)
+{
+  this->dy = dy;
+}
+
 void State::startGame ()
 {
   std::cout << "GAME START" << endl;
