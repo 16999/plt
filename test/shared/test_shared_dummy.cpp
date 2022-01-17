@@ -16,6 +16,7 @@
 
 using namespace ::state;
 using namespace ::engine;
+using namespace ::ai;
 namespace utf = boost::unit_test;
 namespace tt = boost::test_tools;
 
