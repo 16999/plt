@@ -45,6 +45,26 @@ int Engine::getPause() const
   return this->pause;
 }
 
+float Engine::getDx() const
+{
+  return this->dx;
+}
+
+float Engine::getDy() const
+{
+  return this->dy;
+}
+
+void Engine::setDx(float dx)
+{
+  this->dx = dx;
+}
+
+void Engine::setDy(float dy)
+{
+  this->dy = dy;
+}
+
 state::State Engine::getCurrentState()
 {
   return this->currentState;
