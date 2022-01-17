@@ -51,7 +51,7 @@ void display()
 int main(int argc,char* argv[])
 {
   if (argc == 1)
-    std::cout << "Arguments :\n- render\n- engine\n- dumbAI\n- heuristicAI\n- advancedAI" << endl;
+    std::cout << "Arguments :\n- render\n- engine\n- dumbAI\n- heuristicAI\n- advancedAI\n- AIvsAI\n- AIvsAI2" << endl;
   else if (argc == 2)
   {
     if (strcmp(argv[1],"render") == 0)

@@ -52,6 +52,14 @@ BOOST_AUTO_TEST_CASE(TestElement)
     BOOST_CHECK_EQUAL(currentElement.getX(),1);
     currentElement.setY(6);
     BOOST_CHECK_EQUAL(currentElement.getY(),6);
+    currentElement.setX0(9);
+    BOOST_CHECK_EQUAL(currentElement.getX0(),9);
+    currentElement.setY0(5);
+    BOOST_CHECK_EQUAL(currentElement.getY0(),5);
+    currentElement.setWidth(50);
+    BOOST_CHECK_EQUAL(currentElement.getWidth(),50);
+    currentElement.setHeight(40);
+    BOOST_CHECK_EQUAL(currentElement.getHeight(),40);
     currentElement.setPhi(35.5);
     BOOST_CHECK_EQUAL(currentElement.getPhi(),35.5);
   }
@@ -70,6 +78,8 @@ BOOST_AUTO_TEST_CASE(TestPlayer)
     BOOST_CHECK_EQUAL(currentPlayer.getStatus(),MOVING);
     currentPlayer.setDamage(20);
     BOOST_CHECK_EQUAL(currentPlayer.getDamage(),20);
+    currentPlayer.setScore(78);
+    BOOST_CHECK_EQUAL(currentPlayer.getScore(),78);
 
   }
 }
