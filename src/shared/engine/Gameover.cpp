@@ -5,11 +5,11 @@ using namespace std;
 
 
 
-void Gameover::handle(state::State currentState&, Action action)
+void Gameover::handle(state::State& currentState, Action action)
 {
   if(action == START_GAME)
   {
-      this = new Moving;
+      new(this) Moving;
       currentState.startGame();
   }
 }

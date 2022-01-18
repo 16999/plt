@@ -1,6 +1,5 @@
 #include "Engine.h"
 #include <iostream>
-#include <math.h>
 #include <thread>
 #include <mutex>
 #include <chrono>
@@ -9,7 +8,6 @@ using namespace state;
 using namespace std;
 using namespace this_thread;
 using namespace chrono;
-#define RAD_TO_DEG 57.2958
 
 
 
@@ -49,7 +47,7 @@ state::State Engine::getCurrentState()
   return this->currentState;
 }
 
-const Status*& Engine::getStatus() const
+/*const Status*& Engine::getStatus() const
 {
   return this->status;
 }
@@ -57,7 +55,7 @@ const Status*& Engine::getStatus() const
 void Engine::setStatus(const Status*& status)
 {
   this->status = status;
-}
+}*/
 
 void Engine::update(Command* command)
 {
@@ -66,7 +64,7 @@ void Engine::update(Command* command)
 
     this->mute.lock();
     if(this->currentState.getTurnID() == command->getCommandID())
-      this->action = command->run(this->currentState);
+      this->action = command->run(this->currentState, *this->status);
     else
       this->action = NO_ACTION;
 

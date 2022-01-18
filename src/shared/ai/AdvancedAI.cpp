@@ -21,65 +21,62 @@ AdvancedAI::~AdvancedAI()
 
 }
 
-void AdvancedAI::run(engine::Engine& ngine)
+Action AdvancedAI::run(state::State& currentState, Status status)
 {
-  switch (ngine.getStatus())
+  if (typeid(status) == typeid(new Moving))
   {
-    case MOVING:
-      if (this->iteration == 0)
+    if (this->iteration == 0)
+    {
+      switch(rand()%2)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
       {
-        switch(rand()%2)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
-        {
-          case 0 : this->preAction = MOVE_LEFT; break;
-          case 1 : this->preAction = MOVE_RIGHT; break;
-          default : break;
-        }
+        case 0 : this->preAction = MOVE_LEFT; break;
+        case 1 : this->preAction = MOVE_RIGHT; break;
+        default : break;
       }
+    }
 
-      if (this->iteration < this->maxIteration)
-      {
-        this->iteration++;
-        ngine.setAction(this->preAction);
-      }
-      else if (this->iteration == this->maxIteration)
-      {
-        this->optimalAngle = RAD_TO_DEG*0.5*asin((ngine.getCurrentState().getAdversePlayer().getTank().getX()-ngine.getCurrentState().getCurrentPlayer().getTank().getX())*this->w);
-        if (this->optimalAngle > 0)
-          this->optimalAngle = 0;
-        else if (this->optimalAngle < -180)
-          this->optimalAngle = -180;
-        this->iteration++;
-        ngine.setAction(NO_ACTION);
-      }
+    if (this->iteration < this->maxIteration)
+    {
+      this->iteration++;
+      return this->preAction;
+    }
+    else if (this->iteration == this->maxIteration)
+    {
+      this->optimalAngle = RAD_TO_DEG*0.5*asin((currentState.getAdversePlayer().getTank().getX()-currentState.getCurrentPlayer().getTank().getX())*this->w);
+      if (this->optimalAngle > 0)
+        this->optimalAngle = 0;
+      else if (this->optimalAngle < -180)
+        this->optimalAngle = -180;
+      this->iteration++;
+      return NO_ACTION;
+    }
+    else
+    {
+      if (this->optimalAngle - this->epsilon > currentState.getCurrentPlayer().getTank().getTurret().getPhi())
+        return TURN_CLOCKWISE;
+      else if (this->optimalAngle + this->epsilon < currentState.getCurrentPlayer().getTank().getTurret().getPhi())
+        return TURN_ANTICLOCKWISE;
       else
       {
-        if (this->optimalAngle - this->epsilon > ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
-          ngine.setAction(TURN_CLOCKWISE);
-        else if (this->optimalAngle + this->epsilon < ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getPhi())
-          ngine.setAction(TURN_ANTICLOCKWISE);
-        else
-        {
-          this->iteration = 0;
-          this->updateWeight = true;
-          ngine.setAction(FIRE);
-        }
+        this->iteration = 0;
+        this->updateWeight = true;
+        return FIRE;
       }
-    break;
-    case SHOOTING:
-      if(this->updateWeight == true)
-      {
-        std::cout << "w = " << this->w << endl;
-        this->w += this->k*this->lastBulletDelta;
-        this->updateWeight = false;
-      }
-      this->lastBulletDelta = (ngine.getCurrentState().getCurrentPlayer().getTank().getTurret().getBullet().getX() - ngine.getCurrentState().getAdversePlayer().getTank().getX());
-      ngine.setAction(NO_ACTION);
-    break;
-    case GAMEOVER:
-      ngine.setAction(START_GAME);
-    break;
-    default :
-      ngine.setAction(NO_ACTION);
-    break;
+    }
   }
+  else if (typeid(status) == typeid(new Shooting))
+  {
+    if(this->updateWeight == true)
+    {
+      std::cout << "w = " << this->w << endl;
+      this->w += this->k*this->lastBulletDelta;
+      this->updateWeight = false;
+    }
+    this->lastBulletDelta = (currentState.getCurrentPlayer().getTank().getTurret().getBullet().getX() - currentState.getAdversePlayer().getTank().getX());
+    return NO_ACTION;
+  }
+  else if (typeid(status) == typeid(new Gameover))
+    return START_GAME;
+  else
+    return NO_ACTION;
 }

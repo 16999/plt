@@ -17,39 +17,35 @@ DumbAI::~DumbAI()
 
 }
 
-void DumbAI::run(engine::Engine& ngine)
+Action DumbAI::run(state::State& currentState, Status status)
 {
-  switch (ngine.getStatus())
+  if (typeid(status) == typeid(new Moving))
   {
-    case MOVING:
-      if (this->iteration == 0)
+    if (this->iteration == 0)
+    {
+      switch(rand()%4)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
       {
-        switch(rand()%4)  //selectionne au hasard une action parmi un déplacement gauche/droite ou une rotation (anti)horaire
-        {
-          case 0 : this->preAction = MOVE_LEFT; break;
-          case 1 : this->preAction = MOVE_RIGHT; break;
-          case 2 : this->preAction = TURN_ANTICLOCKWISE; break;
-          case 3 : this->preAction = TURN_CLOCKWISE; break;
-          default : break;
-        }
+        case 0 : this->preAction = MOVE_LEFT; break;
+        case 1 : this->preAction = MOVE_RIGHT; break;
+        case 2 : this->preAction = TURN_ANTICLOCKWISE; break;
+        case 3 : this->preAction = TURN_CLOCKWISE; break;
+        default : break;
       }
+    }
 
-      if (this->iteration < this->maxIteration)
-      {
-        this->iteration++;
-        return this->preAction;
-      }
-      else
-      {
-        this->iteration = 0;
-        ngine.setAction(FIRE);
-      }
-    break;
-    case GAMEOVER:
-      ngine.setAction(START_GAME);
-    break;
-    default :
-      ngine.setAction(NO_ACTION);
-    break;
+    if (this->iteration < this->maxIteration)
+    {
+      this->iteration++;
+      return this->preAction;
+    }
+    else
+    {
+      this->iteration = 0;
+      return FIRE;
+    }
   }
+  else if (typeid(status) == typeid(new Gameover))
+    return START_GAME;
+  else
+    return NO_ACTION;
 }

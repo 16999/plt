@@ -1,11 +1,13 @@
 #include "Moving.h"
 #include <iostream>
+#include <math.h>
 using namespace engine;
 using namespace std;
+#define RAD_TO_DEG 57.2958
 
 
 
-void Moving::handle(state::State currentState&, Action action)
+void Moving::handle(state::State& currentState, Action action)
 {
   //record.addAction(action);
   if (action == MOVE_LEFT && currentState.getCurrentPlayer().getTank().getBlocType(currentState.getMap()) != state::LEFT_BORDER)
@@ -21,6 +23,6 @@ void Moving::handle(state::State currentState&, Action action)
     //record.addTurn();
     currentState.setDx(currentState.getSpeed()*cos(currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi()/RAD_TO_DEG));
     currentState.setDy(currentState.getSpeed()*sin(currentState.getCurrentPlayer().getTank().getTurret().getBullet().getPhi()/RAD_TO_DEG));
-    this = new Shooting;
+    new(this) Shooting;
   }
 }
