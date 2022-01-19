@@ -46,3 +46,4 @@ void MapSurface::draw(sf::RenderTarget& target, sf::RenderStates states) const
   states.texture = &this->mapTileset;          // apply the tileset texture
   target.draw(this->mapVertices, states);      // draw the vertex array
 }
+
